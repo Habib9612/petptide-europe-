@@ -1,26 +1,6 @@
-import { randomUUID } from "crypto";
-import type { Product, CartItem, Order, InsertOrder } from "@shared/schema";
+import type { Product } from "@shared/schema";
 
-export interface IStorage {
-  // Products
-  getProducts(): Promise<Product[]>;
-  getProductById(id: string): Promise<Product | undefined>;
-  getProductsByCategory(category: string): Promise<Product[]>;
-  
-  // Cart
-  getCartItems(sessionId: string): Promise<CartItem[]>;
-  addCartItem(sessionId: string, productId: string, quantity: number): Promise<CartItem>;
-  updateCartItem(id: string, quantity: number): Promise<CartItem | undefined>;
-  removeCartItem(id: string): Promise<void>;
-  clearCart(sessionId: string): Promise<void>;
-  
-  // Orders
-  createOrder(order: InsertOrder): Promise<Order>;
-  getOrderById(id: string): Promise<Order | undefined>;
-}
-
-// Product data
-const productsData: Product[] = [
+export const products: Product[] = [
   {
     id: "tirzepatide-10mg",
     name: "Tirzepatide 10mg",
@@ -29,7 +9,7 @@ const productsData: Product[] = [
     regularPrice: 28.00,
     category: "glp1",
     shortDescription: "A dual GIP and GLP-1 receptor agonist. Research indicates potential for significant weight management and glycemic control applications.",
-    fullDescription: "Tirzepatide is a novel, dual-acting GIP and GLP-1 receptor agonist. This synthetic peptide has been the subject of extensive research for its potential to regulate blood glucose levels and influence body weight.",
+    fullDescription: "Tirzepatide is a novel, dual-acting GIP (glucose-dependent insulinotropic polypeptide) and GLP-1 (glucagon-like peptide-1) receptor agonist. This synthetic peptide has been the subject of extensive research for its potential to regulate blood glucose levels and influence body weight.\n\nIn laboratory studies, Tirzepatide has demonstrated a unique mechanism of action by activating both the GIP and GLP-1 receptors, which may lead to synergistic effects on metabolic regulation. It is supplied as a lyophilized powder for research purposes only.",
     sequence: "Y-Aib-E-G-T-F-T-S-D-Y-S-I-A-M-D-K-I-H-Q-Q-D-F-V-N-W-L-L-A-Q-K-G-K-K-N-D-W-K-H-N-I-T-Q",
     casNumber: "2023788-19-2",
     molecularFormula: "C225H348N48O68",
@@ -47,8 +27,8 @@ const productsData: Product[] = [
     regularPrice: 18.00,
     category: "glp1",
     shortDescription: "A GLP-1 receptor agonist. Studies suggest efficacy in metabolic regulation and appetite modulation.",
-    fullDescription: "Semaglutide is a GLP-1 analogue modified to increase half-life. Research indicates it may play a significant role in metabolic health.",
-    sequence: "H-Aib-E-G-T-F-T-S-D-V-S-S-Y-L-E-G-Q-A-A-K-E-F-I-A-W-L-V-R-G-R-G",
+    fullDescription: "Semaglutide is a glucagon-like peptide-1 (GLP-1) analogue that has been modified to increase its half-life. It functions as an agonist for the GLP-1 receptor, a key regulator of insulin secretion and appetite.\n\nResearch indicates that Semaglutide may play a significant role in metabolic health by mimicking the effects of the native hormone GLP-1. It is widely used in studies focusing on type 2 diabetes and obesity management mechanisms.",
+    sequence: "H-Aib-E-G-T-F-T-S-D-V-S-S-Y-L-E-G-Q-A-A-K(AEEA-AEEA-γ-Glu-17-carboxyheptadecanoyl)-E-F-I-A-W-L-V-R-G-R-G",
     casNumber: "910463-68-2",
     molecularFormula: "C187H291N45O59",
     molecularWeight: "4113.58 g/mol",
@@ -65,7 +45,7 @@ const productsData: Product[] = [
     regularPrice: 35.00,
     category: "glp1",
     shortDescription: "A triple agonist (GLP-1, GIP, and Glucagon receptors). Emerging research highlights its potent metabolic effects.",
-    fullDescription: "Retatrutide is a cutting-edge triple agonist peptide targeting multiple receptors simultaneously.",
+    fullDescription: "Retatrutide is a cutting-edge 'triple agonist' peptide that targets the GLP-1, GIP, and Glucagon receptors simultaneously. This multi-receptor activity is hypothesized to produce more profound metabolic effects than single or dual agonists.\n\nCurrent research is investigating Retatrutide's ability to mobilize fat stores and improve glycemic control through this unique triple-action mechanism. It represents the latest frontier in metabolic peptide research.",
     sequence: "Y-Aib-Q-G-T-F-T-S-D-Y-S-I-L-D-K-A-Q-A-A-E-F-V-N-W-L-L-A-G-G-P-S-S-G-A-P-P-P-S-NH2",
     casNumber: "2381089-83-2",
     molecularFormula: "C221H342N46O68",
@@ -83,7 +63,7 @@ const productsData: Product[] = [
     regularPrice: 14.00,
     category: "healing",
     shortDescription: "Body Protection Compound-157. Research focuses on its regenerative properties in tendons, ligaments, and gut health.",
-    fullDescription: "BPC-157 is a pentadecapeptide composed of 15 amino acids derived from a protective protein found in the stomach.",
+    fullDescription: "BPC-157 (Body Protection Compound-157) is a pentadecapeptide composed of 15 amino acids. It is derived from a protective protein found in the stomach.\n\nExtensive research suggests that BPC-157 may accelerate the healing of various tissues, including tendons, muscles, nervous system, and the gastrointestinal tract. It is a primary subject of study for injury recovery and soft tissue repair.",
     sequence: "Gly-Glu-Pro-Pro-Pro-Gly-Lys-Pro-Add-Asp-Asp-Ala-Gly-Leu-Val",
     casNumber: "137525-51-0",
     molecularFormula: "C62H98N16O22",
@@ -101,8 +81,8 @@ const productsData: Product[] = [
     regularPrice: 30.00,
     category: "healing",
     shortDescription: "Synthetic fraction of Thymosin Beta-4. Investigated for its role in cellular migration and tissue repair.",
-    fullDescription: "TB-500 is a synthetic version of Thymosin Beta-4, vital for building new blood vessels and cell migration.",
-    sequence: "Ac-Ser-Asp-Lys-Pro-Asp-Met-Ala-Glu-Ile-Glu-Lys",
+    fullDescription: "TB-500 is a synthetic version of the naturally occurring peptide Thymosin Beta-4. It plays a vital role in building new blood vessels, small muscle tissue fibers, and cell migration.\n\nResearch highlights TB-500's potential to promote rapid wound healing and reduce inflammation. It is often studied in conjunction with BPC-157 for synergistic tissue repair effects.",
+    sequence: "Ac-Ser-Asp-Lys-Pro-Asp-Met-Ala-Glu-Ile-Glu-Lys-F-D-K-S-K-L-K-K-T-E-T-Q-E-K-N-P-L-P-S-K-E-T-I-E-Q-E-K-Q-A-G-E-S",
     casNumber: "77591-33-4",
     molecularFormula: "C212H350N56O78S",
     molecularWeight: "4963.50 g/mol",
@@ -119,7 +99,7 @@ const productsData: Product[] = [
     regularPrice: 15.00,
     category: "growth",
     shortDescription: "A GHRH analogue. Research suggests it may amplify pulsatile growth hormone secretion.",
-    fullDescription: "CJC-1295 without DAC is a synthetic GHRH analogue designed to stimulate growth hormone release.",
+    fullDescription: "CJC-1295 without DAC (Drug Affinity Complex) is a synthetic analogue of Growth Hormone Releasing Hormone (GHRH). It is designed to stimulate the release of growth hormone from the pituitary gland in a pulsatile manner.\n\nUnlike its counterpart with DAC, this version has a shorter half-life, which mimics the body's natural GH spikes more closely. It is frequently researched for its potential to improve muscle growth and fat loss.",
     sequence: "Tyr-D-Ala-Asp-Ala-Ile-Phe-Thr-Gln-Ser-Tyr-Arg-Lys-Val-Leu-Ala-Gln-Leu-Ser-Ala-Arg-Lys-Leu-Leu-Gln-Asp-Ile-Leu-Ser-Arg-NH2",
     casNumber: "863288-34-0",
     molecularFormula: "C152H252N44O42",
@@ -137,7 +117,7 @@ const productsData: Product[] = [
     regularPrice: 15.00,
     category: "growth",
     shortDescription: "A selective GH-Secretagogue. Known in research for specificity without significant cortisol or prolactin elevation.",
-    fullDescription: "Ipamorelin is a pentapeptide and selective agonist of the ghrelin receptor, unique for its high specificity.",
+    fullDescription: "Ipamorelin is a pentapeptide and a selective agonist of the ghrelin/growth hormone secretagogue receptor. It is unique among GHRPs for its high specificity.\n\nStudies show that Ipamorelin stimulates a strong release of growth hormone without significantly increasing cortisol or prolactin levels, making it a preferred subject for research into long-term GH therapy with fewer side effects.",
     sequence: "Aib-His-D-2-Nal-D-Phe-Lys-NH2",
     casNumber: "170851-70-4",
     molecularFormula: "C38H49N9O5",
@@ -155,7 +135,7 @@ const productsData: Product[] = [
     regularPrice: 20.00,
     category: "cosmetic",
     shortDescription: "Copper peptide. Extensively studied for skin remodeling, wound healing, and anti-aging properties.",
-    fullDescription: "GHK-Cu is a naturally occurring copper complex of the tripeptide glycyl-L-histidyl-L-lysine.",
+    fullDescription: "GHK-Cu is a naturally occurring copper complex of the tripeptide glycyl-L-histidyl-L-lysine. It has a strong affinity for copper(II) and is found in human plasma.\n\nResearch has extensively documented GHK-Cu's ability to stimulate collagen and elastin production, promote wound healing, and exert anti-inflammatory effects. It is a staple in cosmetic and dermatological research.",
     sequence: "Gly-His-Lys(Cu2+)",
     casNumber: "49557-75-7",
     molecularFormula: "C14H24N6O4Cu",
@@ -173,7 +153,7 @@ const productsData: Product[] = [
     regularPrice: 12.00,
     category: "cosmetic",
     shortDescription: "Synthetic analogue of alpha-MSH. Research focuses on melanogenesis (tanning) and libido effects.",
-    fullDescription: "Melanotan II is a synthetic analogue of alpha-melanocyte-stimulating hormone.",
+    fullDescription: "Melanotan II is a synthetic analogue of the peptide hormone alpha-melanocyte-stimulating hormone (α-MSH). It was originally developed to treat skin conditions by inducing melanogenesis (pigment production).\n\nIn addition to its tanning effects, research has observed significant aphrodisiac properties, leading to its investigation for sexual dysfunction.",
     sequence: "Ac-Nle-Asp-His-D-Phe-Arg-Trp-Lys-NH2",
     casNumber: "121062-08-6",
     molecularFormula: "C50H69N15O9",
@@ -191,7 +171,7 @@ const productsData: Product[] = [
     regularPrice: 15.00,
     category: "nootropics",
     shortDescription: "Melanocortin receptor agonist. Studied for its central effects on sexual arousal and desire.",
-    fullDescription: "PT-141 acts on the central nervous system to directly increase sexual desire and arousal.",
+    fullDescription: "PT-141, also known as Bremelanotide, is a derivative of Melanotan II but lacks the C-terminal amide group. It acts as a non-selective agonist of the melanocortin receptors.\n\nUnlike other sexual dysfunction treatments that act on the vascular system, PT-141 acts on the central nervous system (hypothalamus) to directly increase sexual desire and arousal in both males and females.",
     sequence: "Ac-Nle-Asp-His-D-Phe-Arg-Trp-Lys-OH",
     casNumber: "189691-06-3",
     molecularFormula: "C50H68N14O10",
@@ -208,8 +188,8 @@ const productsData: Product[] = [
     price: 21.00,
     regularPrice: 25.00,
     category: "nootropics",
-    shortDescription: "Nicotinamide Adenine Dinucleotide. Critical coenzyme essential for energy metabolism.",
-    fullDescription: "NAD+ is a coenzyme central to metabolism, essential for sirtuin function and cellular health.",
+    shortDescription: "Nicotinamide Adenine Dinucleotide. Critical coenzyme found in all living cells, essential for energy metabolism.",
+    fullDescription: "Nicotinamide Adenine Dinucleotide (NAD+) is a coenzyme central to metabolism. It is found in all living cells and is essential for the function of sirtuins, a class of proteins that regulate cellular health and aging.\n\nResearch into NAD+ supplementation focuses on its potential to restore cellular energy levels, repair DNA, and combat age-related decline in mitochondrial function.",
     sequence: "N/A (Coenzyme)",
     casNumber: "53-84-9",
     molecularFormula: "C21H27N7O14P2",
@@ -227,7 +207,7 @@ const productsData: Product[] = [
     regularPrice: 18.00,
     category: "nootropics",
     shortDescription: "Synthetic tetrapeptide. Research investigates its effects on telomerase activity and longevity.",
-    fullDescription: "Epithalon is a synthetic tetrapeptide studied for its ability to activate telomerase.",
+    fullDescription: "Epithalon (also known as Epitalon) is a synthetic tetrapeptide based on a natural peptide found in the pineal gland. It has been the subject of long-term studies on aging and longevity.\n\nThe primary mechanism of interest is its ability to activate telomerase, the enzyme responsible for maintaining the length of telomeres, which protect DNA during cell division.",
     sequence: "Ala-Glu-Asp-Gly",
     casNumber: "307297-39-8",
     molecularFormula: "C14H22N4O9",
@@ -244,8 +224,8 @@ const productsData: Product[] = [
     price: 18.00,
     regularPrice: 22.00,
     category: "glp1",
-    shortDescription: "Mitochondrial-derived peptide. Studied for metabolic regulation and exercise mimetics.",
-    fullDescription: "MOTS-c is a peptide encoded in mitochondrial DNA, acting as an exercise mimetic.",
+    shortDescription: "Mitochondrial-derived peptide. Studied for its role in metabolic regulation and exercise mimetics.",
+    fullDescription: "MOTS-c is a peptide encoded in the mitochondrial DNA. It is known as a 'mitochondrial-derived peptide' and has been shown to regulate metabolic functions throughout the body.\n\nResearch suggests MOTS-c acts as an exercise mimetic, promoting insulin sensitivity and preventing diet-induced obesity. It targets skeletal muscle to enhance glucose metabolism.",
     sequence: "Met-Arg-Trp-Q-E-M-G-Y-I-F-Y-P-R-K-L-R",
     casNumber: "1627580-64-6",
     molecularFormula: "C101H152N28O22S2",
@@ -263,7 +243,7 @@ const productsData: Product[] = [
     regularPrice: 16.00,
     category: "healing",
     shortDescription: "C-terminal tripeptide of alpha-MSH. Research highlights its potent anti-inflammatory properties.",
-    fullDescription: "KPV retains potent anti-inflammatory properties without pigment-inducing effects.",
+    fullDescription: "KPV (Lysine-Proline-Valine) is a C-terminal tripeptide fragment of alpha-MSH. It retains the potent anti-inflammatory properties of the parent hormone but without the pigment-inducing effects.\n\nIt is widely researched for its potential to treat inflammatory conditions, particularly in the gut (IBD/IBS) and skin (psoriasis), due to its ability to inhibit NF-kappaB pathways.",
     sequence: "Lys-Pro-Val",
     casNumber: "67727-97-3",
     molecularFormula: "C16H32N6O4",
@@ -281,7 +261,7 @@ const productsData: Product[] = [
     regularPrice: 20.00,
     category: "healing",
     shortDescription: "Peptide fragment. Clinically studied for immune system modulation and enhancement.",
-    fullDescription: "Thymosin Alpha-1 is a potent modulator of immune function, enhancing T-cell activity.",
+    fullDescription: "Thymosin Alpha-1 is a peptide fragment originally isolated from thymus gland tissue. It is a potent modulator of immune function.\n\nResearch has demonstrated its ability to enhance the activity of T-cells and dendritic cells, making it a key subject of study for boosting immune response against viral infections and chronic diseases.",
     sequence: "Ac-S-D-A-A-V-D-T-S-S-E-I-T-T-K-D-L-K-E-K-K-E-V-V-E-E-A-E-N",
     casNumber: "62304-98-7",
     molecularFormula: "C129H215N33O55",
@@ -293,92 +273,25 @@ const productsData: Product[] = [
   },
 ];
 
-export class MemStorage implements IStorage {
-  private products: Map<string, Product>;
-  private cartItems: Map<string, CartItem>;
-  private orders: Map<string, Order>;
+export const getProductById = (id: string): Product | undefined => {
+  return products.find(p => p.id === id);
+};
 
-  constructor() {
-    this.products = new Map();
-    this.cartItems = new Map();
-    this.orders = new Map();
-    
-    // Initialize products
-    productsData.forEach((product) => {
-      this.products.set(product.id, product);
-    });
-  }
+export const getProductsByCategory = (category: string): Product[] => {
+  return products.filter(p => p.category === category);
+};
 
-  // Products
-  async getProducts(): Promise<Product[]> {
-    return Array.from(this.products.values());
-  }
+export const getFeaturedProducts = (): Product[] => {
+  return products.slice(0, 6);
+};
 
-  async getProductById(id: string): Promise<Product | undefined> {
-    return this.products.get(id);
-  }
-
-  async getProductsByCategory(category: string): Promise<Product[]> {
-    return Array.from(this.products.values()).filter((p) => p.category === category);
-  }
-
-  // Cart
-  async getCartItems(sessionId: string): Promise<CartItem[]> {
-    return Array.from(this.cartItems.values()).filter((item) => item.sessionId === sessionId);
-  }
-
-  async addCartItem(sessionId: string, productId: string, quantity: number): Promise<CartItem> {
-    const existing = Array.from(this.cartItems.values()).find(
-      (item) => item.sessionId === sessionId && item.productId === productId
-    );
-
-    if (existing) {
-      existing.quantity += quantity;
-      return existing;
-    }
-
-    const id = randomUUID();
-    const cartItem: CartItem = { id, productId, quantity, sessionId };
-    this.cartItems.set(id, cartItem);
-    return cartItem;
-  }
-
-  async updateCartItem(id: string, quantity: number): Promise<CartItem | undefined> {
-    const item = this.cartItems.get(id);
-    if (item) {
-      item.quantity = quantity;
-      return item;
-    }
-    return undefined;
-  }
-
-  async removeCartItem(id: string): Promise<void> {
-    this.cartItems.delete(id);
-  }
-
-  async clearCart(sessionId: string): Promise<void> {
-    const itemsToDelete = Array.from(this.cartItems.entries())
-      .filter(([_, item]) => item.sessionId === sessionId)
-      .map(([id]) => id);
-    
-    itemsToDelete.forEach((id) => this.cartItems.delete(id));
-  }
-
-  // Orders
-  async createOrder(orderData: InsertOrder): Promise<Order> {
-    const id = randomUUID();
-    const order: Order = {
-      ...orderData,
-      id,
-      status: "pending",
-    };
-    this.orders.set(id, order);
-    return order;
-  }
-
-  async getOrderById(id: string): Promise<Order | undefined> {
-    return this.orders.get(id);
-  }
-}
-
-export const storage = new MemStorage();
+export const getCategoryName = (categoryId: string): string => {
+  const categoryMap: Record<string, string> = {
+    glp1: "GLP-1 Agonists",
+    healing: "Healing & Repair",
+    growth: "Growth Factors",
+    cosmetic: "Cosmetic Peptides",
+    nootropics: "Nootropics",
+  };
+  return categoryMap[categoryId] || categoryId;
+};
