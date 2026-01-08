@@ -1,0 +1,337 @@
+INSTRUCTIONS: This file contains the exact, verbatim content for the entire Peptide Europe website. Copy and paste these sections directly into your website builder or CMS.
+
+
+1. GLOBAL SETTINGS & FEATURES
+Brand Name: Peptide Europe
+Tagline: Precision Peptides for European Science
+Color Palette:
+
+	•	Primary Blue: #0ea5e9 (Cyan-500)
+	•	Dark Slate: #0f172a (Slate-900)
+	•	White: #ffffff
+	•	Success Green: #22c55e
+
+Required Features:
+
+	1.	Age Verification Popup:
+	◦	Trigger: On first visit.
+	◦	Headline: “Age Verification Required”
+	◦	Body: “The products on this website are intended for laboratory research use only. They are strictly NOT for human consumption. You must be at least 18 years old to enter.”
+	◦	Buttons: “I am 18+ and Agree” (Enter) / “Exit” (Redirect to Google).
+	2.	Stock Status Logic:
+	◦	Display “In Stock” with a green pulse animation for all items.
+	◦	If stock < 5, display “Low Stock - Order Soon”.
+	3.	Payment Gateways:
+	◦	Crypto (Preferred): BTCPay Server (Bitcoin, USDT, Ethereum) - Auto-apply 10% discount.
+	◦	Bank Transfer: SEPA details displayed at checkout.
+	◦	Credit Card: High-risk merchant account integration (e.g., Seamless Chex).
+
+
+2. LEGAL PAGES (FULL TEXT)
+A. Terms of Service
+Page Title: Terms of Service
+SEO Meta Description: Terms and conditions for purchasing research peptides from Peptide Europe. Strictly for laboratory use only.
+
+Content:
+“1. ACCEPTANCE OF TERMS
+By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement. In addition, when using this website’s services, you shall be subject to any posted guidelines or rules applicable to such services.
+
+2. RESEARCH USE ONLY
+All products sold by Peptide Europe are strictly for RESEARCH AND LABORATORY USE ONLY. They are not intended for human consumption, diagnostic, therapeutic, or veterinary use. Any communication suggesting human use will result in immediate order cancellation and a permanent ban from our platform.
+
+3. AGE REQUIREMENT
+You must be at least 18 years of age to purchase from this website. By placing an order, you confirm that you meet this age requirement and are purchasing these products for legitimate research purposes.
+
+4. LIABILITY & INDEMNIFICATION
+Peptide Europe shall not be held liable for any damages resulting from the misuse of our products. The buyer assumes full responsibility for the handling, storage, and use of all purchased items in accordance with applicable laws and safety regulations. You agree to indemnify and hold Peptide Europe harmless from any claims, losses, or damages arising from your use or misuse of our products.”
+
+B. Shipping Policy
+Page Title: Shipping & Delivery
+SEO Meta Description: Fast, guaranteed shipping of research peptides to all EU countries. Same-day dispatch and discreet packaging.
+
+Content:
+“DISPATCH TIME
+All orders placed before 2:00 PM CET (Monday-Friday) are dispatched the same day. Orders placed after this time or on weekends will be dispatched the next business day.
+
+SHIPPING OPTIONS
+
+	•	Standard EU Shipping (DHL/Post): 3-7 business days - €9.99
+	•	Express EU Shipping (DHL Express): 1-3 business days - €19.99
+	•	Free Shipping: On all orders over €150
+
+CUSTOMS & DISCRETION
+We understand the importance of privacy. All packages are shipped in plain, unbranded packaging with no indication of the contents on the outside label. We use stealth shipping methods where necessary to ensure smooth delivery.
+
+DELIVERY GUARANTEE
+We guarantee delivery to all EU countries (plus UK, Norway, Switzerland). If your package is seized by customs or lost in transit (no tracking update for 7 days), we will reship your order once free of charge. Please contact support with your order number to initiate a reshipment.”
+
+C. Refund Policy
+Page Title: Refund & Return Policy
+SEO Meta Description: Our policy on returns and refunds for research chemicals. All sales are final to ensure quality and safety.
+
+Content:
+“ALL SALES FINAL
+Due to the sensitive nature of our products (research chemicals) and the strict storage requirements needed to maintain purity, all sales are final. We cannot accept returns or exchanges once the product has left our facility, as we cannot guarantee the integrity of returned items.
+
+DAMAGED OR INCORRECT ITEMS
+If you receive a damaged item (broken vial) or the wrong product, please contact us within 48 hours of delivery. You must provide photographic evidence of the damage or error. Once verified, we will arrange for a replacement to be sent immediately at no cost to you.
+
+ORDER CANCELLATION
+You may cancel your order for a full refund if it has not yet been dispatched. Once the shipping label has been created, the order cannot be cancelled.”
+
+
+3. PRODUCT CATALOG (FULL DETAILS)
+1. Tirzepatide (10mg)
+	•	Product Name: Tirzepatide 10mg
+	•	Code Name: TRIZZY
+	•	Price: €28.00 (Sale) / €45.00 (Regular)
+	•	Category: GLP-1 Agonists
+	•	Short Description: A dual GIP and GLP-1 receptor agonist. Research indicates potential for significant weight management and glycemic control applications.
+	•	Full Description:
+“Tirzepatide is a novel, dual-acting GIP (glucose-dependent insulinotropic polypeptide) and GLP-1 (glucagon-like peptide-1) receptor agonist. This synthetic peptide has been the subject of extensive research for its potential to regulate blood glucose levels and influence body weight.
+In laboratory studies, Tirzepatide has demonstrated a unique mechanism of action by activating both the GIP and GLP-1 receptors, which may lead to synergistic effects on metabolic regulation. It is supplied as a lyophilized powder for research purposes only.”
+	•	Technical Specs:
+	◦	Sequence: Y-Aib-E-G-T-F-T-S-D-Y-S-I-A-M-D-K-I-H-Q-Q-D-F-V-N-W-L-L-A-Q-K-G-K-K-N-D-W-K-H-N-I-T-Q
+	◦	CAS Number: 2023788-19-2
+	◦	Molecular Formula: C225H348N48O68
+	◦	Molecular Weight: 4813.45 g/mol
+	◦	Purity: ≥99.5% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+2. Semaglutide (5mg)
+	•	Product Name: Semaglutide 5mg
+	•	Code Name: SEMA
+	•	Price: €18.00 (Sale) / €35.00 (Regular)
+	•	Category: GLP-1 Agonists
+	•	Short Description: A GLP-1 receptor agonist. Studies suggest efficacy in metabolic regulation and appetite modulation.
+	•	Full Description:
+“Semaglutide is a glucagon-like peptide-1 (GLP-1) analogue that has been modified to increase its half-life. It functions as an agonist for the GLP-1 receptor, a key regulator of insulin secretion and appetite.
+Research indicates that Semaglutide may play a significant role in metabolic health by mimicking the effects of the native hormone GLP-1. It is widely used in studies focusing on type 2 diabetes and obesity management mechanisms.”
+	•	Technical Specs:
+	◦	Sequence: H-Aib-E-G-T-F-T-S-D-V-S-S-Y-L-E-G-Q-A-A-K(AEEA-AEEA-γ-Glu-17-carboxyheptadecanoyl)-E-F-I-A-W-L-V-R-G-R-G
+	◦	CAS Number: 910463-68-2
+	◦	Molecular Formula: C187H291N45O59
+	◦	Molecular Weight: 4113.58 g/mol
+	◦	Purity: ≥99.5% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+3. Retatrutide (10mg)
+	•	Product Name: Retatrutide 10mg
+	•	Code Name: RITA
+	•	Price: €35.00 (Sale) / €55.00 (Regular)
+	•	Category: GLP-1 Agonists
+	•	Short Description: A triple agonist (GLP-1, GIP, and Glucagon receptors). Emerging research highlights its potent metabolic effects.
+	•	Full Description:
+“Retatrutide is a cutting-edge ‘triple agonist’ peptide that targets the GLP-1, GIP, and Glucagon receptors simultaneously. This multi-receptor activity is hypothesized to produce more profound metabolic effects than single or dual agonists.
+Current research is investigating Retatrutide’s ability to mobilize fat stores and improve glycemic control through this unique triple-action mechanism. It represents the latest frontier in metabolic peptide research.”
+	•	Technical Specs:
+	◦	Sequence: Y-Aib-Q-G-T-F-T-S-D-Y-S-I-L-D-K-A-Q-A-A-E-F-V-N-W-L-L-A-G-G-P-S-S-G-A-P-P-P-S-NH2
+	◦	CAS Number: 2381089-83-2
+	◦	Molecular Formula: C221H342N46O68
+	◦	Molecular Weight: 4731.33 g/mol
+	◦	Purity: ≥99.0% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+4. BPC-157 (5mg)
+	•	Product Name: BPC-157 5mg
+	•	Code Name: WOLVERINE
+	•	Price: €14.00 (Sale) / €25.00 (Regular)
+	•	Category: Healing & Repair
+	•	Short Description: Body Protection Compound-157. Research focuses on its regenerative properties in tendons, ligaments, and gut health.
+	•	Full Description:
+“BPC-157 (Body Protection Compound-157) is a pentadecapeptide composed of 15 amino acids. It is derived from a protective protein found in the stomach.
+Extensive research suggests that BPC-157 may accelerate the healing of various tissues, including tendons, muscles, nervous system, and the gastrointestinal tract. It is a primary subject of study for injury recovery and soft tissue repair.”
+	•	Technical Specs:
+	◦	Sequence: Gly-Glu-Pro-Pro-Pro-Gly-Lys-Pro-Add-Asp-Asp-Ala-Gly-Leu-Val
+	◦	CAS Number: 137525-51-0
+	◦	Molecular Formula: C62H98N16O22
+	◦	Molecular Weight: 1419.56 g/mol
+	◦	Purity: ≥99.0% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+5. TB-500 (10mg)
+	•	Product Name: TB-500 10mg
+	•	Code Name: RECOVERY
+	•	Price: €30.00 (Sale) / €45.00 (Regular)
+	•	Category: Healing & Repair
+	•	Short Description: Synthetic fraction of Thymosin Beta-4. Investigated for its role in cellular migration and tissue repair.
+	•	Full Description:
+“TB-500 is a synthetic version of the naturally occurring peptide Thymosin Beta-4. It plays a vital role in building new blood vessels, small muscle tissue fibers, and cell migration.
+Research highlights TB-500’s potential to promote rapid wound healing and reduce inflammation. It is often studied in conjunction with BPC-157 for synergistic tissue repair effects.”
+	•	Technical Specs:
+	◦	Sequence: Ac-Ser-Asp-Lys-Pro-Asp-Met-Ala-Glu-Ile-Glu-Lys-F-D-K-S-K-L-K-K-T-E-T-Q-E-K-N-P-L-P-S-K-E-T-I-E-Q-E-K-Q-A-G-E-S
+	◦	CAS Number: 77591-33-4
+	◦	Molecular Formula: C212H350N56O78S
+	◦	Molecular Weight: 4963.50 g/mol
+	◦	Purity: ≥99.0% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+6. CJC-1295 No DAC (5mg)
+	•	Product Name: CJC-1295 No DAC 5mg
+	•	Code Name: GROWTH-MOD
+	•	Price: €15.00
+	•	Category: Growth Factors
+	•	Short Description: A GHRH analogue. Research suggests it may amplify pulsatile growth hormone secretion.
+	•	Full Description:
+“CJC-1295 without DAC (Drug Affinity Complex) is a synthetic analogue of Growth Hormone Releasing Hormone (GHRH). It is designed to stimulate the release of growth hormone from the pituitary gland in a pulsatile manner.
+Unlike its counterpart with DAC, this version has a shorter half-life, which mimics the body’s natural GH spikes more closely. It is frequently researched for its potential to improve muscle growth and fat loss.”
+	•	Technical Specs:
+	◦	Sequence: Tyr-D-Ala-Asp-Ala-Ile-Phe-Thr-Gln-Ser-Tyr-Arg-Lys-Val-Leu-Ala-Gln-Leu-Ser-Ala-Arg-Lys-Leu-Leu-Gln-Asp-Ile-Leu-Ser-Arg-NH2
+	◦	CAS Number: 863288-34-0
+	◦	Molecular Formula: C152H252N44O42
+	◦	Molecular Weight: 3367.97 g/mol
+	◦	Purity: ≥98.0% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+7. Ipamorelin (5mg)
+	•	Product Name: Ipamorelin 5mg
+	•	Code Name: IPA
+	•	Price: €15.00
+	•	Category: Growth Factors
+	•	Short Description: A selective GH-Secretagogue. Known in research for specificity without significant cortisol or prolactin elevation.
+	•	Full Description:
+“Ipamorelin is a pentapeptide and a selective agonist of the ghrelin/growth hormone secretagogue receptor. It is unique among GHRPs for its high specificity.
+Studies show that Ipamorelin stimulates a strong release of growth hormone without significantly increasing cortisol or prolactin levels, making it a preferred subject for research into long-term GH therapy with fewer side effects.”
+	•	Technical Specs:
+	◦	Sequence: Aib-His-D-2-Nal-D-Phe-Lys-NH2
+	◦	CAS Number: 170851-70-4
+	◦	Molecular Formula: C38H49N9O5
+	◦	Molecular Weight: 711.85 g/mol
+	◦	Purity: ≥99.0% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+8. GHK-Cu (50mg)
+	•	Product Name: GHK-Cu 50mg
+	•	Code Name: BLUE-GOLD
+	•	Price: €20.00
+	•	Category: Cosmetic Peptides
+	•	Short Description: Copper peptide. Extensively studied for skin remodeling, wound healing, and anti-aging properties.
+	•	Full Description:
+“GHK-Cu is a naturally occurring copper complex of the tripeptide glycyl-L-histidyl-L-lysine. It has a strong affinity for copper(II) and is found in human plasma.
+Research has extensively documented GHK-Cu’s ability to stimulate collagen and elastin production, promote wound healing, and exert anti-inflammatory effects. It is a staple in cosmetic and dermatological research.”
+	•	Technical Specs:
+	◦	Sequence: Gly-His-Lys(Cu2+)
+	◦	CAS Number: 49557-75-7
+	◦	Molecular Formula: C14H24N6O4Cu
+	◦	Molecular Weight: 403.94 g/mol
+	◦	Purity: ≥99.0% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+9. Melanotan II (10mg)
+	•	Product Name: Melanotan II 10mg
+	•	Code Name: SUN-KISS
+	•	Price: €12.00
+	•	Category: Cosmetic Peptides
+	•	Short Description: Synthetic analogue of alpha-MSH. Research focuses on melanogenesis (tanning) and libido effects.
+	•	Full Description:
+“Melanotan II is a synthetic analogue of the peptide hormone alpha-melanocyte-stimulating hormone (α-MSH). It was originally developed to treat skin conditions by inducing melanogenesis (pigment production).
+In addition to its tanning effects, research has observed significant aphrodisiac properties, leading to its investigation for sexual dysfunction.”
+	•	Technical Specs:
+	◦	Sequence: Ac-Nle-Asp-His-D-Phe-Arg-Trp-Lys-NH2
+	◦	CAS Number: 121062-08-6
+	◦	Molecular Formula: C50H69N15O9
+	◦	Molecular Weight: 1024.18 g/mol
+	◦	Purity: ≥98.0% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+10. PT-141 (10mg)
+	•	Product Name: PT-141 (Bremelanotide) 10mg
+	•	Code Name: PASSION
+	•	Price: €15.00
+	•	Category: Nootropics
+	•	Short Description: Melanocortin receptor agonist. Studied for its central effects on sexual arousal and desire.
+	•	Full Description:
+“PT-141, also known as Bremelanotide, is a derivative of Melanotan II but lacks the C-terminal amide group. It acts as a non-selective agonist of the melanocortin receptors.
+Unlike other sexual dysfunction treatments that act on the vascular system, PT-141 acts on the central nervous system (hypothalamus) to directly increase sexual desire and arousal in both males and females.”
+	•	Technical Specs:
+	◦	Sequence: Ac-Nle-Asp-His-D-Phe-Arg-Trp-Lys-OH
+	◦	CAS Number: 189691-06-3
+	◦	Molecular Formula: C50H68N14O10
+	◦	Molecular Weight: 1025.2 g/mol
+	◦	Purity: ≥98.0% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+11. NAD+ (100mg)
+	•	Product Name: NAD+ 100mg
+	•	Code Name: CELL-FUEL
+	•	Price: €25.00
+	•	Category: Nootropics
+	•	Short Description: Nicotinamide Adenine Dinucleotide. Critical coenzyme found in all living cells, essential for energy metabolism.
+	•	Full Description:
+“Nicotinamide Adenine Dinucleotide (NAD+) is a coenzyme central to metabolism. It is found in all living cells and is essential for the function of sirtuins, a class of proteins that regulate cellular health and aging.
+Research into NAD+ supplementation focuses on its potential to restore cellular energy levels, repair DNA, and combat age-related decline in mitochondrial function.”
+	•	Technical Specs:
+	◦	Sequence: N/A (Coenzyme)
+	◦	CAS Number: 53-84-9
+	◦	Molecular Formula: C21H27N7O14P2
+	◦	Molecular Weight: 663.43 g/mol
+	◦	Purity: ≥99.0% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+12. Epithalon (10mg)
+	•	Product Name: Epithalon 10mg
+	•	Code Name: TIME-KEEPER
+	•	Price: €18.00
+	•	Category: Nootropics
+	•	Short Description: Synthetic tetrapeptide. Research investigates its effects on telomerase activity and longevity.
+	•	Full Description:
+“Epithalon (also known as Epitalon) is a synthetic tetrapeptide based on a natural peptide found in the pineal gland. It has been the subject of long-term studies on aging and longevity.
+The primary mechanism of interest is its ability to activate telomerase, the enzyme responsible for maintaining the length of telomeres, which protect DNA during cell division.”
+	•	Technical Specs:
+	◦	Sequence: Ala-Glu-Asp-Gly
+	◦	CAS Number: 307297-39-8
+	◦	Molecular Formula: C14H22N4O9
+	◦	Molecular Weight: 390.35 g/mol
+	◦	Purity: ≥98.0% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+13. MOTS-c (10mg)
+	•	Product Name: MOTS-c 10mg
+	•	Code Name: MITO-BURN
+	•	Price: €22.00
+	•	Category: GLP-1 Agonists (Metabolic)
+	•	Short Description: Mitochondrial-derived peptide. Studied for its role in metabolic regulation and exercise mimetics.
+	•	Full Description:
+“MOTS-c is a peptide encoded in the mitochondrial DNA. It is known as a ‘mitochondrial-derived peptide’ and has been shown to regulate metabolic functions throughout the body.
+Research suggests MOTS-c acts as an exercise mimetic, promoting insulin sensitivity and preventing diet-induced obesity. It targets skeletal muscle to enhance glucose metabolism.”
+	•	Technical Specs:
+	◦	Sequence: Met-Arg-Trp-Q-E-M-G-Y-I-F-Y-P-R-K-L-R
+	◦	CAS Number: 1627580-64-6
+	◦	Molecular Formula: C101H152N28O22S2
+	◦	Molecular Weight: 2174.6 g/mol
+	◦	Purity: ≥98.0% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+14. KPV (10mg)
+	•	Product Name: KPV 10mg
+	•	Code Name: CALM-GUT
+	•	Price: €16.00
+	•	Category: Healing & Repair
+	•	Short Description: C-terminal tripeptide of alpha-MSH. Research highlights its potent anti-inflammatory properties.
+	•	Full Description:
+“KPV (Lysine-Proline-Valine) is a C-terminal tripeptide fragment of alpha-MSH. It retains the potent anti-inflammatory properties of the parent hormone but without the pigment-inducing effects.
+It is widely researched for its potential to treat inflammatory conditions, particularly in the gut (IBD/IBS) and skin (psoriasis), due to its ability to inhibit NF-kappaB pathways.”
+	•	Technical Specs:
+	◦	Sequence: Lys-Pro-Val
+	◦	CAS Number: 67727-97-3
+	◦	Molecular Formula: C16H32N6O4
+	◦	Molecular Weight: 372.46 g/mol
+	◦	Purity: ≥98.0% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
+
+15. Thymosin Alpha-1 (5mg)
+	•	Product Name: Thymosin Alpha-1 5mg
+	•	Code Name: IMMUNE-BOOST
+	•	Price: €20.00
+	•	Category: Healing & Repair
+	•	Short Description: Peptide fragment. Clinically studied for immune system modulation and enhancement.
+	•	Full Description:
+“Thymosin Alpha-1 is a peptide fragment originally isolated from thymus gland tissue. It is a potent modulator of immune function.
+Research has demonstrated its ability to enhance the activity of T-cells and dendritic cells, making it a key subject of study for boosting immune response against viral infections and chronic diseases.”
+	•	Technical Specs:
+	◦	Sequence: Ac-S-D-A-A-V-D-T-S-S-E-I-T-T-K-D-L-K-E-K-K-E-V-V-E-E-A-E-N
+	◦	CAS Number: 62304-98-7
+	◦	Molecular Formula: C129H215N33O55
+	◦	Molecular Weight: 3108.3 g/mol
+	◦	Purity: ≥98.0% (HPLC Verified)
+	◦	Storage: Store at -20°C. Keep away from light.
