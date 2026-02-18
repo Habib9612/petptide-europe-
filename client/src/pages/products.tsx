@@ -75,8 +75,8 @@ export default function Products() {
 
   return (
     <div className="min-h-screen">
-      <div className="border-b border-border/40">
-        <div className="container mx-auto px-4 py-8">
+      <div className="border-b border-border/40 bg-gradient-to-b from-muted/40 to-background">
+        <div className="container mx-auto px-4 py-10">
           <h1 className="text-2xl font-bold mb-1" data-testid="text-products-title">
             {t("products.title")}
           </h1>

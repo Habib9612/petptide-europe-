@@ -66,7 +66,7 @@ export default function ProductDetail() {
 
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
-            <div className="flex h-72 lg:h-96 items-center justify-center rounded-md bg-muted/30 border border-border/50">
+            <div className="flex h-72 lg:h-96 items-center justify-center rounded-md bg-gradient-to-b from-muted/60 to-muted/20 border border-border/50">
               {getProductImage(product.id, "") ? (
                 <img
                   src={getProductImage(product.id, "")}

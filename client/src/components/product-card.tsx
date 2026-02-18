@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "./language-context";
 import { useCart } from "@/lib/cart";
@@ -9,6 +9,14 @@ import { getProductImage } from "@/lib/product-images";
 import type { Product } from "@shared/schema";
 import { Plus, FlaskConical } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+const categoryColors: Record<string, string> = {
+  glp1: "hsl(186, 60%, 42%)",
+  growth: "hsl(155, 50%, 40%)",
+  healing: "hsl(35, 65%, 50%)",
+  cosmetic: "hsl(262, 45%, 52%)",
+  nootropics: "hsl(340, 55%, 48%)",
+};
 
 interface ProductCardProps {
   product: Product;
@@ -19,8 +27,8 @@ export function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCart();
   const { toast } = useToast();
 
-  const isLowStock = product.stock < 5;
   const hasDiscount = product.regularPrice && product.regularPrice > product.price;
+  const catColor = categoryColors[product.category] || "hsl(186, 60%, 42%)";
 
   const handleAddToCart = () => {
     addItem(product);
@@ -34,7 +42,7 @@ export function ProductCard({ product }: ProductCardProps) {
     <Card className="group relative flex flex-col h-full hover-elevate" data-testid={`card-product-${product.id}`}>
       <Link href={`/product/${product.id}`} className="flex flex-col flex-1" data-testid={`link-product-${product.id}`}>
         <div className="p-4 pb-0 flex-1">
-          <div className="mb-4 flex h-32 items-center justify-center rounded-md bg-muted/40">
+          <div className="mb-4 flex h-32 items-center justify-center rounded-md bg-muted/50">
             {getProductImage(product.id, "") ? (
               <img
                 src={getProductImage(product.id, "")}
@@ -48,9 +56,12 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
 
           <div className="space-y-1.5">
-            <p className="text-[11px] text-muted-foreground" data-testid={`badge-category-${product.id}`}>
-              {getCategoryName(product.category)}
-            </p>
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: catColor }} />
+              <p className="text-[11px] text-muted-foreground truncate" data-testid={`badge-category-${product.id}`}>
+                {getCategoryName(product.category)}
+              </p>
+            </div>
             <h3 className="font-semibold text-sm leading-snug" data-testid={`text-name-${product.id}`}>
               {product.name}
             </h3>

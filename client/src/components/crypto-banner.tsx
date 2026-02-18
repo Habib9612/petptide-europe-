@@ -30,6 +30,7 @@ export function CryptoBanner() {
       data-testid="banner-crypto"
     >
       <div className="flex items-center gap-3 rounded-md border bg-card px-4 py-3 shadow-lg">
+        <div className="w-1.5 h-8 rounded-full shrink-0" style={{ backgroundColor: "hsl(35, 65%, 50%)" }} />
         <div>
           <p className="text-sm font-medium">Pay with crypto, save 10%</p>
           <p className="text-xs text-muted-foreground">Bitcoin, Ethereum & USDT accepted</p>

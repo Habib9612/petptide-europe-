@@ -1,16 +1,20 @@
 import { Link } from "wouter";
 import { useLanguage } from "./language-context";
+import { FlaskConical } from "lucide-react";
 
 export function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="border-t bg-muted/20">
+    <footer className="border-t bg-card/50">
       <div className="container mx-auto px-4 py-10">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <span className="text-sm font-bold tracking-tight">Peptide<span className="text-primary">Europe</span></span>
-            <p className="text-xs text-muted-foreground mt-2 leading-relaxed max-w-xs">
+            <div className="flex items-center gap-2 mb-2">
+              <FlaskConical className="h-4 w-4 text-primary" />
+              <span className="text-sm font-bold tracking-tight">Peptide<span className="text-primary">Europe</span></span>
+            </div>
+            <p className="text-xs text-muted-foreground leading-relaxed max-w-xs">
               Research-grade peptides with lab-verified purity for European laboratories and research institutions.
             </p>
           </div>
@@ -36,10 +40,15 @@ export function Footer() {
 
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Payment</h3>
-            <p className="text-sm text-muted-foreground mb-1">Bitcoin, Ethereum, USDT</p>
-            <p className="text-sm text-muted-foreground mb-1">SEPA Bank Transfer</p>
-            <p className="text-sm text-muted-foreground">Credit Card</p>
-            <p className="text-xs text-muted-foreground mt-2">10% off with crypto</p>
+            <div className="space-y-1.5 text-sm text-muted-foreground">
+              <p>Bitcoin, Ethereum, USDT</p>
+              <p>SEPA Bank Transfer</p>
+              <p>Credit Card</p>
+            </div>
+            <div className="mt-3 inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-md bg-muted/80">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "hsl(35, 65%, 50%)" }} />
+              <span className="text-muted-foreground">10% off with crypto</span>
+            </div>
           </div>
         </div>
 
