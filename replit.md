@@ -59,6 +59,27 @@ The schema includes products, cart items, orders, newsletter subscribers, and us
 - Sections: General Peptide Questions, Storage & Handling, Ordering & Payment, Shipping & Delivery, Product Quality & Testing, Returns & Refunds
 - Category filtering and expandable accordion-style Q&A items
 
+### Landing Page Structure
+The home page (`client/src/pages/home.tsx`) uses a GenScript-inspired layout with the following sections:
+- **Hero**: 3D molecular animation with teal/amber particle system, dark gradient background
+- **SectionNav**: Sticky navigation bar with anchor links to sections + "Order Now" CTA
+- **ScienceSection** (id="science"): Molecular science overview with amino acid sequence card
+- **WhyChooseUs** (id="why-choose-us"): 4 trust stat cards (24h processing, purity, catalog, EU shipping)
+- **ProcessSection** (id="process"): 6-step quality pipeline on dark gradient background
+- **SpecsTable** (id="specifications"): Product quality specification table
+- **CategoriesSection** (id="catalog"): 4 peptide category cards with color indicators
+- **Testimonials** (id="testimonials"): 3 researcher testimonial cards
+- **ResourcesBar**: Links to calculator, insights, FAQ
+- **NewsletterSection**: Email signup with discount code
+- **DisclaimerBanner**: Legal research-use disclaimer
+
+### Color Palette
+- **Primary**: Teal/cyan (HSL 186 65% 38-48%)
+- **Accent**: Warm amber (HSL 35 75% 52%)
+- **Success**: Emerald (HSL 155 55% 40%)
+- **Category Colors**: GLP-1=teal, Growth=emerald, Healing=amber, Cosmetic=purple
+- Dark-themed sections (hero, process, disclaimer) use navy-to-teal gradients in both light/dark modes
+
 ### Product Images
 - Custom vial images for BPC-157, CJC-1295, and Hexarelin via `client/src/lib/product-images.ts` import map
 - Other products use FlaskConical icon placeholder
