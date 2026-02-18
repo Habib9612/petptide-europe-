@@ -32,9 +32,21 @@ The server uses a modular structure with routes defined in `server/routes.ts` an
 - **Schema**: Defined in `shared/schema.ts` using Drizzle's table definitions
 - **Validation**: Zod schemas generated from Drizzle schemas via drizzle-zod
 - **Current Storage**: In-memory storage implementation with product data hardcoded (ready for database migration)
-- **Pricing Strategy**: All 15 products display competitor pricing exactly €4 higher than our sale price to show competitive advantage
+- **Pricing Strategy**: All 20 products display competitor pricing exactly €4 higher than our sale price to show competitive advantage
+- **Free Shipping**: Orders over €120 get free shipping (otherwise €9.99)
 
-The schema includes products, cart items, and orders tables. The storage interface (`IStorage`) abstracts data operations, making it straightforward to switch from in-memory to database-backed storage.
+The schema includes products, cart items, orders, newsletter subscribers, and user blog posts tables. The storage interface (`IStorage`) abstracts data operations, making it straightforward to switch from in-memory to database-backed storage.
+
+### Newsletter System
+- Subscribers receive a unique WELCOME10-XXXXXXXX discount code for 10% off first order
+- Discount codes are one-time use and marked as used after order placement
+- API: POST /api/newsletter (subscribe), POST /api/newsletter/validate (check code), POST /api/newsletter/use-code (consume code)
+
+### Blog/Insights System
+- Static research articles defined in `client/src/lib/blog-data.ts` with slugs for routing
+- User-created blog posts via API with in-memory storage
+- Routes: /insights (listing), /insights/:slug (static articles), /insights/user/:id (user posts)
+- API: GET /api/blog-posts, POST /api/blog-posts
 
 ### Key Design Patterns
 - **Path Aliases**: `@/` maps to client src, `@shared/` maps to shared code

@@ -16,6 +16,7 @@ import { useLanguage } from "@/components/language-context";
 import { useCart } from "@/lib/cart";
 import { euCountries } from "@shared/schema";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 import {
   ArrowLeft,
   CreditCard,
@@ -23,6 +24,8 @@ import {
   ShoppingCart,
   CheckCircle,
   FlaskConical,
+  Tag,
+  Check,
 } from "lucide-react";
 import { SiBitcoin } from "react-icons/si";
 
@@ -34,6 +37,10 @@ export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState("crypto");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
+  const [discountCode, setDiscountCode] = useState("");
+  const [newsletterDiscount, setNewsletterDiscount] = useState(0);
+  const [discountApplied, setDiscountApplied] = useState(false);
+  const [validatingCode, setValidatingCode] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -47,8 +54,24 @@ export default function Checkout() {
 
   const subtotal = getSubtotal();
   const cryptoDiscount = paymentMethod === "crypto" ? subtotal * 0.1 : 0;
-  const shipping = subtotal >= 150 ? 0 : 9.99;
-  const total = subtotal - cryptoDiscount + shipping;
+  const newsletterDiscountAmount = discountApplied ? subtotal * (newsletterDiscount / 100) : 0;
+  const shipping = subtotal >= 120 ? 0 : 9.99;
+  const total = subtotal - cryptoDiscount - newsletterDiscountAmount + shipping;
+
+  const handleApplyDiscount = async () => {
+    if (!discountCode.trim()) return;
+    setValidatingCode(true);
+    try {
+      const res = await apiRequest("POST", "/api/newsletter/validate", { code: discountCode.trim() });
+      const data = await res.json();
+      setNewsletterDiscount(data.discount);
+      setDiscountApplied(true);
+      toast({ title: "Discount applied!", description: `${data.discount}% off your order.` });
+    } catch {
+      toast({ title: "Invalid code", description: "This discount code is invalid or already used.", variant: "destructive" });
+    }
+    setValidatingCode(false);
+  };
 
   if (items.length === 0 && !orderComplete) {
     return (
@@ -98,15 +121,39 @@ export default function Checkout() {
 
     setIsSubmitting(true);
     
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    clearCart();
-    setOrderComplete(true);
-    
-    toast({
-      title: "Order placed!",
-      description: "You will receive payment instructions via email.",
-    });
+    try {
+      const orderPayload = {
+        ...formData,
+        paymentMethod,
+        subtotal,
+        shipping,
+        discount: cryptoDiscount + newsletterDiscountAmount,
+        total,
+        items: JSON.stringify(items.map(i => ({ productId: i.product.id, quantity: i.quantity, price: i.product.price }))),
+      };
+
+      await apiRequest("POST", "/api/orders", orderPayload);
+
+      if (discountApplied && discountCode) {
+        try {
+          await apiRequest("POST", "/api/newsletter/use-code", { code: discountCode.trim() });
+        } catch {}
+      }
+
+      clearCart();
+      setOrderComplete(true);
+      
+      toast({
+        title: "Order placed!",
+        description: "You will receive payment instructions via email.",
+      });
+    } catch {
+      toast({
+        title: "Error",
+        description: "Failed to place order. Please try again.",
+        variant: "destructive",
+      });
+    }
     
     setIsSubmitting(false);
   };
@@ -324,24 +371,61 @@ export default function Checkout() {
                     ))}
                   </div>
 
+                  <div className="border-t pt-4 space-y-3">
+                    <div className="flex gap-2">
+                      <div className="relative flex-1">
+                        <Tag className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+                        <Input
+                          placeholder="Discount code"
+                          value={discountCode}
+                          onChange={(e) => setDiscountCode(e.target.value)}
+                          className="pl-9 text-sm"
+                          disabled={discountApplied}
+                          data-testid="input-discount-code"
+                        />
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={handleApplyDiscount}
+                        disabled={discountApplied || validatingCode || !discountCode.trim()}
+                        data-testid="button-apply-discount"
+                      >
+                        {discountApplied ? <Check className="h-4 w-4" /> : validatingCode ? "..." : "Apply"}
+                      </Button>
+                    </div>
+                    {discountApplied && (
+                      <p className="text-xs text-green-600">Newsletter discount applied: {newsletterDiscount}% off</p>
+                    )}
+                  </div>
                   <div className="border-t pt-4 space-y-2">
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Subtotal</span>
-                      <span>€{subtotal.toFixed(2)}</span>
+                      <span>&euro;{subtotal.toFixed(2)}</span>
                     </div>
                     {cryptoDiscount > 0 && (
                       <div className="flex justify-between text-sm text-green-600">
-                        <span>{t("cart.discount")}</span>
-                        <span data-testid="text-discount">-€{cryptoDiscount.toFixed(2)}</span>
+                        <span>{t("cart.discount")} (Crypto)</span>
+                        <span data-testid="text-discount">-&euro;{cryptoDiscount.toFixed(2)}</span>
+                      </div>
+                    )}
+                    {newsletterDiscountAmount > 0 && (
+                      <div className="flex justify-between text-sm text-green-600">
+                        <span>Newsletter Discount</span>
+                        <span data-testid="text-newsletter-discount">-&euro;{newsletterDiscountAmount.toFixed(2)}</span>
                       </div>
                     )}
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Shipping</span>
-                      <span>{shipping === 0 ? "Free" : `€${shipping.toFixed(2)}`}</span>
+                      <span>{shipping === 0 ? "Free" : `\u20AC${shipping.toFixed(2)}`}</span>
                     </div>
+                    {shipping === 0 && (
+                      <p className="text-xs text-green-600">Free shipping on orders over &euro;120</p>
+                    )}
                     <div className="flex justify-between text-lg font-semibold border-t pt-2">
                       <span>Total</span>
-                      <span data-testid="text-checkout-total">€{total.toFixed(2)}</span>
+                      <span data-testid="text-checkout-total">&euro;{total.toFixed(2)}</span>
                     </div>
                   </div>
                 </CardContent>

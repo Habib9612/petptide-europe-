@@ -20,6 +20,7 @@ import Terms from "@/pages/terms";
 import Refund from "@/pages/refund";
 import Insights from "@/pages/insights";
 import BlogPost from "@/pages/blog-post";
+import UserBlogPostPage from "@/pages/user-blog-post";
 
 function Router() {
   return (
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/products" component={Products} />
       <Route path="/product/:id" component={ProductDetail} />
       <Route path="/insights" component={Insights} />
+      <Route path="/insights/user/:id" component={UserBlogPostPage} />
       <Route path="/insights/:slug" component={BlogPost} />
       <Route path="/cart" component={Cart} />
       <Route path="/checkout" component={Checkout} />

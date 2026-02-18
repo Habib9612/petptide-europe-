@@ -61,6 +61,34 @@ export const insertOrderSchema = createInsertSchema(orders).omit({ id: true, sta
 export type InsertOrder = z.infer<typeof insertOrderSchema>;
 export type Order = typeof orders.$inferSelect;
 
+// Newsletter subscribers
+export const newsletterSubscribers = pgTable("newsletter_subscribers", {
+  id: varchar("id").primaryKey(),
+  email: text("email").notNull(),
+  discountCode: text("discount_code").notNull(),
+  subscribedAt: text("subscribed_at").notNull(),
+  used: boolean("used").notNull().default(false),
+});
+
+export const insertNewsletterSchema = createInsertSchema(newsletterSubscribers).omit({ id: true, used: true });
+export type InsertNewsletter = z.infer<typeof insertNewsletterSchema>;
+export type NewsletterSubscriber = typeof newsletterSubscribers.$inferSelect;
+
+// User blog posts
+export const userBlogPosts = pgTable("user_blog_posts", {
+  id: varchar("id").primaryKey(),
+  title: text("title").notNull(),
+  excerpt: text("excerpt").notNull(),
+  content: text("content").notNull(),
+  author: text("author").notNull(),
+  category: text("category").notNull(),
+  createdAt: text("created_at").notNull(),
+});
+
+export const insertUserBlogPostSchema = createInsertSchema(userBlogPosts).omit({ id: true });
+export type InsertUserBlogPost = z.infer<typeof insertUserBlogPostSchema>;
+export type UserBlogPost = typeof userBlogPosts.$inferSelect;
+
 // Categories
 export const categories = [
   { id: "glp1", name: "GLP-1 Agonists", description: "Metabolic regulation peptides" },

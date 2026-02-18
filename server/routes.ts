@@ -150,5 +150,84 @@ export async function registerRoutes(
     }
   });
 
+  // Newsletter API
+  app.post("/api/newsletter", async (req, res) => {
+    try {
+      const { email } = req.body;
+      if (!email || typeof email !== "string" || !email.includes("@")) {
+        return res.status(400).json({ error: "Valid email is required" });
+      }
+      const subscriber = await storage.subscribeNewsletter(email);
+      res.json({ discountCode: subscriber.discountCode, email: subscriber.email });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to subscribe" });
+    }
+  });
+
+  app.post("/api/newsletter/validate", async (req, res) => {
+    try {
+      const { code } = req.body;
+      if (!code) return res.status(400).json({ error: "Discount code required" });
+      const subscriber = await storage.validateDiscountCode(code);
+      if (!subscriber) {
+        return res.status(404).json({ error: "Invalid or already used discount code" });
+      }
+      res.json({ valid: true, discount: 10 });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to validate code" });
+    }
+  });
+
+  app.post("/api/newsletter/use-code", async (req, res) => {
+    try {
+      const { code } = req.body;
+      if (!code) return res.status(400).json({ error: "Code required" });
+      await storage.markDiscountUsed(code);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to mark code as used" });
+    }
+  });
+
+  // User Blog Posts API
+  app.get("/api/blog-posts", async (req, res) => {
+    try {
+      const posts = await storage.getUserBlogPosts();
+      res.json(posts);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch blog posts" });
+    }
+  });
+
+  app.get("/api/blog-posts/:id", async (req, res) => {
+    try {
+      const post = await storage.getUserBlogPostById(req.params.id);
+      if (!post) return res.status(404).json({ error: "Post not found" });
+      res.json(post);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch post" });
+    }
+  });
+
+  app.post("/api/blog-posts", async (req, res) => {
+    try {
+      const { title, excerpt, content, author, category } = req.body;
+      if (!title || !content || !author || !category) {
+        return res.status(400).json({ error: "Title, content, author, and category are required" });
+      }
+      const post = await storage.createUserBlogPost({
+        title,
+        excerpt: excerpt || title,
+        content,
+        author,
+        category,
+        createdAt: new Date().toISOString(),
+      });
+      res.json(post);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to create blog post" });
+    }
+  });
+
   return httpServer;
 }

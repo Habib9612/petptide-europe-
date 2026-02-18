@@ -95,7 +95,7 @@ export default function Cart() {
   const { items, getSubtotal, clearCart } = useCart();
   const subtotal = getSubtotal();
   const cryptoDiscount = subtotal * 0.1;
-  const shipping = subtotal >= 150 ? 0 : 9.99;
+  const shipping = subtotal >= 120 ? 0 : 9.99;
 
   if (items.length === 0) {
     return (
@@ -175,7 +175,7 @@ export default function Cart() {
                   </span>
                 </div>
                 {shipping === 0 && (
-                  <p className="text-xs text-green-600">Free shipping on orders over €150</p>
+                  <p className="text-xs text-green-600">Free shipping on orders over &euro;120</p>
                 )}
                 <div className="border-t pt-4">
                   <div className="flex justify-between text-lg font-semibold">

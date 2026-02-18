@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import type { Product, CartItem, Order, InsertOrder } from "@shared/schema";
+import type { Product, CartItem, Order, InsertOrder, NewsletterSubscriber, InsertNewsletter, UserBlogPost, InsertUserBlogPost } from "@shared/schema";
 
 export interface IStorage {
   // Products
@@ -17,6 +17,17 @@ export interface IStorage {
   // Orders
   createOrder(order: InsertOrder): Promise<Order>;
   getOrderById(id: string): Promise<Order | undefined>;
+
+  // Newsletter
+  subscribeNewsletter(email: string): Promise<NewsletterSubscriber>;
+  getNewsletterByEmail(email: string): Promise<NewsletterSubscriber | undefined>;
+  validateDiscountCode(code: string): Promise<NewsletterSubscriber | undefined>;
+  markDiscountUsed(code: string): Promise<void>;
+
+  // User Blog Posts
+  getUserBlogPosts(): Promise<UserBlogPost[]>;
+  getUserBlogPostById(id: string): Promise<UserBlogPost | undefined>;
+  createUserBlogPost(post: InsertUserBlogPost): Promise<UserBlogPost>;
 }
 
 // Product data
@@ -387,11 +398,15 @@ export class MemStorage implements IStorage {
   private products: Map<string, Product>;
   private cartItems: Map<string, CartItem>;
   private orders: Map<string, Order>;
+  private newsletterSubscribers: Map<string, NewsletterSubscriber>;
+  private userBlogPosts: Map<string, UserBlogPost>;
 
   constructor() {
     this.products = new Map();
     this.cartItems = new Map();
     this.orders = new Map();
+    this.newsletterSubscribers = new Map();
+    this.userBlogPosts = new Map();
     
     // Initialize products
     productsData.forEach((product) => {
@@ -468,6 +483,55 @@ export class MemStorage implements IStorage {
 
   async getOrderById(id: string): Promise<Order | undefined> {
     return this.orders.get(id);
+  }
+
+  // Newsletter
+  async subscribeNewsletter(email: string): Promise<NewsletterSubscriber> {
+    const existing = Array.from(this.newsletterSubscribers.values()).find(s => s.email === email);
+    if (existing) return existing;
+
+    const id = randomUUID();
+    const discountCode = "WELCOME10-" + randomUUID().slice(0, 8).toUpperCase();
+    const subscriber: NewsletterSubscriber = {
+      id,
+      email,
+      discountCode,
+      subscribedAt: new Date().toISOString(),
+      used: false,
+    };
+    this.newsletterSubscribers.set(id, subscriber);
+    return subscriber;
+  }
+
+  async getNewsletterByEmail(email: string): Promise<NewsletterSubscriber | undefined> {
+    return Array.from(this.newsletterSubscribers.values()).find(s => s.email === email);
+  }
+
+  async validateDiscountCode(code: string): Promise<NewsletterSubscriber | undefined> {
+    return Array.from(this.newsletterSubscribers.values()).find(s => s.discountCode === code && !s.used);
+  }
+
+  async markDiscountUsed(code: string): Promise<void> {
+    const sub = Array.from(this.newsletterSubscribers.values()).find(s => s.discountCode === code);
+    if (sub) sub.used = true;
+  }
+
+  // User Blog Posts
+  async getUserBlogPosts(): Promise<UserBlogPost[]> {
+    return Array.from(this.userBlogPosts.values()).sort((a, b) => 
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+  }
+
+  async getUserBlogPostById(id: string): Promise<UserBlogPost | undefined> {
+    return this.userBlogPosts.get(id);
+  }
+
+  async createUserBlogPost(postData: InsertUserBlogPost): Promise<UserBlogPost> {
+    const id = randomUUID();
+    const post: UserBlogPost = { ...postData, id };
+    this.userBlogPosts.set(id, post);
+    return post;
   }
 }
 
