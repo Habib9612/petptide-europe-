@@ -17,7 +17,7 @@ export const products: Product[] = [
     purity: "≥99.5% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 45,
-    imageUrl: null,
+    imageUrl: "/images/products/tirzepatide.png",
   },
   {
     id: "semaglutide-5mg",
@@ -35,7 +35,7 @@ export const products: Product[] = [
     purity: "≥99.5% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 62,
-    imageUrl: null,
+    imageUrl: "/images/products/semaglutide.png",
   },
   {
     id: "retatrutide-10mg",
@@ -53,7 +53,7 @@ export const products: Product[] = [
     purity: "≥99.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 28,
-    imageUrl: null,
+    imageUrl: "/images/products/retatrutide.png",
   },
   {
     id: "bpc157-5mg",
@@ -71,7 +71,7 @@ export const products: Product[] = [
     purity: "≥99.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 89,
-    imageUrl: null,
+    imageUrl: "/images/products/bpc157.png",
   },
   {
     id: "tb500-10mg",
@@ -89,7 +89,7 @@ export const products: Product[] = [
     purity: "≥99.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 54,
-    imageUrl: null,
+    imageUrl: "/images/products/tb500.png",
   },
   {
     id: "cjc1295-nodac-5mg",
@@ -107,7 +107,7 @@ export const products: Product[] = [
     purity: "≥98.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 73,
-    imageUrl: null,
+    imageUrl: "/images/products/cjc1295.png",
   },
   {
     id: "ipamorelin-5mg",
@@ -125,7 +125,7 @@ export const products: Product[] = [
     purity: "≥99.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 81,
-    imageUrl: null,
+    imageUrl: "/images/products/cjc1295.png",
   },
   {
     id: "ghkcu-50mg",
@@ -143,7 +143,7 @@ export const products: Product[] = [
     purity: "≥99.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 67,
-    imageUrl: null,
+    imageUrl: "/images/products/ghkcu.png",
   },
   {
     id: "melanotan2-10mg",
