@@ -39,25 +39,25 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-2 hover-elevate active-elevate-2 rounded-md px-2 py-1" data-testid="link-logo">
-            <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground">
-              <FlaskConical className="h-5 w-5" />
+        <div className="flex h-20 items-center justify-between gap-4">
+          <Link href="/" className="flex items-center gap-3 group" data-testid="link-logo">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+              <FlaskConical className="h-6 w-6" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-tight">Peptide Europe</span>
-              <span className="text-[10px] text-muted-foreground uppercase tracking-wider hidden sm:block">Research Only</span>
+              <span className="text-xl font-black tracking-tight leading-none uppercase">Peptide<span className="text-primary">Europe</span></span>
+              <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-[0.3em] mt-1 hidden sm:block">Precision Science</span>
             </div>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-2">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
                 <Button
                   variant="ghost"
-                  className={location === link.href ? "bg-accent" : ""}
+                  className={`px-4 font-semibold text-sm transition-colors ${location === link.href ? "text-primary bg-primary/5" : "text-muted-foreground hover:text-primary"}`}
                   data-testid={`link-nav-${link.href.slice(1)}`}
                 >
                   {link.label}
@@ -66,48 +66,53 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="hidden sm:flex gap-1" data-testid="button-language">
-                  <span className="text-sm">{currentLang?.flag}</span>
-                  <span className="text-sm">{currentLang?.name}</span>
-                  <ChevronDown className="h-3 w-3 opacity-50" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                {languageOptions.map((lang) => (
-                  <DropdownMenuItem
-                    key={lang.code}
-                    onClick={() => setLanguage(lang.code)}
-                    className={language === lang.code ? "bg-accent" : ""}
-                    data-testid={`button-lang-${lang.code}`}
-                  >
-                    <span className="mr-2">{lang.flag}</span>
-                    {lang.name}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center bg-muted/50 rounded-full p-1 pr-3 gap-2 border border-border/50">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="h-8 rounded-full gap-2 px-3 hover:bg-background" data-testid="button-language">
+                    <span className="text-base leading-none">{currentLang?.flag}</span>
+                    <span className="text-xs font-bold uppercase tracking-wider">{currentLang?.code}</span>
+                    <ChevronDown className="h-3 w-3 opacity-50" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48 p-2 rounded-xl">
+                  {languageOptions.map((lang) => (
+                    <DropdownMenuItem
+                      key={lang.code}
+                      onClick={() => setLanguage(lang.code)}
+                      className={`rounded-lg cursor-pointer mb-1 last:mb-0 ${language === lang.code ? "bg-primary/10 text-primary" : ""}`}
+                      data-testid={`button-lang-${lang.code}`}
+                    >
+                      <span className="mr-3 text-lg">{lang.flag}</span>
+                      <span className="font-semibold">{lang.name}</span>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+              
+              <div className="w-[1px] h-4 bg-border/50" />
 
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              data-testid="button-theme-toggle"
-            >
-              {theme === "light" ? (
-                <Moon className="h-5 w-5" />
-              ) : (
-                <Sun className="h-5 w-5" />
-              )}
-            </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 rounded-full hover:bg-background"
+                onClick={toggleTheme}
+                data-testid="button-theme-toggle"
+              >
+                {theme === "light" ? (
+                  <Moon className="h-4 w-4" />
+                ) : (
+                  <Sun className="h-4 w-4" />
+                )}
+              </Button>
+            </div>
 
             <Link href="/cart">
-              <Button variant="ghost" size="icon" className="relative" data-testid="link-cart">
+              <Button size="icon" className="h-11 w-11 rounded-xl relative shadow-lg shadow-primary/10 transition-transform active:scale-95" data-testid="link-cart">
                 <ShoppingCart className="h-5 w-5" />
                 {itemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[11px] font-medium text-primary-foreground" data-testid="badge-cart-count">
+                  <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-[10px] font-black text-white ring-2 ring-background animate-in zoom-in" data-testid="badge-cart-count">
                     {itemCount}
                   </span>
                 )}
@@ -117,11 +122,11 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="lg:hidden h-11 w-11 rounded-xl"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               data-testid="button-mobile-menu"
             >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>

@@ -35,72 +35,75 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Card className="group relative overflow-visible transition-all duration-200 hover-elevate" data-testid={`card-product-${product.id}`}>
+    <Card className="group relative flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 border-border/50 bg-card/50 backdrop-blur-sm" data-testid={`card-product-${product.id}`}>
       {hasDiscount && (
-        <div className="absolute -top-2 -right-2 z-10">
-          <Badge className="bg-red-500 text-white border-0 px-2 py-1 text-xs font-semibold">
+        <div className="absolute top-3 right-3 z-10">
+          <Badge className="bg-primary text-primary-foreground border-none px-2.5 py-1 text-xs font-bold shadow-lg">
             -{discountPercent}%
           </Badge>
         </div>
       )}
       
-      <Link href={`/product/${product.id}`}>
-        <CardContent className="p-6">
-          <div className="mb-4 flex h-32 items-center justify-center rounded-lg bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900">
+      <Link href={`/product/${product.id}`} className="flex flex-col flex-1">
+        <div className="relative p-6 pt-8 flex-1">
+          <div className="mb-6 flex h-40 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-100/50 to-slate-50/30 dark:from-slate-800/50 dark:to-slate-900/30 group-hover:scale-[1.02] transition-transform duration-500">
             <div className="relative">
-              <FlaskConical className="h-16 w-16 text-primary/60" />
+              <FlaskConical className="h-20 w-20 text-primary/40 group-hover:text-primary/60 transition-colors duration-500" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-[10px] font-bold text-primary mt-2">{product.codeName}</span>
+                <span className="text-xs font-black text-primary/80 mt-3 tracking-widest">{product.codeName}</span>
               </div>
             </div>
           </div>
           
-          <div className="space-y-2">
-            <p className="text-xs font-medium uppercase tracking-wider text-primary" data-testid={`text-codename-${product.id}`}>
-              {product.codeName}
-            </p>
-            <h3 className="font-semibold line-clamp-1" data-testid={`text-name-${product.id}`}>
-              {product.name}
-            </h3>
-            <p className="text-sm text-muted-foreground line-clamp-2">
-              {product.shortDescription}
-            </p>
-            
-            <div className="flex items-center justify-between pt-2">
-              <Badge variant="secondary" className="text-xs">
-                {getCategoryName(product.category)}
-              </Badge>
-              
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary/70" data-testid={`text-codename-${product.id}`}>
+                {product.codeName}
+              </span>
               <div className="flex items-center gap-1.5">
-                <span className={`h-2 w-2 rounded-full ${isLowStock ? "bg-amber-500 animate-pulse" : "bg-green-500 animate-pulse"}`} />
-                <span className={`text-xs ${isLowStock ? "text-amber-600 dark:text-amber-500" : "text-green-600 dark:text-green-500"}`} data-testid={`text-stock-${product.id}`}>
+                <span className={`h-1.5 w-1.5 rounded-full ${isLowStock ? "bg-amber-500" : "bg-emerald-500"}`} />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
                   {isLowStock ? t("products.lowStock") : t("products.inStock")}
                 </span>
               </div>
             </div>
+            
+            <h3 className="text-lg font-bold leading-tight group-hover:text-primary transition-colors" data-testid={`text-name-${product.id}`}>
+              {product.name}
+            </h3>
+            
+            <p className="text-sm text-muted-foreground/80 line-clamp-2 leading-relaxed">
+              {product.shortDescription}
+            </p>
           </div>
-        </CardContent>
+        </div>
         
-        <CardFooter className="flex items-center justify-between gap-4 border-t p-4">
-          <div className="flex items-baseline gap-2">
-            <span className="text-xl font-bold text-primary" data-testid={`text-price-${product.id}`}>
-              €{product.price.toFixed(2)}
-            </span>
-            {hasDiscount && (
-              <span className="text-sm text-muted-foreground line-through" data-testid={`text-regular-price-${product.id}`}>
-                €{product.regularPrice!.toFixed(2)}
+        <CardFooter className="flex flex-col gap-4 p-6 pt-0 mt-auto">
+          <div className="flex items-center justify-between w-full">
+            <div className="flex flex-col">
+              {hasDiscount && (
+                <span className="text-xs text-muted-foreground line-through decoration-primary/30" data-testid={`text-regular-price-${product.id}`}>
+                  €{product.regularPrice!.toFixed(2)}
+                </span>
+              )}
+              <span className="text-2xl font-black tracking-tight text-foreground" data-testid={`text-price-${product.id}`}>
+                €{product.price.toFixed(2)}
               </span>
-            )}
+            </div>
+            
+            <Badge variant="outline" className="bg-primary/5 border-primary/20 text-primary font-bold px-3 py-1">
+              {getCategoryName(product.category)}
+            </Badge>
           </div>
           
-          <div className="flex gap-2">
-            <Button size="sm" variant="outline" className="gap-1.5" data-testid={`button-view-${product.id}`}>
-              <Eye className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">View</span>
+          <div className="grid grid-cols-2 gap-2 w-full">
+            <Button variant="outline" className="h-10 font-bold hover:bg-primary hover:text-primary-foreground transition-all duration-300" data-testid={`button-view-${product.id}`}>
+              <Eye className="h-4 w-4 mr-2" />
+              Detail
             </Button>
-            <Button size="sm" className="gap-1.5" onClick={handleAddToCart} data-testid={`button-add-cart-${product.id}`}>
-              <ShoppingCart className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Add</span>
+            <Button className="h-10 font-bold shadow-md shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all" onClick={handleAddToCart} data-testid={`button-add-cart-${product.id}`}>
+              <ShoppingCart className="h-4 w-4 mr-2" />
+              Add
             </Button>
           </div>
         </CardFooter>
