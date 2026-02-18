@@ -23,11 +23,16 @@ import {
   BookOpen,
   HelpCircle,
   Atom,
+  Zap,
+  Award,
+  Globe,
+  Quote,
+  BadgeCheck,
 } from "lucide-react";
 
 function ScienceSection() {
   return (
-    <section className="py-24 lg:py-32 relative">
+    <section className="py-24 lg:py-32 relative" id="science">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/40 to-background" />
       <div className="container relative mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
@@ -94,6 +99,203 @@ function ScienceSection() {
   );
 }
 
+function WhyChooseUs() {
+  const stats = [
+    {
+      icon: Zap,
+      number: "24h",
+      label: "Order Processing",
+      desc: "Orders confirmed and dispatched within one business day across the European Union.",
+      accent: "hsl(186, 60%, 42%)",
+    },
+    {
+      icon: Award,
+      number: "98-99%+",
+      label: "Purity Guaranteed",
+      desc: "Every batch verified by HPLC and mass spectrometry with certificate of analysis included.",
+      accent: "hsl(155, 50%, 42%)",
+    },
+    {
+      icon: FlaskConical,
+      number: "20+",
+      label: "Research Peptides",
+      desc: "Comprehensive catalog spanning GLP-1 agonists, growth factors, healing peptides, and more.",
+      accent: "hsl(35, 65%, 50%)",
+    },
+    {
+      icon: Globe,
+      number: "EU-Wide",
+      label: "Cold-Chain Shipping",
+      desc: "Temperature-controlled delivery to all EU member states with full tracking and insurance.",
+      accent: "hsl(262, 45%, 52%)",
+    },
+  ];
+
+  return (
+    <section className="py-24 lg:py-32 relative" id="why-choose-us">
+      <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-background to-background" />
+      <div className="container relative mx-auto px-4">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <BadgeCheck className="h-4 w-4 text-primary" />
+            <p className="text-xs font-semibold tracking-widest text-primary uppercase" data-testid="text-why-label">
+              Why Peptide Europe
+            </p>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 leading-tight" data-testid="text-why-title">
+            Trusted by researchers across Europe
+          </h2>
+          <p className="text-muted-foreground" data-testid="text-why-desc">
+            From synthesis to delivery, we maintain pharmaceutical-grade standards at every step.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((stat, i) => (
+            <Card key={i} className="p-6 text-center" data-testid={`card-why-${i}`}>
+              <div className="inline-flex items-center justify-center h-12 w-12 rounded-md mb-4" style={{ backgroundColor: `${stat.accent}12` }}>
+                <stat.icon className="h-5 w-5" style={{ color: stat.accent }} strokeWidth={1.5} />
+              </div>
+              <p className="text-2xl font-bold tracking-tight mb-1" data-testid={`text-why-number-${i}`}>{stat.number}</p>
+              <p className="text-sm font-semibold mb-2" data-testid={`text-why-stat-label-${i}`}>{stat.label}</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">{stat.desc}</p>
+            </Card>
+          ))}
+        </div>
+
+        <div className="text-center mt-10">
+          <Link href="/products">
+            <Button className="gap-2" data-testid="button-why-cta">
+              Browse Catalog
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SpecsTable() {
+  return (
+    <section className="py-24 lg:py-32 relative" id="specifications">
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+      <div className="container relative mx-auto px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-xs font-semibold tracking-widest text-primary uppercase mb-4" data-testid="text-specs-label">
+              Specifications
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 leading-tight" data-testid="text-specs-title">
+              Product quality at a glance
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto" data-testid="text-specs-desc">
+              Every peptide in our catalog meets strict quality benchmarks. Here&apos;s what you can expect with each order.
+            </p>
+          </div>
+
+          <Card className="overflow-visible" data-testid="table-specs">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="text-left font-semibold p-4 text-muted-foreground text-xs uppercase tracking-wider">Parameter</th>
+                    <th className="text-left font-semibold p-4 text-muted-foreground text-xs uppercase tracking-wider">Standard</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { param: "Purity (HPLC)", value: "≥98% — most products ≥99%" },
+                    { param: "Synthesis Method", value: "Solid-Phase Peptide Synthesis (SPPS / Fmoc)" },
+                    { param: "Verification", value: "ESI-MS / MALDI-TOF mass spectrometry" },
+                    { param: "Form", value: "Lyophilized powder (freeze-dried)" },
+                    { param: "Available Quantities", value: "5 mg, 10 mg, 20 mg vials" },
+                    { param: "Documentation", value: "Certificate of Analysis (CoA) with every order" },
+                    { param: "Storage", value: "-20°C recommended; stable 6-12 months lyophilized" },
+                    { param: "Shipping", value: "Temperature-controlled, EU-wide, tracked & insured" },
+                  ].map((row, i) => (
+                    <tr key={i} className={i % 2 === 0 ? "bg-muted/30" : ""}>
+                      <td className="p-4 font-medium" data-testid={`text-spec-param-${i}`}>{row.param}</td>
+                      <td className="p-4 text-muted-foreground" data-testid={`text-spec-value-${i}`}>{row.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+
+          <div className="text-center mt-8">
+            <Link href="/faq">
+              <Button variant="outline" className="gap-2" data-testid="button-specs-faq">
+                View full FAQ
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  const reviews = [
+    {
+      quote: "The purity documentation was thorough and the peptides performed consistently across our assay panel. We've since moved all our peptide sourcing here.",
+      name: "Dr. M. Kessler",
+      role: "Principal Investigator",
+      institution: "University of Munich, Biochemistry Dept.",
+    },
+    {
+      quote: "Fast turnaround and reliable cold-chain shipping. The BPC-157 and TB-500 batches matched our reference standards perfectly. Excellent supplier for EU-based labs.",
+      name: "Dr. S. van der Berg",
+      role: "Research Scientist",
+      institution: "Utrecht Institute for Pharmaceutical Sciences",
+    },
+    {
+      quote: "We needed consistent GLP-1 agonist peptides for a multi-site study. Peptide Europe delivered on purity, quantity, and documentation every time.",
+      name: "Dr. L. Moreau",
+      role: "Group Leader, Metabolic Research",
+      institution: "INSERM, Lyon",
+    },
+  ];
+
+  return (
+    <section className="py-24 lg:py-32 relative" id="testimonials">
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+      <div className="container relative mx-auto px-4">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <p className="text-xs font-semibold tracking-widest text-primary uppercase mb-4" data-testid="text-testimonials-label">
+            Testimonials
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 leading-tight" data-testid="text-testimonials-title">
+            What researchers say
+          </h2>
+          <p className="text-muted-foreground">
+            Feedback from laboratories and research institutions across Europe.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {reviews.map((review, i) => (
+            <Card key={i} className="p-6 flex flex-col" data-testid={`card-testimonial-${i}`}>
+              <Quote className="h-5 w-5 text-primary/30 mb-3 shrink-0" />
+              <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-5" data-testid={`text-testimonial-quote-${i}`}>
+                {review.quote}
+              </p>
+              <div className="pt-4 border-t border-border">
+                <p className="font-semibold text-sm" data-testid={`text-testimonial-name-${i}`}>{review.name}</p>
+                <p className="text-xs text-muted-foreground" data-testid={`text-testimonial-role-${i}`}>{review.role}</p>
+                <p className="text-xs text-primary/70 mt-0.5" data-testid={`text-testimonial-institution-${i}`}>{review.institution}</p>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ProcessSection() {
   const steps = [
     {
@@ -135,7 +337,7 @@ function ProcessSection() {
   ];
 
   return (
-    <section className="py-24 lg:py-32 relative" style={{ background: "linear-gradient(180deg, hsl(215, 35%, 8%) 0%, hsl(200, 30%, 10%) 50%, hsl(215, 35%, 8%) 100%)" }}>
+    <section className="py-24 lg:py-32 relative" id="process" style={{ background: "linear-gradient(180deg, hsl(215, 35%, 8%) 0%, hsl(200, 30%, 10%) 50%, hsl(215, 35%, 8%) 100%)" }}>
       <div className="container mx-auto px-4 relative">
         <div className="max-w-2xl mb-14">
           <p className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "hsl(35, 65%, 55%)" }} data-testid="text-process-label">
@@ -166,6 +368,15 @@ function ProcessSection() {
               <p className="text-sm leading-relaxed" style={{ color: "hsl(210, 12%, 62%)" }}>{step.desc}</p>
             </div>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link href="/products">
+            <Button variant="outline" className="gap-2" style={{ borderColor: "hsla(0, 0%, 100%, 0.12)", backgroundColor: "hsla(0, 0%, 100%, 0.05)", color: "hsl(210, 15%, 75%)", backdropFilter: "blur(8px)" }} data-testid="button-process-cta">
+              View all peptides
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
@@ -201,7 +412,7 @@ function CategoriesSection() {
   ];
 
   return (
-    <section className="py-24 lg:py-32 relative">
+    <section className="py-24 lg:py-32 relative" id="catalog">
       <div className="absolute inset-0 bg-gradient-to-b from-background to-muted/30" />
       <div className="container relative mx-auto px-4">
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
@@ -385,15 +596,56 @@ function NewsletterSection() {
   );
 }
 
+function SectionNav() {
+  const navItems = [
+    { label: "Overview", href: "#science" },
+    { label: "Why Us", href: "#why-choose-us" },
+    { label: "Quality", href: "#process" },
+    { label: "Specs", href: "#specifications" },
+    { label: "Catalog", href: "#catalog" },
+    { label: "Testimonials", href: "#testimonials" },
+  ];
+
+  return (
+    <nav className="sticky top-0 z-[90] border-b border-border/50 bg-background/80 backdrop-blur-md" data-testid="nav-section">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-wrap items-center gap-1 overflow-x-auto no-scrollbar py-0">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="shrink-0 px-4 py-3 text-xs font-medium text-muted-foreground transition-colors"
+              data-testid={`link-section-${item.href.slice(1)}`}
+            >
+              {item.label}
+            </a>
+          ))}
+          <div className="flex-1" />
+          <Link href="/products">
+            <Button size="sm" className="shrink-0 gap-1.5 my-1.5" data-testid="button-nav-order">
+              Order Now
+              <ArrowRight className="h-3 w-3" />
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
 export default function Home() {
   const { t } = useLanguage();
 
   return (
     <div>
       <Hero />
+      <SectionNav />
       <ScienceSection />
+      <WhyChooseUs />
       <ProcessSection />
+      <SpecsTable />
       <CategoriesSection />
+      <Testimonials />
       <ResourcesBar />
       <NewsletterSection />
       <DisclaimerBanner />
