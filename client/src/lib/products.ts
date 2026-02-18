@@ -125,7 +125,7 @@ export const products: Product[] = [
     purity: "≥99.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 81,
-    imageUrl: "/images/products/cjc1295.png",
+    imageUrl: "/images/products/ipamorelin.png",
   },
   {
     id: "ghkcu-50mg",
@@ -161,7 +161,7 @@ export const products: Product[] = [
     purity: "≥98.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 92,
-    imageUrl: null,
+    imageUrl: "/images/products/melanotan2.png",
   },
   {
     id: "pt141-10mg",
@@ -179,7 +179,7 @@ export const products: Product[] = [
     purity: "≥98.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 58,
-    imageUrl: null,
+    imageUrl: "/images/products/pt141.png",
   },
   {
     id: "nad-100mg",
@@ -197,7 +197,7 @@ export const products: Product[] = [
     purity: "≥99.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 44,
-    imageUrl: null,
+    imageUrl: "/images/products/nad.png",
   },
   {
     id: "epithalon-10mg",
@@ -215,7 +215,7 @@ export const products: Product[] = [
     purity: "≥98.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 71,
-    imageUrl: null,
+    imageUrl: "/images/products/epithalon.png",
   },
   {
     id: "motsc-10mg",
@@ -233,7 +233,7 @@ export const products: Product[] = [
     purity: "≥98.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 36,
-    imageUrl: null,
+    imageUrl: "/images/products/motsc.png",
   },
   {
     id: "kpv-10mg",
@@ -251,7 +251,7 @@ export const products: Product[] = [
     purity: "≥98.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 63,
-    imageUrl: null,
+    imageUrl: "/images/products/kpv.png",
   },
   {
     id: "thymosin-alpha1-5mg",
@@ -269,7 +269,7 @@ export const products: Product[] = [
     purity: "≥98.0% (HPLC Verified)",
     storage: "Store at -20°C. Keep away from light.",
     stock: 47,
-    imageUrl: null,
+    imageUrl: "/images/products/thymosinalpha1.png",
   },
 ];
 
