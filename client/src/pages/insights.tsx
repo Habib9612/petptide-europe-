@@ -79,9 +79,14 @@ export default function Insights() {
               <p className="text-muted-foreground text-sm line-clamp-3 mb-4">
                 {post.excerpt}
               </p>
-              <button className="text-primary text-sm font-semibold hover:underline">
+              <a 
+                href="https://www.peptideregenesis.com/blogs/peptide-blog" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-primary text-sm font-semibold hover:underline"
+              >
                 Read more...
-              </button>
+              </a>
             </CardContent>
           </Card>
         ))}
