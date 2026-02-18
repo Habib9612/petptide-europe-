@@ -18,6 +18,7 @@ import Checkout from "@/pages/checkout";
 import Shipping from "@/pages/shipping";
 import Terms from "@/pages/terms";
 import Refund from "@/pages/refund";
+import Insights from "@/pages/insights";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/products" component={Products} />
       <Route path="/product/:id" component={ProductDetail} />
+      <Route path="/insights" component={Insights} />
       <Route path="/cart" component={Cart} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/shipping" component={Shipping} />
