@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLanguage } from "@/components/language-context";
 import { useCart } from "@/lib/cart";
 import { getProductById, getCategoryName } from "@/lib/products";
+import { getProductImage } from "@/lib/product-images";
 import { useToast } from "@/hooks/use-toast";
 import {
   ShoppingCart,
@@ -70,13 +71,22 @@ export default function ProductDetail() {
           <div className="space-y-4">
             <Card className="overflow-hidden">
               <CardContent className="p-0">
-                <div className="relative flex h-80 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 lg:h-96">
-                  <div className="relative">
-                    <FlaskConical className="h-32 w-32 text-primary/40" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-xl font-bold text-primary mt-4">{product.codeName}</span>
+                <div className="relative flex h-80 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 lg:h-96 overflow-hidden">
+                  {getProductImage(product.id, "") ? (
+                    <img
+                      src={getProductImage(product.id, "")}
+                      alt={product.name}
+                      className="h-full w-full object-contain p-4"
+                      data-testid="img-product-detail"
+                    />
+                  ) : (
+                    <div className="relative">
+                      <FlaskConical className="h-32 w-32 text-primary/40" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-xl font-bold text-primary mt-4">{product.codeName}</span>
+                      </div>
                     </div>
-                  </div>
+                  )}
                   {hasDiscount && (
                     <Badge className="absolute top-4 right-4 bg-red-500 text-white border-0 px-3 py-1">
                       -{discountPercent}% OFF

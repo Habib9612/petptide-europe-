@@ -48,6 +48,21 @@ The schema includes products, cart items, orders, newsletter subscribers, and us
 - Routes: /insights (listing), /insights/:slug (static articles), /insights/user/:id (user posts)
 - API: GET /api/blog-posts, POST /api/blog-posts
 
+### Peptide Calculator
+- Reconstitution calculator at /calculator
+- Inputs: peptide amount (mg), bacteriostatic water volume (mL), desired dose (mcg/mg), syringe size
+- Outputs: draw volume, syringe units, total doses per vial, concentration
+- Includes reconstitution guide, storage guidelines, and common solvents sidebar
+
+### FAQ System
+- Comprehensive FAQ page at /faq with 6 sections (30+ Q&As)
+- Sections: General Peptide Questions, Storage & Handling, Ordering & Payment, Shipping & Delivery, Product Quality & Testing, Returns & Refunds
+- Category filtering and expandable accordion-style Q&A items
+
+### Product Images
+- Custom vial images for BPC-157, CJC-1295, and Hexarelin via `client/src/lib/product-images.ts` import map
+- Other products use FlaskConical icon placeholder
+
 ### Key Design Patterns
 - **Path Aliases**: `@/` maps to client src, `@shared/` maps to shared code
 - **Shared Types**: Schema types exported from `shared/schema.ts` are used by both frontend and backend

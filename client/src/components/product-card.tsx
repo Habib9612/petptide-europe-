@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "./language-context";
 import { useCart } from "@/lib/cart";
 import { getCategoryName } from "@/lib/products";
+import { getProductImage } from "@/lib/product-images";
 import type { Product } from "@shared/schema";
 import { ShoppingCart, FlaskConical, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -46,13 +47,22 @@ export function ProductCard({ product }: ProductCardProps) {
       
       <Link href={`/product/${product.id}`} className="flex flex-col flex-1">
         <div className="relative p-6 pt-8 flex-1">
-          <div className="mb-6 flex h-40 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-100/50 to-slate-50/30 dark:from-slate-800/50 dark:to-slate-900/30 group-hover:scale-[1.02] transition-transform duration-500">
-            <div className="relative">
-              <FlaskConical className="h-20 w-20 text-primary/40 group-hover:text-primary/60 transition-colors duration-500" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-xs font-black text-primary/80 mt-3 tracking-widest">{product.codeName}</span>
+          <div className="mb-6 flex h-40 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-100/50 to-slate-50/30 dark:from-slate-800/50 dark:to-slate-900/30 group-hover:scale-[1.02] transition-transform duration-500 overflow-hidden">
+            {getProductImage(product.id, "") ? (
+              <img
+                src={getProductImage(product.id, "")}
+                alt={product.name}
+                className="h-full w-full object-contain p-2"
+                data-testid={`img-product-${product.id}`}
+              />
+            ) : (
+              <div className="relative">
+                <FlaskConical className="h-20 w-20 text-primary/40 group-hover:text-primary/60 transition-colors duration-500" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-xs font-black text-primary/80 mt-3 tracking-widest">{product.codeName}</span>
+                </div>
               </div>
-            </div>
+            )}
           </div>
           
           <div className="space-y-3">
