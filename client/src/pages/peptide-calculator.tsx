@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Calculator, Beaker, Syringe, Info, FlaskConical, RotateCcw, Clock, Droplets, Target, TrendingUp } from "lucide-react";
+import { Beaker, Info, FlaskConical, RotateCcw } from "lucide-react";
 
 interface PeptidePreset {
   name: string;
@@ -155,15 +155,10 @@ export default function PeptideCalculator() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="border-b border-border/40 bg-muted/30">
+      <div className="border-b border-border/40">
         <div className="container mx-auto px-4 py-8">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary">
-              <Calculator className="h-4.5 w-4.5" />
-            </div>
-            <h1 className="text-2xl font-bold" data-testid="text-calculator-title">Reconstitution Calculator</h1>
-          </div>
-          <p className="text-sm text-muted-foreground ml-12">Calculate precise dosing for your research peptides</p>
+          <h1 className="text-2xl font-bold mb-1" data-testid="text-calculator-title">Reconstitution Calculator</h1>
+          <p className="text-sm text-muted-foreground">Calculate precise dosing for your research peptides.</p>
         </div>
       </div>
 
@@ -381,10 +376,7 @@ export default function PeptideCalculator() {
           <div className="space-y-4">
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm flex items-center gap-2">
-                  <FlaskConical className="h-4 w-4 text-primary" />
-                  Reconstitution Steps
-                </CardTitle>
+                <CardTitle className="text-sm">Reconstitution Steps</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3 text-sm text-muted-foreground">
                 <div>
@@ -408,21 +400,18 @@ export default function PeptideCalculator() {
 
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm flex items-center gap-2">
-                  <Info className="h-4 w-4 text-primary" />
-                  Storage
-                </CardTitle>
+                <CardTitle className="text-sm">Storage</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2.5 text-sm text-muted-foreground">
-                <div className="flex justify-between gap-2 flex-wrap items-center">
+                <div className="flex justify-between gap-3 flex-wrap items-center">
                   <span className="text-xs">Powder (unreconstituted)</span>
                   <Badge variant="secondary" className="text-[10px]">-20 C</Badge>
                 </div>
-                <div className="flex justify-between gap-2 flex-wrap items-center">
+                <div className="flex justify-between gap-3 flex-wrap items-center">
                   <span className="text-xs">Reconstituted (short-term)</span>
                   <Badge variant="secondary" className="text-[10px]">2-8 C</Badge>
                 </div>
-                <div className="flex justify-between gap-2 flex-wrap items-center">
+                <div className="flex justify-between gap-3 flex-wrap items-center">
                   <span className="text-xs">Reconstituted (long-term)</span>
                   <Badge variant="secondary" className="text-[10px]">-20 C</Badge>
                 </div>
@@ -434,10 +423,7 @@ export default function PeptideCalculator() {
 
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm flex items-center gap-2">
-                  <Beaker className="h-4 w-4 text-primary" />
-                  Solvents
-                </CardTitle>
+                <CardTitle className="text-sm">Solvents</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2.5 text-sm text-muted-foreground">
                 <div>

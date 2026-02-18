@@ -12,9 +12,6 @@ import {
   ShoppingCart,
   ArrowLeft,
   FlaskConical,
-  Shield,
-  Truck,
-  Package,
   Minus,
   Plus,
 } from "lucide-react";
@@ -32,9 +29,9 @@ export default function ProductDetail() {
   if (!product) {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
+        <h1 className="text-xl font-bold mb-4">Product not found</h1>
         <Link href="/products">
-          <Button>Back to Products</Button>
+          <Button variant="outline">Back to Products</Button>
         </Link>
       </div>
     );
@@ -50,7 +47,7 @@ export default function ProductDetail() {
     addItem(product, quantity);
     toast({
       title: "Added to cart",
-      description: `${quantity}x ${product.name} has been added to your cart.`,
+      description: `${quantity}x ${product.name} added.`,
     });
   };
 
@@ -59,138 +56,104 @@ export default function ProductDetail() {
 
   return (
     <div className="min-h-screen">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6">
         <Link href="/products">
-          <Button variant="ghost" className="mb-6 gap-2" data-testid="button-back">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Products
+          <Button variant="ghost" size="sm" className="mb-6 gap-1.5 text-muted-foreground" data-testid="button-back">
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Products
           </Button>
         </Link>
 
-        <div className="grid gap-8 lg:grid-cols-2">
-          <div className="space-y-4">
-            <Card className="overflow-hidden">
-              <CardContent className="p-0">
-                <div className="relative flex h-80 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 lg:h-96 overflow-hidden">
-                  {getProductImage(product.id, "") ? (
-                    <img
-                      src={getProductImage(product.id, "")}
-                      alt={product.name}
-                      className="h-full w-full object-contain p-4"
-                      data-testid="img-product-detail"
-                    />
-                  ) : (
-                    <div className="relative">
-                      <FlaskConical className="h-32 w-32 text-primary/40" />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-xl font-bold text-primary mt-4">{product.codeName}</span>
-                      </div>
-                    </div>
-                  )}
-                  {hasDiscount && (
-                    <Badge className="absolute top-4 right-4 bg-red-500 text-white border-0 px-3 py-1">
-                      -{discountPercent}% OFF
-                    </Badge>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+        <div className="grid gap-10 lg:grid-cols-2">
+          <div>
+            <div className="flex h-72 lg:h-96 items-center justify-center rounded-md bg-muted/30 border border-border/50">
+              {getProductImage(product.id, "") ? (
+                <img
+                  src={getProductImage(product.id, "")}
+                  alt={product.name}
+                  className="h-full w-full object-contain p-6"
+                  data-testid="img-product-detail"
+                />
+              ) : (
+                <FlaskConical className="h-24 w-24 text-muted-foreground/15" />
+              )}
+            </div>
 
-            <div className="grid grid-cols-3 gap-4">
-              <Card>
-                <CardContent className="flex flex-col items-center p-4 text-center">
-                  <Truck className="h-6 w-6 text-primary mb-2" />
-                  <span className="text-xs text-muted-foreground">Fast EU Shipping</span>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="flex flex-col items-center p-4 text-center">
-                  <Shield className="h-6 w-6 text-primary mb-2" />
-                  <span className="text-xs text-muted-foreground">Lab-Grade Purity</span>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="flex flex-col items-center p-4 text-center">
-                  <Package className="h-6 w-6 text-primary mb-2" />
-                  <span className="text-xs text-muted-foreground">Discreet Package</span>
-                </CardContent>
-              </Card>
+            <div className="mt-4 grid grid-cols-3 gap-3 text-center text-xs text-muted-foreground">
+              <div className="rounded-md border border-border/50 py-2.5" data-testid="info-shipping">Fast EU shipping</div>
+              <div className="rounded-md border border-border/50 py-2.5" data-testid="info-purity">HPLC verified</div>
+              <div className="rounded-md border border-border/50 py-2.5" data-testid="info-packaging">Discreet packaging</div>
             </div>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-5">
             <div>
-              <p className="text-sm font-medium uppercase tracking-wider text-primary mb-2" data-testid="text-product-codename">
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1" data-testid="text-product-codename">
                 {product.codeName}
               </p>
-              <h1 className="text-3xl font-bold mb-3" data-testid="text-product-name">
+              <h1 className="text-2xl font-bold mb-2" data-testid="text-product-name">
                 {product.name}
               </h1>
-              <Badge variant="secondary">{getCategoryName(product.category)}</Badge>
+              <p className="text-xs text-muted-foreground">{getCategoryName(product.category)}</p>
             </div>
 
-            <div className="flex items-center gap-2">
-              <span className={`h-3 w-3 rounded-full ${isLowStock ? "bg-amber-500 animate-pulse" : "bg-green-500 animate-pulse"}`} />
-              <span className={isLowStock ? "text-amber-600 dark:text-amber-500" : "text-green-600 dark:text-green-500"} data-testid="text-product-stock">
+            <div className="flex items-center gap-1.5 text-sm">
+              <span className={`h-2 w-2 rounded-full ${isLowStock ? "bg-amber-500" : "bg-emerald-500"}`} />
+              <span className={isLowStock ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground"} data-testid="text-product-stock">
                 {isLowStock ? t("products.lowStock") : t("products.inStock")} ({product.stock} units)
               </span>
             </div>
 
-            <div className="flex items-baseline gap-3">
-              <span className="text-4xl font-bold text-primary" data-testid="text-product-price">
-                €{product.price.toFixed(2)}
+            <div className="flex items-baseline gap-2">
+              <span className="text-3xl font-bold" data-testid="text-product-price">
+                &euro;{product.price.toFixed(2)}
               </span>
               {hasDiscount && (
-                <span className="text-xl text-muted-foreground line-through" data-testid="text-product-regular-price">
-                  €{product.regularPrice!.toFixed(2)}
-                </span>
+                <>
+                  <span className="text-lg text-muted-foreground line-through" data-testid="text-product-regular-price">
+                    &euro;{product.regularPrice!.toFixed(2)}
+                  </span>
+                  <Badge variant="secondary" className="text-xs">-{discountPercent}%</Badge>
+                </>
               )}
             </div>
 
-            <p className="text-muted-foreground" data-testid="text-product-short-desc">
+            <p className="text-sm text-muted-foreground leading-relaxed" data-testid="text-product-short-desc">
               {product.shortDescription}
             </p>
 
-            <Card className="border-primary/20">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-4">
-                  <span className="text-sm font-medium">Quantity:</span>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      size="icon"
-                      variant="outline"
-                      onClick={decrementQuantity}
-                      disabled={quantity <= 1}
-                      data-testid="button-decrease-qty"
-                    >
-                      <Minus className="h-4 w-4" />
-                    </Button>
-                    <span className="w-12 text-center font-medium" data-testid="text-quantity">
-                      {quantity}
-                    </span>
-                    <Button
-                      size="icon"
-                      variant="outline"
-                      onClick={incrementQuantity}
-                      disabled={quantity >= product.stock}
-                      data-testid="button-increase-qty"
-                    >
-                      <Plus className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <span className="text-lg font-semibold ml-auto" data-testid="text-total">
-                    €{(product.price * quantity).toFixed(2)}
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="flex items-center gap-3 pt-2">
+              <div className="flex items-center border rounded-md">
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  onClick={decrementQuantity}
+                  disabled={quantity <= 1}
+                  data-testid="button-decrease-qty"
+                >
+                  <Minus className="h-3.5 w-3.5" />
+                </Button>
+                <span className="w-10 text-center text-sm font-medium" data-testid="text-quantity">
+                  {quantity}
+                </span>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  onClick={incrementQuantity}
+                  disabled={quantity >= product.stock}
+                  data-testid="button-increase-qty"
+                >
+                  <Plus className="h-3.5 w-3.5" />
+                </Button>
+              </div>
 
-            <Button size="lg" className="w-full gap-2" onClick={handleAddToCart} data-testid="button-add-to-cart">
-              <ShoppingCart className="h-5 w-5" />
-              {t("products.addToCart")}
-            </Button>
+              <Button className="flex-1 gap-2" onClick={handleAddToCart} data-testid="button-add-to-cart">
+                <ShoppingCart className="h-4 w-4" />
+                Add to Cart &mdash; &euro;{(product.price * quantity).toFixed(2)}
+              </Button>
+            </div>
 
-            <Tabs defaultValue="description" className="mt-8">
+            <Tabs defaultValue="description" className="pt-4">
               <TabsList className="w-full grid grid-cols-3">
                 <TabsTrigger value="description" data-testid="tab-description">
                   {t("product.description")}
@@ -204,72 +167,56 @@ export default function ProductDetail() {
               </TabsList>
 
               <TabsContent value="description" className="mt-4">
-                <Card>
-                  <CardContent className="p-4">
-                    <p className="whitespace-pre-line text-muted-foreground" data-testid="text-full-description">
-                      {product.fullDescription}
-                    </p>
-                  </CardContent>
-                </Card>
+                <p className="text-sm text-muted-foreground whitespace-pre-line leading-relaxed" data-testid="text-full-description">
+                  {product.fullDescription}
+                </p>
               </TabsContent>
 
-              <TabsContent value="specs" className="mt-4">
-                <Card>
-                  <CardContent className="p-4 space-y-3">
-                    {product.sequence && product.sequence !== "N/A (Coenzyme)" && (
-                      <div>
-                        <span className="text-sm font-medium">{t("product.sequence")}:</span>
-                        <p className="text-xs font-mono text-muted-foreground mt-1 break-all" data-testid="text-sequence">
-                          {product.sequence}
-                        </p>
-                      </div>
-                    )}
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <span className="text-sm font-medium">{t("product.cas")}:</span>
-                        <p className="text-sm text-muted-foreground" data-testid="text-cas">{product.casNumber}</p>
-                      </div>
-                      <div>
-                        <span className="text-sm font-medium">{t("product.purity")}:</span>
-                        <p className="text-sm text-muted-foreground" data-testid="text-purity">{product.purity}</p>
-                      </div>
-                      <div>
-                        <span className="text-sm font-medium">{t("product.formula")}:</span>
-                        <p className="text-sm text-muted-foreground" data-testid="text-formula">{product.molecularFormula}</p>
-                      </div>
-                      <div>
-                        <span className="text-sm font-medium">{t("product.weight")}:</span>
-                        <p className="text-sm text-muted-foreground" data-testid="text-weight">{product.molecularWeight}</p>
-                      </div>
-                    </div>
-                    <div>
-                      <span className="text-sm font-medium">{t("product.storage")}:</span>
-                      <p className="text-sm text-muted-foreground" data-testid="text-storage">{product.storage}</p>
-                    </div>
-                  </CardContent>
-                </Card>
+              <TabsContent value="specs" className="mt-4 space-y-3">
+                {product.sequence && product.sequence !== "N/A (Coenzyme)" && (
+                  <div>
+                    <p className="text-xs font-medium text-muted-foreground mb-1">{t("product.sequence")}</p>
+                    <p className="text-xs font-mono break-all" data-testid="text-sequence">
+                      {product.sequence}
+                    </p>
+                  </div>
+                )}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-xs font-medium text-muted-foreground">{t("product.cas")}</p>
+                    <p className="text-sm" data-testid="text-cas">{product.casNumber}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-muted-foreground">{t("product.purity")}</p>
+                    <p className="text-sm" data-testid="text-purity">{product.purity}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-muted-foreground">{t("product.formula")}</p>
+                    <p className="text-sm" data-testid="text-formula">{product.molecularFormula}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-muted-foreground">{t("product.weight")}</p>
+                    <p className="text-sm" data-testid="text-weight">{product.molecularWeight}</p>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-muted-foreground">{t("product.storage")}</p>
+                  <p className="text-sm" data-testid="text-storage">{product.storage}</p>
+                </div>
               </TabsContent>
 
               <TabsContent value="disclaimer" className="mt-4">
-                <Card className="border-amber-500/30 bg-amber-500/5">
-                  <CardContent className="p-4">
-                    <div className="flex items-start gap-3">
-                      <Shield className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
-                      <div>
-                        <h4 className="font-semibold text-amber-700 dark:text-amber-400 mb-2">
-                          Research Use Only
-                        </h4>
-                        <p className="text-sm text-muted-foreground">
-                          This product is intended for laboratory research purposes only. It is not
-                          intended for human consumption, diagnostic, therapeutic, or veterinary use.
-                          By purchasing this product, you confirm that you are acquiring it for
-                          legitimate research purposes and that you will handle it in accordance with
-                          all applicable laws and safety regulations.
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                <div className="rounded-md bg-amber-500/5 border border-amber-500/15 p-4">
+                  <p className="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-1.5">
+                    Research Use Only
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    This product is intended for laboratory research purposes only. It is not
+                    intended for human consumption, diagnostic, therapeutic, or veterinary use.
+                    By purchasing, you confirm you are acquiring it for legitimate research
+                    purposes and will handle it in accordance with all applicable laws.
+                  </p>
+                </div>
               </TabsContent>
             </Tabs>
           </div>

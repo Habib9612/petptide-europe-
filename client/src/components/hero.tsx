@@ -1,64 +1,42 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "./language-context";
-import { ArrowRight, Shield, Truck, Award } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-slate-950">
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }} />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/8 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-400/5 rounded-full blur-[100px]" />
-      </div>
+    <section className="relative bg-slate-950 overflow-hidden">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
 
-      <div className="container relative z-10 mx-auto px-4 py-20 md:py-28">
-        <div className="max-w-3xl">
-          <div className="mb-8 inline-flex items-center gap-2 rounded-md border border-blue-400/20 bg-blue-400/5 px-3 py-1.5 text-xs font-medium text-blue-300 backdrop-blur-sm">
-            <Award className="h-3.5 w-3.5" />
-            <span>HPLC Verified &middot; 98-99%+ Purity</span>
-          </div>
+      <div className="container relative mx-auto px-4 py-24 md:py-32 lg:py-40">
+        <div className="max-w-2xl">
+          <p className="text-sm font-medium tracking-wide text-blue-400/80 mb-4" data-testid="text-hero-tagline">
+            HPLC Verified &middot; 98-99%+ Purity &middot; EU Shipping
+          </p>
 
-          <h1 className="mb-6 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.1]" data-testid="text-hero-title">
-            Research-Grade Peptides{" "}
-            <span className="text-blue-400">
-              for European Laboratories
-            </span>
+          <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold tracking-tight text-white leading-[1.08] mb-6" data-testid="text-hero-title">
+            Research-grade peptides for European laboratories
           </h1>
 
-          <p className="mb-10 max-w-xl text-base text-slate-400 sm:text-lg leading-relaxed" data-testid="text-hero-subtitle">
+          <p className="text-lg text-slate-400 leading-relaxed mb-10 max-w-lg" data-testid="text-hero-subtitle">
             {t("hero.subtitle")}
           </p>
 
-          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+          <div className="flex flex-wrap items-center gap-3">
             <Link href="/products">
-              <Button size="lg" className="gap-2 font-semibold" data-testid="button-hero-cta">
-                {t("hero.cta")}
+              <Button size="lg" className="gap-2" data-testid="button-hero-cta">
+                Browse Catalog
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <Link href="/insights">
-              <Button size="lg" variant="outline" className="border-white/15 bg-white/5 text-white backdrop-blur-sm" data-testid="button-hero-learn">
-                Learn About Peptides
+            <Link href="/calculator">
+              <Button size="lg" variant="outline" className="border-white/10 bg-white/[0.03] text-slate-300 backdrop-blur-sm" data-testid="button-hero-learn">
+                Reconstitution Calculator
               </Button>
             </Link>
-          </div>
-
-          <div className="mt-14 flex flex-wrap gap-6 sm:gap-10 text-sm text-slate-400">
-            <div className="flex items-center gap-2" data-testid="trust-shipping">
-              <Truck className="h-4 w-4 text-blue-400" />
-              <span>Free EU Shipping Over 120</span>
-            </div>
-            <div className="flex items-center gap-2" data-testid="trust-research">
-              <Shield className="h-4 w-4 text-blue-400" />
-              <span>For Research Use Only</span>
-            </div>
-            <div className="flex items-center gap-2" data-testid="trust-crypto">
-              <Award className="h-4 w-4 text-blue-400" />
-              <span>10% Off with Crypto</span>
-            </div>
           </div>
         </div>
       </div>

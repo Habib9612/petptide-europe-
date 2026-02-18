@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search, Filter, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 const categories = [
   { id: "all", name: "All Categories" },
@@ -75,91 +75,80 @@ export default function Products() {
 
   return (
     <div className="min-h-screen">
-      <div className="bg-gradient-to-b from-muted/50 to-background border-b">
-        <div className="container mx-auto px-4 py-12">
-          <h1 className="text-4xl font-bold mb-4" data-testid="text-products-title">
+      <div className="border-b border-border/40">
+        <div className="container mx-auto px-4 py-8">
+          <h1 className="text-2xl font-bold mb-1" data-testid="text-products-title">
             {t("products.title")}
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl">
-            Premium research-grade peptides with HPLC-verified purity. All products are for laboratory research purposes only.
+          <p className="text-sm text-muted-foreground">
+            HPLC-verified peptides for laboratory research. All products are for in-vitro use only.
           </p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col gap-4 mb-8 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center flex-1">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                placeholder="Search peptides..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-                data-testid="input-search"
-              />
-            </div>
-
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-full sm:w-48" data-testid="select-category">
-                <Filter className="h-4 w-4 mr-2" />
-                <SelectValue placeholder="Category" />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((cat) => (
-                  <SelectItem key={cat.id} value={cat.id} data-testid={`option-category-${cat.id}`}>
-                    {cat.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-
-            <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="w-full sm:w-40" data-testid="select-sort">
-                <SelectValue placeholder="Sort by" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="name">Name</SelectItem>
-                <SelectItem value="price-low">Price: Low to High</SelectItem>
-                <SelectItem value="price-high">Price: High to Low</SelectItem>
-              </SelectContent>
-            </Select>
+      <div className="container mx-auto px-4 py-6">
+        <div className="flex flex-col gap-3 mb-6 sm:flex-row sm:items-center">
+          <div className="relative flex-1 max-w-sm">
+            <Search className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              placeholder="Search peptides..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-9 text-sm"
+              data-testid="input-search"
+            />
           </div>
 
+          <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+            <SelectTrigger className="w-full sm:w-44 text-sm" data-testid="select-category">
+              <SelectValue placeholder="Category" />
+            </SelectTrigger>
+            <SelectContent>
+              {categories.map((cat) => (
+                <SelectItem key={cat.id} value={cat.id} data-testid={`option-category-${cat.id}`}>
+                  {cat.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          <Select value={sortBy} onValueChange={setSortBy}>
+            <SelectTrigger className="w-full sm:w-40 text-sm" data-testid="select-sort">
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="name">Name</SelectItem>
+              <SelectItem value="price-low">Price: Low to High</SelectItem>
+              <SelectItem value="price-high">Price: High to Low</SelectItem>
+            </SelectContent>
+          </Select>
+
           {hasActiveFilters && (
-            <Button variant="ghost" size="sm" onClick={clearFilters} className="gap-2" data-testid="button-clear-filters">
-              <X className="h-4 w-4" />
-              Clear Filters
+            <Button variant="ghost" size="sm" onClick={clearFilters} className="gap-1.5 text-xs" data-testid="button-clear-filters">
+              <X className="h-3.5 w-3.5" />
+              Clear
             </Button>
           )}
         </div>
 
-        {selectedCategory !== "all" && (
-          <div className="mb-6">
-            <h2 className="text-2xl font-semibold" data-testid="text-category-name">
-              {getCategoryName(selectedCategory)}
-            </h2>
-          </div>
-        )}
+        <p className="text-xs text-muted-foreground mb-5" data-testid="text-results-count">
+          {filteredProducts.length} product{filteredProducts.length !== 1 ? "s" : ""}
+          {selectedCategory !== "all" && ` in ${getCategoryName(selectedCategory)}`}
+        </p>
 
         {filteredProducts.length === 0 ? (
           <div className="text-center py-16" data-testid="text-no-results">
-            <p className="text-lg text-muted-foreground mb-4">No products found</p>
-            <Button variant="outline" onClick={clearFilters}>
-              Clear Filters
+            <p className="text-muted-foreground mb-4">No products found</p>
+            <Button variant="outline" size="sm" onClick={clearFilters}>
+              Clear filters
             </Button>
           </div>
         ) : (
-          <>
-            <p className="text-sm text-muted-foreground mb-6" data-testid="text-results-count">
-              Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? "s" : ""}
-            </p>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         )}
       </div>
     </div>
