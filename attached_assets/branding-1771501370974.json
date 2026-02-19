@@ -1,0 +1,153 @@
+{
+  "colorScheme": "light",
+  "fonts": [
+    {
+      "family": "Figtree",
+      "role": "body"
+    },
+    {
+      "family": "Poppins",
+      "role": "heading"
+    },
+    {
+      "family": "Segoe UI",
+      "role": "unknown"
+    }
+  ],
+  "colors": {
+    "primary": "#5FB035",
+    "accent": "#1D73DD",
+    "background": "#FFFFFF",
+    "textPrimary": "#333333",
+    "link": "#1D73DD"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Figtree",
+      "heading": "Poppins"
+    },
+    "fontStacks": {
+      "heading": [
+        "Figtree",
+        "Poppins",
+        "sans-serif"
+      ],
+      "body": [
+        "Figtree",
+        "Poppins",
+        "sans-serif"
+      ],
+      "paragraph": [
+        "Figtree",
+        "Poppins",
+        "sans-serif"
+      ]
+    },
+    "fontSizes": {
+      "h1": "58px",
+      "h2": "21px",
+      "body": "16px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 4,
+    "borderRadius": "4px"
+  },
+  "components": {
+    "input": {
+      "background": "transparent",
+      "textColor": "#FFFFFF",
+      "borderColor": null,
+      "borderRadius": "0px",
+      "borderRadiusCorners": {
+        "topLeft": "0px",
+        "topRight": "0px",
+        "bottomRight": "0px",
+        "bottomLeft": "0px"
+      },
+      "shadow": "none"
+    },
+    "buttonPrimary": {
+      "background": "#5FB035",
+      "textColor": "#FFFFFF",
+      "borderColor": "#5FB035",
+      "borderRadius": "50px",
+      "borderRadiusCorners": {
+        "topLeft": "50px",
+        "topRight": "50px",
+        "bottomRight": "50px",
+        "bottomLeft": "50px"
+      },
+      "shadow": "none"
+    },
+    "buttonSecondary": {
+      "background": "#000A46",
+      "textColor": "#5FB035",
+      "borderColor": "#5FB035",
+      "borderRadius": "20px",
+      "borderRadiusCorners": {
+        "topLeft": "20px",
+        "topRight": "20px",
+        "bottomRight": "20px",
+        "bottomLeft": "20px"
+      },
+      "shadow": "none"
+    }
+  },
+  "images": {
+    "logo": "https://www.genscript.com/gsimages/index/index-logo-white-2025.svg",
+    "favicon": "https://www.genscript.com/images/favicon.ico?=3",
+    "ogImage": null,
+    "logoHref": "File saved at: attached_assets/logoHref.html",
+    "logoAlt": "white background"
+  },
+  "__llm_logo_reasoning": {
+    "selectedIndex": 0,
+    "reasoning": "Selected #0 because it is visible, located in the header, links to the homepage, and matches the brand inferred from the URL and page title.",
+    "confidence": 0.9,
+    "source": "llm"
+  },
+  "__llm_button_reasoning": {
+    "primary": {
+      "index": 1,
+      "text": "Quote/Order",
+      "reasoning": "Button #1 ('Quote/Order') uses the vibrant brand color #5FB035, indicating it's a primary call-to-action for ordering or getting a quote, which aligns with the site's purpose."
+    },
+    "secondary": {
+      "index": 4,
+      "text": "Quick Order",
+      "reasoning": "Button #4 ('Quick Order') uses a different vibrant color #000A46, making it a suitable secondary action related to ordering, but less prominent than the primary CTA."
+    },
+    "confidence": 0.95
+  },
+  "personality": {
+    "tone": "professional",
+    "energy": "medium",
+    "targetAudience": "scientists and researchers in life sciences"
+  },
+  "designSystem": {
+    "framework": "bootstrap",
+    "componentLibrary": ""
+  },
+  "confidence": {
+    "buttons": 0.95,
+    "colors": 0.9,
+    "overall": 0.925
+  },
+  "__llm_metadata": {
+    "logoSelection": {
+      "llmCalled": true,
+      "llmSucceeded": true,
+      "finalSource": "llm",
+      "rawLogoSelection": {
+        "selectedLogoIndex": 0,
+        "selectedLogoReasoning": "Selected #0 because it is visible, located in the header, links to the homepage, and matches the brand inferred from the URL and page title.",
+        "confidence": 0.9
+      }
+    },
+    "buttonClassification": {
+      "llmCalled": true,
+      "llmSucceeded": true
+    }
+  }
+}

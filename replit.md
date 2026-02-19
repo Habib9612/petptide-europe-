@@ -60,17 +60,18 @@ The schema includes products, cart items, orders, newsletter subscribers, and us
 - Category filtering and expandable accordion-style Q&A items
 
 ### Landing Page Structure
-The home page (`client/src/pages/home.tsx`) uses a GenScript-inspired layout with the following sections:
-- **Hero**: 3D molecular animation with teal/amber particle system, dark gradient background
-- **SectionNav**: Sticky navigation bar with anchor links to sections + "Order Now" CTA
-- **ScienceSection** (id="science"): Molecular science overview with amino acid sequence card
-- **WhyChooseUs** (id="why-choose-us"): 4 trust stat cards (24h processing, purity, catalog, EU shipping)
-- **ProcessSection** (id="process"): 6-step quality pipeline on dark gradient background
-- **SpecsTable** (id="specifications"): Product quality specification table
-- **CategoriesSection** (id="catalog"): 4 peptide category cards with color indicators
-- **Testimonials** (id="testimonials"): 3 researcher testimonial cards
-- **ResourcesBar**: Links to calculator, insights, FAQ
-- **NewsletterSection**: Email signup with discount code
+The home page (`client/src/pages/home.tsx`) uses a premium biotech design that surpasses GenScript's layout with the following sections:
+- **Hero**: 3D molecular animation with teal/amber particle system, dark gradient background, stats bar at bottom with colored accent numbers
+- **SectionNav**: Sticky navigation bar (top-14, z-40) with anchor links to sections + "Quote / Order" CTA
+- **ScienceSection** (id="science"): Molecular science overview with amino acid sequence card + dual CTAs
+- **WhyChooseUs** (id="why-choose-us"): Dark background section with 4 icon+stat cards (24h, 98-99%+, 20+, 27 Countries), dual CTAs
+- **ProcessSection** (id="process"): 6-step numbered grid (01-06) with border-separated cells
+- **SpecsTable** (id="specifications"): Product quality specification table on muted background
+- **MidPageCTA**: Bold teal gradient banner "Ready to order? Ships within 24 hours" with white CTA button
+- **FeaturedPeptides** (id="catalog"): 6 popular product cards with prices + 4 category cards below
+- **Testimonials** (id="testimonials"): Dark background with 3 researcher testimonial cards
+- **ToolsAndResources** (id="tools"): 3 resource cards (Calculator, Insights, FAQ) in centered grid
+- **NewsletterSection**: Email signup with 10% discount code
 - **DisclaimerBanner**: Legal research-use disclaimer
 
 ### Color Palette
