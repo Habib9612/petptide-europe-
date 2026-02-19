@@ -29,14 +29,72 @@ import {
   Check,
 } from "lucide-react";
 
+function PeptideVisualization() {
+  const residues = ["Gly", "Glu", "Pro", "Pro", "Pro", "Gly", "Lys", "Pro", "Ala", "Asp", "Asp", "Ala", "Gly", "Leu", "Val"];
+  return (
+    <div className="relative" data-testid="section-amino-chain">
+      <div className="absolute -inset-4 bg-gradient-to-br from-primary/[0.04] via-transparent to-primary/[0.02] rounded-md -z-10" />
+      <Card className="overflow-visible">
+        <div className="p-6">
+          <div className="flex items-center justify-between gap-4 mb-5">
+            <div className="flex items-center gap-2">
+              <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+              <p className="text-[10px] uppercase tracking-widest font-medium text-primary" data-testid="text-sequence-label">
+                BPC-157 — Pentadecapeptide
+              </p>
+            </div>
+            <span className="text-[10px] font-mono text-muted-foreground">15 residues</span>
+          </div>
+
+          <div className="flex flex-wrap gap-1 mb-5" data-testid="text-sequence-value">
+            {residues.map((res, i) => (
+              <span key={i} className="inline-flex items-center">
+                <span className="font-mono text-xs px-1.5 py-0.5 rounded-md bg-primary/[0.06] text-foreground/80 border border-primary/10">
+                  {res}
+                </span>
+                {i < residues.length - 1 && (
+                  <span className="text-primary/30 mx-0.5 text-[10px]">&mdash;</span>
+                )}
+              </span>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-border text-xs">
+            <div data-testid="text-formula-value">
+              <span className="block font-medium text-muted-foreground mb-0.5">Formula</span>
+              <span className="text-foreground font-mono text-[11px]">C<sub>62</sub>H<sub>98</sub>N<sub>16</sub>O<sub>22</sub></span>
+            </div>
+            <div data-testid="text-mw-value">
+              <span className="block font-medium text-muted-foreground mb-0.5">Mol. Weight</span>
+              <span className="text-foreground font-mono text-[11px]">1419.56 g/mol</span>
+            </div>
+            <div data-testid="text-purity-value">
+              <span className="block font-medium text-muted-foreground mb-0.5">Purity (HPLC)</span>
+              <span className="font-semibold text-primary text-[11px]">&ge;99.0%</span>
+            </div>
+            <div data-testid="text-cas-value">
+              <span className="block font-medium text-muted-foreground mb-0.5">CAS Number</span>
+              <span className="text-foreground font-mono text-[11px]">137525-51-0</span>
+            </div>
+          </div>
+        </div>
+      </Card>
+      <p className="text-[10px] text-muted-foreground mt-2 pl-1">
+        Example compound data. Certificate of Analysis included with every order.
+      </p>
+    </div>
+  );
+}
+
 function ScienceSection() {
   return (
     <section className="py-20 lg:py-28" id="science">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           <div>
+            <p className="text-xs font-medium tracking-[0.15em] uppercase text-primary mb-3">Peptide Science</p>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-5 leading-tight" data-testid="text-science-title">
-              Precision-synthesized compounds for your research
+              Precision-synthesized compounds for advanced research
             </h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
@@ -61,40 +119,7 @@ function ScienceSection() {
             </div>
           </div>
 
-          <div data-testid="section-amino-chain">
-            <Card className="overflow-visible">
-              <div className="p-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="h-2 w-2 rounded-full bg-primary" />
-                  <p className="text-[10px] uppercase tracking-widest font-medium text-primary" data-testid="text-sequence-label">Amino Acid Sequence — BPC-157</p>
-                </div>
-                <p className="font-mono text-sm leading-loose tracking-wider break-all text-foreground/70" data-testid="text-sequence-value">
-                  Gly-Glu-Pro-Pro-Pro-Gly-Lys-Pro-Ala-Asp-Asp-Ala-Gly-Leu-Val
-                </p>
-                <div className="flex flex-wrap gap-6 mt-5 pt-4 border-t border-border text-xs">
-                  <div data-testid="text-formula-value">
-                    <span className="block font-medium text-muted-foreground mb-0.5">Formula</span>
-                    <span className="text-foreground">C<sub>62</sub>H<sub>98</sub>N<sub>16</sub>O<sub>22</sub></span>
-                  </div>
-                  <div data-testid="text-mw-value">
-                    <span className="block font-medium text-muted-foreground mb-0.5">MW</span>
-                    <span className="text-foreground">1419.56 g/mol</span>
-                  </div>
-                  <div data-testid="text-purity-value">
-                    <span className="block font-medium text-muted-foreground mb-0.5">Purity</span>
-                    <span className="font-semibold text-primary">≥99.0%</span>
-                  </div>
-                  <div data-testid="text-cas-value">
-                    <span className="block font-medium text-muted-foreground mb-0.5">CAS</span>
-                    <span className="text-foreground">137525-51-0</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-            <p className="text-[10px] text-muted-foreground mt-2 pl-1">
-              Example compound data. Every product ships with a certificate of analysis.
-            </p>
-          </div>
+          <PeptideVisualization />
         </div>
       </div>
     </section>
@@ -103,33 +128,37 @@ function ScienceSection() {
 
 function WhyChooseUs() {
   const features = [
-    { icon: Zap, title: "24h Processing", desc: "Orders confirmed and dispatched within one business day across the EU." },
-    { icon: Award, title: "98-99%+ Purity", desc: "Every batch verified by HPLC and mass spectrometry with full CoA." },
-    { icon: Beaker, title: "20+ Compounds", desc: "GLP-1 agonists, growth factors, healing peptides, and cosmetic compounds." },
-    { icon: Globe, title: "27 EU Countries", desc: "Temperature-controlled delivery with full tracking and insurance." },
+    { icon: Zap, value: "24h", title: "Processing Time", desc: "Orders confirmed and dispatched within one business day across the EU." },
+    { icon: Award, value: "98-99%+", title: "HPLC Purity", desc: "Every batch verified by HPLC and mass spectrometry with full CoA." },
+    { icon: Beaker, value: "20+", title: "Compounds", desc: "GLP-1 agonists, growth factors, healing peptides, and cosmetic compounds." },
+    { icon: Globe, value: "27", title: "EU Countries", desc: "Temperature-controlled delivery with full tracking and insurance." },
   ];
 
   return (
-    <section className="py-20 lg:py-28 bg-muted/30" id="why-choose-us">
-      <div className="container mx-auto px-4">
+    <section className="relative py-20 lg:py-28 bg-[hsl(215,35%,7%)] overflow-hidden" id="why-choose-us">
+      <div className="absolute inset-0" aria-hidden="true">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-[hsl(186,65%,48%,0.03)]" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full bg-[hsl(186,65%,48%,0.02)]" />
+      </div>
+      <div className="container relative mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center mb-14">
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3" data-testid="text-why-title">
+          <p className="text-xs font-medium tracking-[0.15em] uppercase text-[hsl(186,65%,55%)] mb-3">Why Peptide Europe</p>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3 text-white" data-testid="text-why-title">
             Built for researchers who need reliability
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-[hsl(210,15%,55%)]">
             From synthesis to delivery, we maintain pharmaceutical-grade standards at every step.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.06] rounded-md overflow-hidden max-w-5xl mx-auto">
           {features.map((feat, i) => (
-            <Card className="overflow-visible" key={i} data-testid={`card-why-${i}`}>
-              <div className="p-6">
-                <feat.icon className="h-5 w-5 text-primary mb-4" strokeWidth={1.5} />
-                <h3 className="font-semibold text-sm mb-2" data-testid={`text-why-stat-label-${i}`}>{feat.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{feat.desc}</p>
-              </div>
-            </Card>
+            <div className="bg-[hsl(215,35%,7%)] p-6" key={i} data-testid={`card-why-${i}`}>
+              <feat.icon className="h-5 w-5 text-[hsl(186,65%,55%)] mb-4" strokeWidth={1.5} />
+              <p className="text-2xl font-bold text-white mb-1 tracking-tight">{feat.value}</p>
+              <h3 className="font-semibold text-sm mb-2 text-[hsl(210,15%,70%)]" data-testid={`text-why-stat-label-${i}`}>{feat.title}</h3>
+              <p className="text-xs text-[hsl(210,15%,45%)] leading-relaxed">{feat.desc}</p>
+            </div>
           ))}
         </div>
       </div>
@@ -151,24 +180,28 @@ function ProcessSection() {
     <section className="py-20 lg:py-28" id="process">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mb-12">
+          <p className="text-xs font-medium tracking-[0.15em] uppercase text-primary mb-3">Our Process</p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3 leading-tight" data-testid="text-process-title">
             From synthesis to your lab in 6 steps
           </h2>
           <p className="text-muted-foreground">
-            Every peptide goes through a rigorous production and quality control process.
+            Every peptide goes through a rigorous production and quality control pipeline.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border/50 border border-border rounded-md overflow-hidden">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {steps.map((step, i) => (
-            <div className="bg-background p-6" key={i} data-testid={`card-process-${i}`}>
-              <div className="flex items-center gap-3 mb-3">
-                <span className="text-xs font-bold text-primary tabular-nums" data-testid={`text-process-num-${i}`}>
+            <div className="relative pl-8 pb-6" key={i} data-testid={`card-process-${i}`}>
+              <div className="absolute left-0 top-0 flex flex-col items-center">
+                <span className="text-lg font-bold text-primary/20 tabular-nums leading-none" data-testid={`text-process-num-${i}`}>
                   {step.num}
                 </span>
-                <step.icon className="h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
+                {i < 5 && <div className="w-px h-full bg-border mt-2 hidden lg:block" />}
               </div>
-              <h3 className="font-semibold text-sm mb-1.5" data-testid={`text-process-step-${i}`}>{step.title}</h3>
+              <div className="flex items-center gap-2 mb-2">
+                <step.icon className="h-4 w-4 text-primary" strokeWidth={1.5} />
+                <h3 className="font-semibold text-sm" data-testid={`text-process-step-${i}`}>{step.title}</h3>
+              </div>
               <p className="text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
             </div>
           ))}
@@ -226,12 +259,24 @@ function SpecsTable() {
 
 function MidPageCTA() {
   return (
-    <section className="relative overflow-hidden bg-primary" data-testid="section-midcta">
+    <section className="relative overflow-hidden bg-gradient-to-r from-[hsl(186,65%,32%)] to-[hsl(186,65%,42%)]" data-testid="section-midcta">
+      <div className="absolute inset-0" aria-hidden="true">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.08]" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid slice">
+          <g stroke="white" fill="none" strokeWidth="1">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <circle key={i} cx={70 + i * 60} cy={100 + Math.sin(i * 0.8) * 30} r="3" fill="white" fillOpacity="0.5" />
+            ))}
+            {Array.from({ length: 11 }).map((_, i) => (
+              <line key={i} x1={70 + i * 60} y1={100 + Math.sin(i * 0.8) * 30} x2={70 + (i + 1) * 60} y2={100 + Math.sin((i + 1) * 0.8) * 30} />
+            ))}
+          </g>
+        </svg>
+      </div>
       <div className="container relative mx-auto px-4 py-14 lg:py-20 text-center">
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight mb-3 text-primary-foreground" data-testid="text-cta-title">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight mb-3 text-white" data-testid="text-cta-title">
           Ready to order? Ships within 24 hours
         </h2>
-        <p className="text-sm text-primary-foreground/70 mb-6">
+        <p className="text-sm text-white/70 mb-6">
           Free shipping on orders over &euro;120. Pay with crypto and save 10%.
         </p>
         <Link href="/products">
@@ -353,31 +398,33 @@ function Testimonials() {
   ];
 
   return (
-    <section className="py-20 lg:py-28 bg-muted/30" id="testimonials">
-      <div className="container mx-auto px-4">
+    <section className="relative py-20 lg:py-28 bg-[hsl(215,35%,7%)] overflow-hidden" id="testimonials">
+      <div className="absolute inset-0" aria-hidden="true">
+        <div className="absolute bottom-0 left-0 w-[600px] h-[300px] bg-[hsl(186,65%,48%,0.02)]" />
+      </div>
+      <div className="container relative mx-auto px-4">
         <div className="max-w-2xl mx-auto text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3" data-testid="text-testimonials-title">
+          <p className="text-xs font-medium tracking-[0.15em] uppercase text-[hsl(186,65%,55%)] mb-3">Testimonials</p>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3 text-white" data-testid="text-testimonials-title">
             Trusted by researchers across Europe
           </h2>
-          <p className="text-muted-foreground">
+          <p className="text-[hsl(210,15%,55%)]">
             Feedback from laboratories and research institutions.
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {reviews.map((review, i) => (
-            <Card key={i} className="overflow-visible" data-testid={`card-testimonial-${i}`}>
-              <div className="p-6 flex flex-col h-full">
-                <p className="text-sm leading-relaxed flex-1 mb-5 text-muted-foreground" data-testid={`text-testimonial-quote-${i}`}>
-                  &ldquo;{review.quote}&rdquo;
-                </p>
-                <div className="pt-4 border-t border-border">
-                  <p className="font-semibold text-sm" data-testid={`text-testimonial-name-${i}`}>{review.name}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5" data-testid={`text-testimonial-role-${i}`}>{review.role}</p>
-                  <p className="text-xs text-primary mt-0.5" data-testid={`text-testimonial-institution-${i}`}>{review.institution}</p>
-                </div>
+            <div key={i} className="rounded-md border border-white/[0.06] bg-white/[0.02] p-6 flex flex-col h-full" data-testid={`card-testimonial-${i}`}>
+              <p className="text-sm leading-relaxed flex-1 mb-5 text-[hsl(210,15%,60%)]" data-testid={`text-testimonial-quote-${i}`}>
+                &ldquo;{review.quote}&rdquo;
+              </p>
+              <div className="pt-4 border-t border-white/[0.06]">
+                <p className="font-semibold text-sm text-white" data-testid={`text-testimonial-name-${i}`}>{review.name}</p>
+                <p className="text-xs text-[hsl(210,15%,50%)] mt-0.5" data-testid={`text-testimonial-role-${i}`}>{review.role}</p>
+                <p className="text-xs text-[hsl(186,65%,55%)] mt-0.5" data-testid={`text-testimonial-institution-${i}`}>{review.institution}</p>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       </div>
