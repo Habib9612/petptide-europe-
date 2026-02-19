@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { useLanguage } from "./language-context";
-import { FlaskConical } from "lucide-react";
+import { Logo } from "./logo";
 
 export function Footer() {
   const { t } = useLanguage();
@@ -10,10 +10,7 @@ export function Footer() {
       <div className="container mx-auto px-4 py-10">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <FlaskConical className="h-4 w-4 text-primary" />
-              <span className="text-sm font-bold tracking-tight">Peptide<span className="text-primary">Europe</span></span>
-            </div>
+            <Logo size="sm" className="mb-2" />
             <p className="text-xs text-muted-foreground leading-relaxed max-w-xs">
               Research-grade peptides with lab-verified purity for European laboratories and research institutions.
             </p>
@@ -46,13 +43,13 @@ export function Footer() {
               <p>Credit Card</p>
             </div>
             <div className="mt-3 inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-md bg-muted/80">
-              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "hsl(35, 65%, 50%)" }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
               <span className="text-muted-foreground">10% off with crypto</span>
             </div>
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="mt-8 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground" data-testid="text-copyright">
             {t("footer.copyright")}
           </p>

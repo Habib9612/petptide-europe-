@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "./language-context";
 import { useTheme } from "./theme-provider";
 import { useCart } from "@/lib/cart";
-import { ShoppingCart, Menu, X, Sun, Moon, ChevronDown, FlaskConical } from "lucide-react";
+import { ShoppingCart, Menu, X, Sun, Moon, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { Logo } from "./logo";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,7 +29,7 @@ export function Header() {
   const { getItemCount } = useCart();
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
+
   const itemCount = getItemCount();
   const currentLang = languageOptions.find(l => l.code === language);
 
@@ -42,10 +43,9 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
-        <div className="flex h-14 items-center justify-between gap-4">
-          <Link href="/" className="flex items-center gap-2" data-testid="link-logo">
-            <FlaskConical className="h-4.5 w-4.5 text-primary" />
-            <span className="text-lg font-bold tracking-tight">Peptide<span className="text-primary">Europe</span></span>
+        <div className="flex h-14 items-center justify-between gap-6">
+          <Link href="/" data-testid="link-logo">
+            <Logo />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
