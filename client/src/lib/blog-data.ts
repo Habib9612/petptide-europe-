@@ -1,4 +1,5 @@
 import mitochondrialProtocolCover from "@assets/mitochondrial-protocol-blog-cover.png";
+import peptideProtocolsCover from "@assets/peptide-protocols-blog-cover.png";
 
 export interface BlogPost {
   slug: string;
@@ -11,6 +12,668 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "peptide-protocols-dosing-reconstitution-benefits",
+    title: "Peptide Protocols, Dosing, Reconstitution and Benefits — Complete Guide",
+    excerpt: "A comprehensive reference covering reconstitution math, GLP-1 agonists, growth hormone secretagogues, IGF axis peptides, tissue repair compounds, neuro/mood peptides, sexual function, and immune modulators with full dosing protocols.",
+    date: "February 20, 2026",
+    category: "Peptide Resources",
+    image: peptideProtocolsCover,
+    content: `
+### Introduction
+
+This comprehensive guide covers peptide protocols, dosing, reconstitution, and benefits across all major categories. Originally compiled by Malice.lifts (200k+ on TikTok), this resource is for **education only and is not medical advice**.
+
+---
+
+### Universal Reconstitution Math (Cheat Sheet)
+
+1. Add bacteriostatic water slowly down the glass wall.
+2. **Concentration = vial mg / mL BW.** Example: 10 mg vial + 2 mL BW → 5 mg/mL.
+3. U100 insulin syringe: 1 unit = 0.01 mL. If 10 mg + 2 mL → 1 unit = 50 mcg.
+
+**Common setups:**
+
+| Vial Size | BW Added | Concentration | Per Unit |
+|-----------|----------|---------------|----------|
+| 5 mg | 2 mL | 2.5 mg/mL | 1 unit = 25 mcg |
+| 5 mg | 2.5 mL | 2 mg/mL | 1 unit = 20 mcg |
+| 10 mg | 2 mL | 5 mg/mL | 1 unit = 50 mcg |
+| 10 mg | 5 mL | 2 mg/mL | 1 unit = 20 mcg |
+
+---
+
+## GLP-1 Agonists and Weight Management
+
+### Semaglutide
+
+**Overview:** GLP-1 receptor agonist that slows gastric emptying, increases satiety, improves insulin dynamics.
+
+**Benefits:** Appetite control, weight reduction, improved glycemic markers.
+
+**Dosing:** 0.25 mg weekly. Titrate by 0.25–0.5 mg each 2–4 weeks toward 0.5–2.4 mg weekly as tolerated.
+
+**Cycle:** Ongoing; reassess every 8–12 weeks.
+
+**Administration:** Subcutaneous (abdomen, thigh, upper arm).
+
+**Reconstitution:** Typical 5–30 mg vial. Add 2–5 mL BW to reach convenient units (e.g., 10 mg + 2 mL → 1 unit = 50 mcg).
+
+**Stacks:** High protein diet, lifting, steps. If GI upset, split dose or add BPC-157 for GI support.
+
+**Cautions:** Nausea, vomiting, dehydration risk; avoid with history of medullary thyroid carcinoma; escalate slowly.
+
+---
+
+### Tirzepatide
+
+**Overview:** Dual GLP-1 and GIP agonist; stronger appetite suppression and metabolic effects than single agonists.
+
+**Benefits:** Significant weight loss, improved insulin sensitivity, reduced cravings.
+
+**Dosing:** 2.5 mg weekly start; titrate 5–15 mg weekly as tolerated.
+
+**Cycle:** Ongoing; reassess at 12–16 weeks.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 10–50 mg vials common. Example: 10 mg + 2 mL → 1 unit = 50 mcg.
+
+**Stacks:** Lifestyle: high protein, training, sleep. Add BPC-157 if GI irritation occurs.
+
+**Cautions:** GI effects; monitor for hypoglycemia when combined with other agents.
+
+---
+
+### Retatrutide
+
+**Overview:** Triple agonist at GLP-1, GIP, and glucagon receptors; combines satiety with potential thermogenic effects.
+
+**Benefits:** Rapid body weight reduction and appetite control; early clinical promise.
+
+**Dosing:** 0.25–0.5 mg weekly start; titrate toward 1–2 mg weekly as tolerated.
+
+**Cycle:** Ongoing; evaluate response at 8–12 weeks.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** Common 10 mg vial. Add 2–5 mL BW to desired concentration.
+
+**Stacks:** Protein forward diet, resistance training. Consider electrolytes for nausea support.
+
+**Cautions:** Similar GI effects as GLP-1 class; watch for increased heart rate.
+
+---
+
+### AOD-9604
+
+**Overview:** Fragment of human growth hormone (176–191) that may increase lipolysis without classic GH effects.
+
+**Benefits:** Body fat reduction support; appetite control in some users.
+
+**Dosing:** 250–500 mcg daily; split AM and pre-workout or pre-bed. 5 days on, 2 off or daily.
+
+**Cycle:** 8–12 weeks.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 5 mg vial + 2.5 mL BW → 1 unit = 20 mcg.
+
+**Stacks:** Pairs with GLP-1 class for appetite; add cardio.
+
+**Cautions:** Mild; avoid if pregnant or nursing.
+
+---
+
+### L-Carnitine (Injectable)
+
+**Overview:** Amino acid derivative that shuttles fatty acids into mitochondria for oxidation.
+
+**Benefits:** Endurance, fatty acid utilization, pump.
+
+**Dosing:** 200–500 mg IM or deep subq pre-workout; 3–5 days per week.
+
+**Cycle:** 4–8 weeks.
+
+**Administration:** IM preferred (ventrogluteal, deltoid).
+
+**Reconstitution:** Often provided in solution; if powdered, reconstitute per supplier.
+
+**Stacks:** GLP-1s, yohimbine (fasted AM), caffeine. Hydrate well.
+
+**Cautions:** Injection site irritation; do not exceed osmolarity limits.
+
+---
+
+## Growth Hormone Axis — GHRH and Secretagogues
+
+### CJC-1295 (no DAC)
+
+**Overview:** GHRH analog; short half-life; used with a GHRP for pulsatile GH release.
+
+**Benefits:** Sleep quality, recovery, fat loss support, IGF-1 increase.
+
+**Dosing:** 100 mcg 1–3 times daily; common stack: CJC-1295 (no DAC) 100 mcg + Ipamorelin 100 mcg AM and pre-bed.
+
+**Cycle:** 8–12 weeks.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 2 mg vial + 2 mL BW → 1 unit = 1 mcg.
+
+**Stacks:** Ipamorelin, GHRP-2/6, fasting window pre-injection for best pulse.
+
+**Cautions:** Carpal tunnel-like symptoms if IGF rises too high.
+
+---
+
+### CJC-1295 (DAC)
+
+**Overview:** Long-acting GHRH analog (Drug Affinity Complex).
+
+**Benefits:** Sustained IGF-1 elevation; convenient weekly dosing.
+
+**Dosing:** 1–2 mg once weekly or split twice weekly.
+
+**Cycle:** 8–12 weeks.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 2 mg vial + 2 mL BW → 1 unit = 1 mcg. Inject mg-levels using insulin syringe units math.
+
+**Stacks:** Avoid stacking with other GH-raising agents if edema occurs.
+
+**Cautions:** Water retention, numbness, fatigue possible.
+
+---
+
+### Ipamorelin
+
+**Overview:** Selective ghrelin receptor agonist (GHRP) with minimal cortisol or prolactin effect.
+
+**Benefits:** Pulsatile GH release; recovery and sleep support.
+
+**Dosing:** 100–300 mcg 1–3 times daily; often 100 mcg AM and pre-bed.
+
+**Cycle:** 8–12 weeks.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 2 mg vial + 2 mL → 1 unit = 1 mcg.
+
+**Stacks:** CJC-1295 no DAC for synergy.
+
+**Cautions:** Dizziness if injected fasted in some users.
+
+---
+
+### GHRP-2
+
+**Overview:** Ghrelin receptor agonist; stronger but more side effects vs ipamorelin.
+
+**Benefits:** GH pulse, appetite increase.
+
+**Dosing:** 100–200 mcg 1–3x daily.
+
+**Cycle:** 6–8 weeks.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 5 mg + 2.5 mL → 1 unit = 20 mcg.
+
+**Stacks:** CJC-1295 no DAC.
+
+**Cautions:** May raise cortisol and prolactin; water retention.
+
+---
+
+### GHRP-6
+
+**Overview:** Ghrelin receptor agonist with strong hunger drive.
+
+**Benefits:** GH pulse, appetite for bulking.
+
+**Dosing:** 100–200 mcg 1–3x daily.
+
+**Cycle:** 6–8 weeks.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 5 mg + 2.5 mL → 1 unit = 20 mcg.
+
+**Stacks:** CJC-1295 no DAC.
+
+**Cautions:** Hunger spikes; watch body fat gain.
+
+---
+
+### Hexarelin
+
+**Overview:** Potent GHRP; high GH pulse but desensitizes quickly.
+
+**Benefits:** Strength, recovery in short runs.
+
+**Dosing:** 50–100 mcg 1–2x daily for 2–4 weeks; then break.
+
+**Cycle:** Short bursts due to receptor desensitization.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 2 mg + 2 mL → 1 unit = 1 mcg.
+
+**Stacks:** CJC-1295 no DAC.
+
+**Cautions:** May impact lipids and prolactin.
+
+---
+
+### Sermorelin
+
+**Overview:** GHRH analog; similar to CJC no DAC.
+
+**Benefits:** GH/IGF support with low sides.
+
+**Dosing:** 100–300 mcg pre-bed.
+
+**Cycle:** 8–12 weeks.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 2 mg + 2 mL → 1 unit = 1 mcg.
+
+**Stacks:** Ipamorelin.
+
+**Cautions:** Mild flushing.
+
+---
+
+### Tesamorelin
+
+**Overview:** GHRH analog FDA-approved for HIV-associated lipodystrophy; reduces visceral fat.
+
+**Benefits:** Visceral fat reduction; IGF rise; possible sleep benefits.
+
+**Dosing:** 2 mg subq daily (clinical); research protocols sometimes 1 mg daily.
+
+**Cycle:** 8–12 weeks or longer with monitoring.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 2 mg + 2 mL → 1 unit = 1 mcg.
+
+**Stacks:** Lifestyle changes to maintain fat loss.
+
+**Cautions:** Injection site reactions; tingling; contraindications similar to GH.
+
+---
+
+### Somatropin (HGH)
+
+**Overview:** Recombinant human growth hormone.
+
+**Benefits:** Fat loss, recovery, joint comfort, IGF-mediated effects.
+
+**Dosing:** 1–2 IU daily for wellness; 3–6 IU advanced users, split dosing.
+
+**Cycle:** 12+ weeks.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** Common 10 IU vial + 1 mL → 1 IU per 0.1 mL.
+
+**Stacks:** Insulin sensitivity support (steps, metformin).
+
+**Cautions:** Edema, carpal tunnel symptoms, insulin resistance at high doses.
+
+---
+
+## IGF Axis and Hypertrophy
+
+### IGF-1 LR3
+
+**Overview:** Long R3 IGF-1; resists binding proteins; longer activity.
+
+**Benefits:** Nutrient partitioning, pumps, potential lean mass support.
+
+**Dosing:** 20–60 mcg post-workout IM or subq in trained muscle, 3–5x weekly.
+
+**Cycle:** 4–6 weeks.
+
+**Administration:** IM or subq.
+
+**Reconstitution:** 1 mg + 2 mL → 1 unit = 5 mcg.
+
+**Stacks:** PEG-MGF alternating days.
+
+**Cautions:** Hypoglycemia risk; start low.
+
+---
+
+### IGF-1 DES
+
+**Overview:** Short-acting IGF-1 variant; site specific.
+
+**Benefits:** Local hypertrophy signaling.
+
+**Dosing:** 20–60 mcg pre or post-workout into target muscle, 3–5x weekly.
+
+**Cycle:** 4–6 weeks.
+
+**Administration:** IM or subq intramuscular region.
+
+**Reconstitution:** 1 mg + 2 mL → 1 unit = 5 mcg.
+
+**Stacks:** PEG-MGF or GH secretagogues.
+
+**Cautions:** Hypoglycemia, jaw or hand aches.
+
+---
+
+### PEG-MGF
+
+**Overview:** Pegylated mechano growth factor; longer half-life than MGF.
+
+**Benefits:** Recovery and satellite cell activation support.
+
+**Dosing:** 100–200 mcg 2–3x weekly post-workout.
+
+**Cycle:** 4–6 weeks.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 2 mg + 2 mL → 1 unit = 1 mcg.
+
+**Stacks:** Alternate with IGF-1 LR3.
+
+**Cautions:** Water retention in some users.
+
+---
+
+### MGF (non-PEG)
+
+**Overview:** Short-acting mechano growth factor.
+
+**Benefits:** Acute recovery signaling.
+
+**Dosing:** 100–200 mcg post-workout in trained muscle.
+
+**Cycle:** 4 weeks.
+
+**Administration:** IM or subq near muscle.
+
+**Reconstitution:** 2 mg + 2 mL → 1 unit = 1 mcg.
+
+**Stacks:** Use on different days than IGF-1 LR3.
+
+**Cautions:** Short half-life requires timing.
+
+---
+
+## Tissue Repair and Anti-Inflammatory
+
+### BPC-157
+
+**Overview:** Gastric peptide that promotes angiogenesis and tendon, gut, and ligament healing in animal data.
+
+**Benefits:** GI protection, tendon and joint recovery, anti-inflammatory effects.
+
+**Dosing:** 250–500 mcg daily subq near injury or 250 mcg twice daily; oral capsules used by some.
+
+**Cycle:** 4–8 weeks.
+
+**Administration:** Subcutaneous; oral possible from some vendors.
+
+**Reconstitution:** 5 mg + 2.5 mL → 1 unit = 20 mcg.
+
+**Stacks:** TB-500; collagen and vitamin C; mechanical loading.
+
+**Cautions:** Limited human clinical data.
+
+---
+
+### TB-500 (Thymosin Beta-4 Fragment)
+
+**Overview:** Actin-binding peptide promoting cell migration and healing.
+
+**Benefits:** Soft tissue healing, recovery, reduced inflammation.
+
+**Dosing:** 2–5 mg weekly for 4–6 weeks (loading), then 2–5 mg monthly (maintenance).
+
+**Cycle:** 6–10 weeks for loading.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 5 mg + 2.5 mL → 1 unit = 20 mcg.
+
+**Stacks:** BPC-157 for synergy.
+
+**Cautions:** Possible fatigue; keep injections sterile.
+
+---
+
+### KPV (Lys-Pro-Val)
+
+**Overview:** Alpha-MSH tripeptide fragment; anti-inflammatory and GI barrier support.
+
+**Benefits:** IBD symptoms, skin inflammation, general recovery (anecdotal).
+
+**Dosing:** 250–500 mcg daily oral or subq; topical for dermatology.
+
+**Cycle:** 4–8 weeks.
+
+**Administration:** Subq, oral, or topical.
+
+**Reconstitution:** 5 mg + 2.5 mL → 1 unit = 20 mcg.
+
+**Stacks:** BPC-157 for GI.
+
+**Cautions:** Limited human trials.
+
+---
+
+### GHK-Cu
+
+**Overview:** Copper peptide complex that supports collagen synthesis and skin/hair health.
+
+**Benefits:** Skin quality, wound healing, hair support.
+
+**Dosing:** Topical serum nightly; injectable protocols 100–200 mcg subq near area 3x weekly.
+
+**Cycle:** 8–12 weeks.
+
+**Administration:** Topical or subq.
+
+**Reconstitution:** 2 mg + 2 mL → 1 unit = 1 mcg.
+
+**Stacks:** Microneedling (low depth) topically; vitamin C alternating nights.
+
+**Cautions:** Copper sensitivity in rare cases.
+
+---
+
+## Neuro and Mood
+
+### Semax
+
+**Overview:** ACTH(4–10) analog; nootropic and neuroprotective properties in Russian literature.
+
+**Benefits:** Focus, memory, stress resistance.
+
+**Dosing:** 300–600 mcg total daily intranasal divided into 2–3 doses for 10–14 days.
+
+**Cycle:** 2 weeks on, 2 weeks off pattern common.
+
+**Administration:** Intranasal; some subq use.
+
+**Reconstitution:** If solution, store refrigerated; if powder, reconstitute with sterile saline per vendor.
+
+**Stacks:** Selank for anxiolysis.
+
+**Cautions:** Irritation of nasal mucosa.
+
+---
+
+### Selank
+
+**Overview:** Tuftsin analog; anxiolytic without sedation per Russian studies.
+
+**Benefits:** Reduced anxiety, calm focus.
+
+**Dosing:** 300–600 mcg total daily intranasal divided 2–3 times.
+
+**Cycle:** 2 weeks on, 2 weeks off.
+
+**Administration:** Intranasal.
+
+**Reconstitution:** If solution, store refrigerated; if powder, reconstitute with sterile saline per vendor.
+
+**Stacks:** Semax; magnesium glycinate at night.
+
+**Cautions:** Mild nasal irritation.
+
+---
+
+### Dihexa
+
+**Overview:** Small peptide that may enhance synaptogenesis in animal models.
+
+**Benefits:** Focus and memory support (anecdotal).
+
+**Dosing:** 5–20 mg oral daily reported in forums; topical 10–20 mg to neck also reported.
+
+**Cycle:** 4–8 weeks then reassess.
+
+**Administration:** Oral or topical.
+
+**Reconstitution:** Often provided as capsules or solution.
+
+**Stacks:** Semax or Noopept (non-peptide).
+
+**Cautions:** Human data limited; start low.
+
+---
+
+## Sexual Function and Pigmentation
+
+### Melanotan II (MT-2)
+
+**Overview:** Melanocortin receptor agonist; increases melanin and libido.
+
+**Benefits:** Tanning and libido support.
+
+**Dosing:** Loading: 250–500 mcg daily for 1–2 weeks; Maintenance: 250–500 mcg 2–3x weekly.
+
+**Cycle:** As needed.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 10 mg + 2 mL → 1 unit = 50 mcg.
+
+**Stacks:** PT-141 for sexual function.
+
+**Cautions:** Nausea, flushing; darkening of moles; avoid with melanoma history.
+
+---
+
+### PT-141 (Bremelanotide)
+
+**Overview:** Melanocortin agonist for arousal; FDA nasal version exists.
+
+**Benefits:** Sexual arousal in men and women.
+
+**Dosing:** 1.25–2.5 mg subq as needed; intranasal 7–10 sprays total across nostrils in some research protocols.
+
+**Cycle:** As needed with 24+ hr spacing.
+
+**Administration:** Subq or intranasal.
+
+**Reconstitution:** 10 mg + 2 mL → 1 unit = 50 mcg.
+
+**Stacks:** MT-2 for tanning-libido combo.
+
+**Cautions:** Nausea, flushing, transient BP changes.
+
+---
+
+## Immune and Endocrine Modulators
+
+### Thymosin Alpha-1 (Talpha-1)
+
+**Overview:** Immune modulator peptide.
+
+**Benefits:** Immune balance and resilience.
+
+**Dosing:** 1.6 mg twice weekly for 6–12 weeks is common in literature.
+
+**Cycle:** 6–12 weeks.
+
+**Administration:** Subcutaneous.
+
+**Reconstitution:** 2 mg + 2 mL → 1 unit = 1 mcg.
+
+**Stacks:** BPC-157, vitamin D, zinc for immune protocol.
+
+**Cautions:** Generally well tolerated; monitor if autoimmune conditions present.
+
+---
+
+### Epithalon (Epitalon)
+
+**Overview:** Synthetic tetrapeptide based on epithalamin; studied for telomerase activation.
+
+**Benefits:** Telomere maintenance, potential anti-aging and sleep cycle regulation.
+
+**Dosing:** 5–10 mg daily for 10–20 days; repeat cycle every 4–6 months.
+
+**Cycle:** Short burst cycles with long breaks.
+
+**Administration:** Subcutaneous or IV.
+
+**Reconstitution:** 10 mg + 2 mL → 1 unit = 50 mcg.
+
+**Stacks:** NAD+, antioxidants for longevity stack.
+
+**Cautions:** Limited human trial data; generally well tolerated.
+
+---
+
+### NAD+ (Nicotinamide Adenine Dinucleotide)
+
+**Overview:** Essential coenzyme for cellular energy and DNA repair; levels decline with age.
+
+**Benefits:** Cellular energy, sirtuin activation, DNA repair, mental clarity.
+
+**Dosing:** 25–100 mg subq twice weekly; escalate gradually over weeks.
+
+**Cycle:** 12–14+ weeks; ongoing protocols exist.
+
+**Administration:** Subcutaneous or IV infusion.
+
+**Reconstitution:** Follow vendor-specific instructions based on vial size.
+
+**Stacks:** SS-31 for mitochondrial synergy; MOTS-c for metabolic activation; resveratrol for sirtuin amplification.
+
+**Cautions:** Flushing and nausea at higher doses; start low and titrate.
+
+---
+
+### Summary Table — Quick Reference
+
+| Category | Peptides | Key Benefit |
+|----------|----------|-------------|
+| GLP-1 / Weight | Semaglutide, Tirzepatide, Retatrutide, AOD-9604, L-Carnitine | Appetite control, fat loss |
+| GH Axis | CJC-1295, Ipamorelin, GHRP-2/6, Hexarelin, Sermorelin, Tesamorelin, HGH | GH release, recovery, sleep |
+| IGF / Hypertrophy | IGF-1 LR3, IGF-1 DES, PEG-MGF, MGF | Muscle growth, nutrient partitioning |
+| Tissue Repair | BPC-157, TB-500, KPV, GHK-Cu | Healing, anti-inflammatory, skin |
+| Neuro / Mood | Semax, Selank, Dihexa | Focus, memory, anxiety reduction |
+| Sexual / Pigmentation | Melanotan II, PT-141 | Libido, tanning |
+| Immune / Endocrine | Thymosin Alpha-1, Epithalon, NAD+ | Immune support, longevity |
+
+---
+
+*This article is for research and educational purposes only. All compounds discussed are intended for laboratory research use. Consult relevant regulatory guidelines before any experimental application.*
+    `
+  },
   {
     slug: "mitochondrial-enhancement-protocol",
     title: "The 14-Week Mitochondrial Enhancement Protocol: SS-31, MOTS-c & NAD+",
