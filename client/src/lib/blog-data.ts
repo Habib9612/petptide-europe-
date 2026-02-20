@@ -1,3 +1,5 @@
+import mitochondrialProtocolCover from "@assets/mitochondrial-protocol-blog-cover.png";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -9,6 +11,125 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "mitochondrial-enhancement-protocol",
+    title: "The 14-Week Mitochondrial Enhancement Protocol: SS-31, MOTS-c & NAD+",
+    excerpt: "A detailed analysis of a sequential 14-week protocol combining SS-31, MOTS-c, and NAD+ to target mitochondrial health, metabolic function, and longevity pathways.",
+    date: "February 20, 2026",
+    category: "Longevity",
+    image: mitochondrialProtocolCover,
+    content: `
+### Introduction
+
+This 14-week protocol is designed to sequentially target mitochondrial health and metabolic function using three interventions: **SS-31**, **MOTS-c**, and **NAD+**. Each compound is introduced in a specific order and timeframe to optimize their individual benefits and exploit potential synergistic effects. The overarching goal is to improve mitochondrial energy production, enhance metabolic health, and promote longevity-related pathways.
+
+---
+
+### Protocol Schedule Overview
+
+| Week | SS-31 | MOTS-c | NAD+ |
+|------|-------|--------|------|
+| Week 1–2 | — | — | 25 mg twice/week |
+| Week 3–4 | 4 mg daily | — | 50 mg twice/week |
+| Week 5–8 | 4 mg daily | — | 100 mg twice/week |
+| Week 9–14 | — | 5 mg 3×/week | 100 mg twice/week |
+
+---
+
+### SS-31: Mitochondria-Targeted Peptide (Elamipretide)
+
+SS-31 is a cell-permeable tetrapeptide that selectively concentrates in the inner mitochondrial membrane by binding to **cardiolipin**, a unique phospholipid critical for electron transport chain (ETC) function. By stabilizing ETC supercomplexes, SS-31 improves electron transfer efficiency and preserves ATP production while minimizing reactive oxygen species (ROS) generation.
+
+**Key mechanisms:**
+- Scavenges mitochondrial ROS and prevents oxidative damage
+- Improves mitochondrial bioenergetics by modulating cytochrome c–cardiolipin interactions
+- Inhibits opening of the mitochondrial permeability transition pore (mPTP)
+- Enhances organ function in aging: 8 weeks of SS-31 in aged mice improved cardiac diastolic function and reduced oxidative stress to youthful levels
+
+SS-31 is given during **weeks 3–8** (a 6-week window), as prolonged use beyond 4 weeks has not been formally studied in humans. This timeframe aligns with animal studies (4–8 weeks) that achieved significant mitochondrial improvements.
+
+---
+
+### MOTS-c: Mitochondrial-Derived Peptide
+
+MOTS-c is a 16-amino acid peptide encoded in mitochondrial DNA (12S rRNA gene) that functions as a signaling molecule linking mitochondrial status to nuclear metabolism.
+
+**Key mechanisms:**
+- **AMPK activation**: Interferes with the folate cycle, causing AICAR accumulation that activates AMPK — a master energy sensor enhancing glucose uptake, fatty-acid oxidation, and mitochondrial biogenesis
+- **Nuclear gene regulation**: Translocates to the nucleus to regulate genes involved in metabolism and proteostasis
+- **NAD+ elevation**: Raises intracellular NAD+ levels and acts via SIRT1 to exert metabolic effects
+- **Anti-inflammatory action**: Reduces IL-6 levels and enhances antioxidant responses via Nrf2 activation
+
+In animal studies, MOTS-c prevented obesity and insulin resistance in mice on high-fat diets. In older mice, intermittent MOTS-c (5 mg/kg thrice weekly) significantly enhanced physical performance and delayed age-related frailty. MOTS-c levels naturally decline ~20% with aging, making supplementation a compelling strategy.
+
+MOTS-c is introduced during **weeks 9–14** after SS-31 has repaired the mitochondrial machinery, allowing cells to fully capitalize on MOTS-c's metabolic activation.
+
+---
+
+### NAD+ Supplementation: The Metabolic Backbone
+
+NAD+ is a vital coenzyme acting as an electron carrier in redox reactions and a substrate for signaling enzymes (sirtuins, PARPs). NAD+ levels diminish with age due to reduced synthesis and increased consumption, leading to metabolic sluggishness and impaired DNA repair.
+
+**Supplementation benefits:**
+- Activates sirtuin enzymes (SIRT1, SIRT3) that regulate energy metabolism and genomic stability
+- Improves mitochondrial function via SIRT3-mediated deacetylation of metabolic enzymes
+- Enhances mental clarity, energy levels, and brain function
+- Supports DNA repair mechanisms
+
+**Dosage escalation rationale:**
+- **Weeks 1–2**: 25 mg twice/week — allows acclimation and avoids side effects (flushing, nausea)
+- **Weeks 3–4**: 50 mg twice/week — gradual increase as tolerance builds
+- **Weeks 5–14**: 100 mg twice/week — therapeutic plateau maintained throughout
+
+NAD+ is the only component spanning all 14 weeks, providing continuous metabolic support for both SS-31 and MOTS-c phases.
+
+---
+
+### The Three-Phase Sequential Strategy
+
+**Phase 1 — Foundation (Weeks 1–2): NAD+ Loading**
+Elevating NAD+ ensures cells have ample metabolic cofactor availability and activated sirtuin pathways from the outset. This "fuel priming" readies mitochondria for improvement.
+
+**Phase 2 — Mitochondrial Repair (Weeks 3–8): SS-31 + NAD+**
+With NAD+-dependent enzymes already more active, SS-31 directly targets mitochondria to reduce ROS and stabilize ETC function. Research in aged mice showed combined NAD+ and SS-31 treatment produced a **synergistic rejuvenating effect** on heart metabolism that exceeded either compound alone.
+
+**Phase 3 — Metabolic Enhancement (Weeks 9–14): MOTS-c + NAD+**
+After mitochondria have been revitalized by SS-31, MOTS-c activates AMPK to push the system to higher performance. The AMPK–SIRT1 positive feedback loop is amplified by maintained NAD+ levels, driving improvements in glucose handling, insulin sensitivity, and physical endurance.
+
+---
+
+### Synergistic Effects
+
+**SS-31 + NAD+ (Mitochondrial Synergy)**
+SS-31 preserves ETC function while NAD+ provides NADH fuel. Because SS-31 reduces oxidative damage, less NAD+ is diverted to PARP enzymes for DNA repair, conserving NAD+ pools for productive metabolism. Combined treatment in aged hearts restored youthful energy dynamics better than either alone.
+
+**MOTS-c + NAD+ (Metabolic Synergy)**
+MOTS-c triggers AMPK, AMPK boosts NAD+ via NAMPT upregulation, and high NAD+ activates sirtuins that complement AMPK effects. With NAD+ already elevated, SIRT1 is primed when MOTS-c arrives — producing stronger metabolic effects than MOTS-c alone.
+
+**SS-31 → MOTS-c (Sequential Complementarity)**
+By improving mitochondrial capacity first, SS-31 enhances responsiveness to MOTS-c's metabolic demands. When AMPK activation increases energy requirements, repaired mitochondria can meet that demand with higher efficiency and resilience.
+
+---
+
+### Why This Sequence Matters
+
+The order **NAD+ → SS-31 → MOTS-c** follows a logical progression: first repair the engine (mitochondria), then step on the gas pedal (AMPK/metabolic activation). An alternate sequence — activating metabolism before repairing mitochondria — would be like revving a broken engine, potentially producing excess ROS without achieving desired energy output.
+
+All three interventions together target the **"mitochondrial triangle" of healthy aging**: mitochondrial function, metabolic signaling, and cellular maintenance. The expected result is a multiplicative effect where combined treatment best recapitulates youthful metabolic states.
+
+---
+
+### Key Takeaways
+
+1. **Sequential approach** avoids overloading the body and allows each compound's effects to unfold fully
+2. **NAD+ dose escalation** ensures safety, tolerance, and optimal utilization
+3. **SS-31's 6-week window** captures mitochondrial benefits within prudent safety margins
+4. **MOTS-c after SS-31** leverages repaired mitochondria for maximum metabolic enhancement
+5. **Combined synergies** produce greater results than any single intervention alone
+
+*This article is for research and educational purposes only. All compounds discussed are intended for laboratory research use. Consult relevant regulatory guidelines before any experimental application.*
+    `
+  },
   {
     slug: "retatrutide-research",
     title: "Retatrutide in Research: Stability, Storage, and Experimental Optimization",
