@@ -1,0 +1,84 @@
+Role: You are the Lead Developer for this project. I am the System Architect. This document provides the technical specifications and architectural requirements for the new product page you are building. Your current codebase is 70% complete; this directive will guide you through the implementation of the remaining 30%, focusing on complex frontend logic, dynamic content, and visual fidelity.
+
+Reference Analysis: https://mypeptideslab.com/products/ret4-rt3
+
+
+1. System-Level Requirements
+1.1. Core Objective
+Integrate a new, high-performance product landing page into the existing `cyber.io` infrastructure. The page must be architected to replicate the dynamic pricing, checkout logic, and information hierarchy of the reference site while adhering strictly to the established `cyber.io` dark-mode, futuristic design system. The primary goal is maximizing user conversion through a seamless, informative, and visually compelling experience.
+
+1.2. Technology Stack & Performance
+	•	Frontend Framework: Continue with the established stack (React, Vite, TypeScript, TailwindCSS).
+	•	Performance: The page must achieve a Lighthouse performance score of 90+. Pay specific attention to the loading of the hero section video. The video asset must be optimized for web delivery without sacrificing visual quality.
+	•	Responsiveness: The layout must be fully responsive, with a mobile-first approach. All interactive elements, especially the pricing matrix and calculator, must be highly usable on small viewports.
+
+
+2. Frontend Architecture & Component Specification
+2.1. Hero Section: 3D Vial Video Integration
+This is the highest-priority visual component. You will implement a background-less video to serve as the central, dynamic element of the hero section.
+
+	•	Asset: Use the provided video file: `peptide_vial_3d_rotating.mp4`.
+	•	Implementation:
+	◦	The video must be implemented using the HTML `<video>` tag with the `autoplay`, `loop`, `muted`, and `playsinline` attributes.
+	◦	Crucially, the video has a transparent alpha channel. Your CSS must ensure that no background color is rendered behind the video, allowing the vial to float over the page’s dark background gradient.
+	◦	The video should be positioned as the centerpiece of the hero section, with the main headline (H1) and call-to-action (CTA) button wrapping or positioned adjacent to it.
+	•	Interaction: Implement a subtle parallax effect where the vial video moves slightly in the opposite direction of the user’s mouse cursor movement within the hero section. This creates a sense of depth and interactivity.
+	•	Label Redesign (Future Task): The current video uses a placeholder label. Architect the component so that the video source can be easily updated in the future with a version that has the final `cyber.io` branding on the vial label.
+
+2.2. Product Purchasing Component (`ProductEngine`)
+This component will encapsulate all pricing logic, options, and add-to-cart functionality. It must be a stateful React component.
+
+	•	State Management: Use `useState` or a similar hook to manage the following state variables:
+	◦	`selectedTier` (e.g., ‘10mg’)
+	◦	`quantity` (number)
+	◦	`bacWater` (boolean)
+	◦	`needles` (number)
+	◦	`totalPrice` (number)
+	•	Tiered Pricing Logic:
+	◦	Create a data structure (e.g., a JSON object or an array) to hold the pricing tiers. This ensures scalability.
+
+
+￼
+	◦	The component must render a set of radio buttons or styled `div`s that update the `selectedTier` state on click.
+	◦	The UI must visually distinguish the ‘Most Popular’ and ‘Best Value’ tiers, using your brand’s accent colors (e.g., a purple glow or border).
+	•	Dynamic Price Calculation:
+	◦	The `totalPrice` must be recalculated whenever `selectedTier`, `quantity`, `bacWater`, or `needles` changes.
+	◦	The formula is: `(tierPrice * quantity) + (bacWaterPrice * (bacWater ? 1 : 0)) + (needlesPrice * needlesQuantity)`.
+	◦	The main “TOEVOEGEN AAN WINKELWAGEN” button text must be dynamically updated to reflect the `totalPrice` in real-time.
+
+2.3. Checkout & Shipping Logic
+	•	Free Shipping Banner: The component displaying “Gratis Verzending na €150” must be present and permanently visible at the top of the page.
+	•	Cart Integration: When the user proceeds to checkout, the calculated `totalPrice` must be passed to the cart/checkout page.
+	•	Shipping Calculation: At the checkout stage, implement a function that checks the cart’s subtotal. If `subtotal >= 150`, the shipping cost must be set to `0`. Otherwise, apply your standard shipping rate.
+	•	Shipping Form: The shipping address form must collect the following fields, all of which are mandatory:
+	◦	Email Address
+	◦	Country/Region (dropdown)
+	◦	First Name, Last Name
+	◦	Full Address (Street, Apartment/Suite, etc.)
+	◦	Postal Code
+	◦	City
+	◦	Phone Number (for shipping updates)
+
+2.4. Redesigned Dosage Calculator Component
+Re-architect the calculator from the reference site to be more interactive and visually aligned with your brand’s UI. It should be a modal or a dedicated, sleekly designed section on the landing page itself, not a separate page.
+
+	•	UI:
+	◦	Replace the radio buttons for numerical inputs with interactive sliders (e.g., using a library like `rc-slider`).
+	◦	The output should be a large, clear numerical display, supplemented by the existing text explanation.
+	•	Visual Syringe:
+	◦	Create a simple, stylized SVG component that represents a syringe. The plunger or a fill-level indicator on this SVG must move dynamically to the calculated position (`unitsToDraw`) to provide an immediate visual guide for the user.
+	•	Real-time Calculation: The calculation logic must execute on every input change, providing instant feedback. The core formula remains:
+`unitsToDraw = (totalSyringeUnits / totalSyringeVolume) * (bacteriostaticWaterVolume / peptideVialAmount) * desiredDose`
+
+3. SEO & Content Structure
+	•	Semantic HTML: Structure the page with a single `<h1>` for the main product title. Use `<h2>` for major section headings (“Choose Your Dosage,” “What’s Included,” “Expected Results,” “Dosage Calculator”) and `<h3>` for sub-headings.
+	•	Keyword Density: Ensure the copy from the reference site is adapted and integrated, maintaining a high density of keywords like “peptide research,” “RET4 / RT3,” “metabolic efficiency,” and “weight management.”
+	•	Image SEO: All `<img>` tags must have descriptive `alt` attributes.
+	•	Metadata: The page’s `<title>` and `<meta name="description">` tags must be optimized for the product name and its primary benefits.
+
+4. Design System Implementation
+	•	Colors: Strictly adhere to the `cyber.io` color palette. Use the dark slate/purple gradients for backgrounds. Use neon cyan and bright purples for CTAs, highlights, and interactive element states (hover, focus).
+	•	Typography: Utilize the existing font stack. Ensure all text has a contrast ratio of at least 4.5:1 against the background.
+	•	Imagery: All icons (e.g., for the “What’s Included” section) must be styled to match your futuristic aesthetic (e.g., single-color, thin-line icons in your accent color).
+
+Execute this directive precisely. The goal is to create a seamless fusion of sophisticated e-commerce functionality and a premium, brand-aligned user experience.

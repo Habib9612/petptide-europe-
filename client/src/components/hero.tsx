@@ -2,53 +2,75 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "./language-context";
 import { ArrowRight, ShieldCheck, Truck, Award, FlaskConical } from "lucide-react";
+import { useRef, useCallback, useState, useEffect } from "react";
+import vialVideo from "@assets/peptide_vial_3d_rotating_1771609453361.MP4";
 
-function VialIllustration() {
+function Vial3D() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const dx = (e.clientX - centerX) / rect.width;
+    const dy = (e.clientY - centerY) / rect.height;
+    setOffset({ x: -dx * 20, y: -dy * 15 });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setOffset({ x: 0, y: 0 });
+  }, []);
+
+  useEffect(() => {
+    const hero = containerRef.current?.closest("[data-testid='section-hero']");
+    if (!hero) return;
+    const el = hero as HTMLElement;
+    el.addEventListener("mousemove", handleMouseMove);
+    el.addEventListener("mouseleave", handleMouseLeave);
+    return () => {
+      el.removeEventListener("mousemove", handleMouseMove);
+      el.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [handleMouseMove, handleMouseLeave]);
+
   return (
-    <div className="relative flex items-center justify-center" aria-hidden="true">
-      <div className="absolute w-[280px] h-[280px] lg:w-[360px] lg:h-[360px] rounded-full bg-[hsl(186,65%,48%,0.06)] animate-pulse" style={{ animationDuration: "4s" }} />
-      <div className="absolute w-[200px] h-[200px] lg:w-[260px] lg:h-[260px] rounded-full bg-[hsl(186,65%,48%,0.04)]" />
-      <svg viewBox="0 0 120 260" className="relative w-[100px] lg:w-[130px] drop-shadow-[0_0_30px_hsl(186,65%,48%,0.3)]" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="vialBody" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="hsl(210, 15%, 85%)" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="hsl(210, 15%, 70%)" stopOpacity="0.7" />
-          </linearGradient>
-          <linearGradient id="vialLiquid" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="hsl(186, 65%, 55%)" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="hsl(186, 65%, 40%)" stopOpacity="0.8" />
-          </linearGradient>
-          <linearGradient id="capGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="hsl(186, 65%, 45%)" />
-            <stop offset="100%" stopColor="hsl(186, 65%, 32%)" />
-          </linearGradient>
-        </defs>
-        <rect x="30" y="10" width="60" height="22" rx="4" fill="url(#capGrad)" />
-        <rect x="38" y="32" width="44" height="8" rx="2" fill="hsl(210, 10%, 60%)" fillOpacity="0.6" />
-        <rect x="35" y="40" width="50" height="180" rx="6" fill="url(#vialBody)" />
-        <rect x="35" y="40" width="50" height="180" rx="6" fill="none" stroke="hsl(210,15%,80%)" strokeWidth="0.5" strokeOpacity="0.5" />
-        <rect x="37" y="120" width="46" height="98" rx="5" fill="url(#vialLiquid)" />
-        <rect x="42" y="46" width="2" height="170" rx="1" fill="white" fillOpacity="0.15" />
-        <line x1="40" y1="80" x2="52" y2="80" stroke="hsl(210,15%,60%)" strokeWidth="0.5" strokeOpacity="0.4" />
-        <line x1="40" y1="120" x2="55" y2="120" stroke="hsl(210,15%,60%)" strokeWidth="0.5" strokeOpacity="0.4" />
-        <line x1="40" y1="160" x2="52" y2="160" stroke="hsl(210,15%,60%)" strokeWidth="0.5" strokeOpacity="0.4" />
-        <text x="60" y="246" textAnchor="middle" fontSize="7" fill="hsl(210,15%,60%)" fillOpacity="0.6" fontFamily="monospace">5mg</text>
-      </svg>
-      <svg className="absolute top-0 left-0 w-full h-full opacity-[0.15]" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+    <div ref={containerRef} className="relative flex items-center justify-center" aria-hidden="true">
+      <div className="absolute w-[320px] h-[320px] lg:w-[420px] lg:h-[420px] rounded-full bg-[hsl(186,65%,48%,0.05)]" />
+      <div
+        className="relative w-[280px] h-[350px] lg:w-[360px] lg:h-[450px]"
+        style={{
+          transform: `translate(${offset.x}px, ${offset.y}px)`,
+          transition: "transform 0.15s ease-out",
+        }}
+      >
+        <video
+          src={vialVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-contain drop-shadow-[0_0_40px_hsl(186,65%,48%,0.25)]"
+          style={{ background: "transparent" }}
+          data-testid="video-hero-vial"
+        />
+      </div>
+      <svg className="absolute top-0 left-0 w-full h-full opacity-[0.12] pointer-events-none" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
         {[
-          { cx: 40, cy: 60, r: 2.5 }, { cx: 90, cy: 30, r: 2 },
-          { cx: 250, cy: 50, r: 2.5 }, { cx: 220, cy: 100, r: 2 },
-          { cx: 60, cy: 240, r: 2 }, { cx: 260, cy: 230, r: 2.5 },
-          { cx: 30, cy: 150, r: 2 }, { cx: 270, cy: 160, r: 2 },
+          { cx: 30, cy: 50, r: 2.5 }, { cx: 80, cy: 20, r: 2 },
+          { cx: 260, cy: 40, r: 2.5 }, { cx: 230, cy: 90, r: 2 },
+          { cx: 50, cy: 250, r: 2 }, { cx: 270, cy: 240, r: 2.5 },
+          { cx: 20, cy: 160, r: 2 }, { cx: 280, cy: 170, r: 2 },
         ].map((p, i) => (
           <circle key={i} cx={p.cx} cy={p.cy} r={p.r} fill="hsl(186,65%,55%)">
             <animate attributeName="fillOpacity" values="0.3;0.7;0.3" dur={`${4 + i * 0.5}s`} repeatCount="indefinite" />
           </circle>
         ))}
-        <line x1="40" y1="60" x2="90" y2="30" stroke="hsl(186,65%,55%)" strokeWidth="0.5" strokeOpacity="0.3" />
-        <line x1="250" y1="50" x2="220" y2="100" stroke="hsl(186,65%,55%)" strokeWidth="0.5" strokeOpacity="0.3" />
-        <line x1="60" y1="240" x2="30" y2="150" stroke="hsl(186,65%,55%)" strokeWidth="0.5" strokeOpacity="0.3" />
-        <line x1="260" y1="230" x2="270" y2="160" stroke="hsl(186,65%,55%)" strokeWidth="0.5" strokeOpacity="0.3" />
+        <line x1="30" y1="50" x2="80" y2="20" stroke="hsl(186,65%,55%)" strokeWidth="0.5" strokeOpacity="0.3" />
+        <line x1="260" y1="40" x2="230" y2="90" stroke="hsl(186,65%,55%)" strokeWidth="0.5" strokeOpacity="0.3" />
+        <line x1="50" y1="250" x2="20" y2="160" stroke="hsl(186,65%,55%)" strokeWidth="0.5" strokeOpacity="0.3" />
+        <line x1="270" y1="240" x2="280" y2="170" stroke="hsl(186,65%,55%)" strokeWidth="0.5" strokeOpacity="0.3" />
       </svg>
     </div>
   );
@@ -150,8 +172,8 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="hidden lg:flex justify-center">
-            <VialIllustration />
+          <div className="flex justify-center">
+            <Vial3D />
           </div>
         </div>
       </div>
