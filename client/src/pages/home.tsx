@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { getProductImage } from "@/lib/product-images";
 import {
   ArrowRight,
   CheckCircle2,
@@ -58,15 +59,22 @@ function FeaturedPeptides() {
             <Link href={`/products/${peptide.id}`} key={peptide.id} data-testid={`link-product-${peptide.id}`}>
               <Card className="hover-elevate h-full overflow-visible" data-testid={`card-featured-${i}`}>
                 <div className="p-5">
-                  <div className="flex items-start justify-between gap-4 mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-md bg-primary/[0.08] flex items-center justify-center shrink-0">
-                        <FlaskConical className="h-4.5 w-4.5 text-primary" strokeWidth={1.5} />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-sm" data-testid={`text-featured-name-${i}`}>{peptide.name}</h3>
-                        <p className="text-xs text-muted-foreground">{peptide.dose}</p>
-                      </div>
+                  <div className="mb-3 h-36 rounded-md bg-muted/40 flex items-center justify-center overflow-hidden">
+                    {getProductImage(peptide.id, "") ? (
+                      <img
+                        src={getProductImage(peptide.id, "")}
+                        alt={peptide.name}
+                        className="h-full w-full object-contain p-2"
+                        data-testid={`img-featured-${i}`}
+                      />
+                    ) : (
+                      <FlaskConical className="h-8 w-8 text-muted-foreground/40" />
+                    )}
+                  </div>
+                  <div className="flex items-start justify-between gap-4 mb-3">
+                    <div>
+                      <h3 className="font-semibold text-sm" data-testid={`text-featured-name-${i}`}>{peptide.name}</h3>
+                      <p className="text-xs text-muted-foreground">{peptide.dose}</p>
                     </div>
                     <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-muted text-muted-foreground uppercase tracking-wider shrink-0" data-testid={`badge-category-${i}`}>
                       {peptide.category}
