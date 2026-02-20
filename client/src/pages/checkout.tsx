@@ -47,9 +47,11 @@ export default function Checkout() {
     firstName: "",
     lastName: "",
     address: "",
+    apartment: "",
     city: "",
     country: "",
     postalCode: "",
+    phone: "",
   });
 
   const subtotal = getSubtotal();
@@ -110,7 +112,7 @@ export default function Checkout() {
     e.preventDefault();
     
     if (!formData.email || !formData.firstName || !formData.lastName || 
-        !formData.address || !formData.city || !formData.country || !formData.postalCode) {
+        !formData.address || !formData.city || !formData.country || !formData.postalCode || !formData.phone) {
       toast({
         title: "Missing information",
         description: "Please fill in all required fields.",
@@ -233,7 +235,7 @@ export default function Checkout() {
                 <CardContent>
                   <div className="space-y-4">
                     <div>
-                      <Label htmlFor="address">Address</Label>
+                      <Label htmlFor="address">Street Address</Label>
                       <Input
                         id="address"
                         placeholder="123 Research Lane"
@@ -241,6 +243,16 @@ export default function Checkout() {
                         onChange={(e) => handleInputChange("address", e.target.value)}
                         required
                         data-testid="input-address"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="apartment">Apartment / Suite (optional)</Label>
+                      <Input
+                        id="apartment"
+                        placeholder="Apt 4B, Floor 2, etc."
+                        value={formData.apartment}
+                        onChange={(e) => handleInputChange("apartment", e.target.value)}
+                        data-testid="input-apartment"
                       />
                     </div>
                     <div className="grid gap-4 sm:grid-cols-2">
@@ -268,7 +280,7 @@ export default function Checkout() {
                       </div>
                     </div>
                     <div>
-                      <Label htmlFor="country">Country</Label>
+                      <Label htmlFor="country">Country / Region</Label>
                       <Select
                         value={formData.country}
                         onValueChange={(value) => handleInputChange("country", value)}
@@ -284,6 +296,19 @@ export default function Checkout() {
                           ))}
                         </SelectContent>
                       </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="phone">Phone Number</Label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        placeholder="+49 123 456 7890"
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange("phone", e.target.value)}
+                        required
+                        data-testid="input-phone"
+                      />
+                      <p className="text-xs text-muted-foreground mt-1">For shipping updates</p>
                     </div>
                   </div>
                 </CardContent>

@@ -1,28 +1,24 @@
 import { useRoute, Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLanguage } from "@/components/language-context";
-import { useCart } from "@/lib/cart";
 import { getProductById, getCategoryName } from "@/lib/products";
 import { getProductImage } from "@/lib/product-images";
-import { useToast } from "@/hooks/use-toast";
+import { ProductEngine } from "@/components/product-engine";
+import { DosageCalculatorInline } from "@/components/dosage-calculator-inline";
 import {
-  ShoppingCart,
   ArrowLeft,
   FlaskConical,
-  Minus,
-  Plus,
+  ShieldCheck,
+  Truck,
+  Award,
+  Package,
 } from "lucide-react";
-import { useState } from "react";
 
 export default function ProductDetail() {
   const [, params] = useRoute("/product/:id");
   const { t } = useLanguage();
-  const { addItem } = useCart();
-  const { toast } = useToast();
-  const [quantity, setQuantity] = useState(1);
 
   const product = params?.id ? getProductById(params.id) : null;
 
@@ -43,17 +39,6 @@ export default function ProductDetail() {
     ? Math.round(((product.regularPrice! - product.price) / product.regularPrice!) * 100)
     : 0;
 
-  const handleAddToCart = () => {
-    addItem(product, quantity);
-    toast({
-      title: "Added to cart",
-      description: `${quantity}x ${product.name} added.`,
-    });
-  };
-
-  const incrementQuantity = () => setQuantity((q) => Math.min(q + 1, product.stock));
-  const decrementQuantity = () => setQuantity((q) => Math.max(q - 1, 1));
-
   return (
     <div className="min-h-screen">
       <div className="container mx-auto px-4 py-6">
@@ -70,7 +55,7 @@ export default function ProductDetail() {
               {getProductImage(product.id, "") ? (
                 <img
                   src={getProductImage(product.id, "")}
-                  alt={product.name}
+                  alt={`${product.name} - ${product.purity} research peptide`}
                   className="h-full w-full object-contain"
                   data-testid="img-product-detail"
                 />
@@ -79,11 +64,26 @@ export default function ProductDetail() {
               )}
             </div>
 
-            <div className="mt-4 grid grid-cols-3 gap-3 text-center text-xs text-muted-foreground">
-              <div className="rounded-md border border-border/50 py-2.5" data-testid="info-shipping">Fast EU shipping</div>
-              <div className="rounded-md border border-border/50 py-2.5" data-testid="info-purity">HPLC verified</div>
-              <div className="rounded-md border border-border/50 py-2.5" data-testid="info-packaging">Discreet packaging</div>
+            <div className="mt-4 grid grid-cols-4 gap-2 text-center text-xs text-muted-foreground">
+              <div className="rounded-md border border-border/50 py-2.5 flex flex-col items-center gap-1" data-testid="info-shipping">
+                <Truck className="h-3.5 w-3.5 text-primary/60" />
+                <span>Fast EU</span>
+              </div>
+              <div className="rounded-md border border-border/50 py-2.5 flex flex-col items-center gap-1" data-testid="info-purity">
+                <Award className="h-3.5 w-3.5 text-primary/60" />
+                <span>HPLC</span>
+              </div>
+              <div className="rounded-md border border-border/50 py-2.5 flex flex-col items-center gap-1" data-testid="info-coa">
+                <ShieldCheck className="h-3.5 w-3.5 text-primary/60" />
+                <span>CoA</span>
+              </div>
+              <div className="rounded-md border border-border/50 py-2.5 flex flex-col items-center gap-1" data-testid="info-packaging">
+                <Package className="h-3.5 w-3.5 text-primary/60" />
+                <span>Discreet</span>
+              </div>
             </div>
+
+            <DosageCalculatorInline />
           </div>
 
           <div className="space-y-5">
@@ -105,12 +105,12 @@ export default function ProductDetail() {
             </div>
 
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold" data-testid="text-product-price">
-                &euro;{product.price.toFixed(2)}
+              <span className="text-2xl font-bold" data-testid="text-product-price">
+                From &euro;{product.price.toFixed(2)}
               </span>
               {hasDiscount && (
                 <>
-                  <span className="text-lg text-muted-foreground line-through" data-testid="text-product-regular-price">
+                  <span className="text-base text-muted-foreground line-through" data-testid="text-product-regular-price">
                     &euro;{product.regularPrice!.toFixed(2)}
                   </span>
                   <Badge variant="secondary" className="text-xs">-{discountPercent}%</Badge>
@@ -122,36 +122,7 @@ export default function ProductDetail() {
               {product.shortDescription}
             </p>
 
-            <div className="flex items-center gap-3 pt-2">
-              <div className="flex items-center border rounded-md">
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  onClick={decrementQuantity}
-                  disabled={quantity <= 1}
-                  data-testid="button-decrease-qty"
-                >
-                  <Minus className="h-3.5 w-3.5" />
-                </Button>
-                <span className="w-10 text-center text-sm font-medium" data-testid="text-quantity">
-                  {quantity}
-                </span>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  onClick={incrementQuantity}
-                  disabled={quantity >= product.stock}
-                  data-testid="button-increase-qty"
-                >
-                  <Plus className="h-3.5 w-3.5" />
-                </Button>
-              </div>
-
-              <Button className="flex-1 gap-2" onClick={handleAddToCart} data-testid="button-add-to-cart">
-                <ShoppingCart className="h-4 w-4" />
-                Add to Cart &mdash; &euro;{(product.price * quantity).toFixed(2)}
-              </Button>
-            </div>
+            <ProductEngine product={product} />
 
             <Tabs defaultValue="description" className="pt-4">
               <TabsList className="w-full grid grid-cols-3">
@@ -167,12 +138,14 @@ export default function ProductDetail() {
               </TabsList>
 
               <TabsContent value="description" className="mt-4">
+                <h2 className="sr-only">Product Description</h2>
                 <p className="text-sm text-muted-foreground whitespace-pre-line leading-relaxed" data-testid="text-full-description">
                   {product.fullDescription}
                 </p>
               </TabsContent>
 
               <TabsContent value="specs" className="mt-4 space-y-3">
+                <h2 className="sr-only">Product Specifications</h2>
                 {product.sequence && product.sequence !== "N/A (Coenzyme)" && (
                   <div>
                     <p className="text-xs font-medium text-muted-foreground mb-1">{t("product.sequence")}</p>

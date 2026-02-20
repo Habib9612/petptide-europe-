@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "./language-context";
 import { useTheme } from "./theme-provider";
 import { useCart } from "@/lib/cart";
-import { ShoppingCart, Menu, X, Sun, Moon, ChevronDown } from "lucide-react";
+import { ShoppingCart, Menu, X, Sun, Moon, ChevronDown, Truck } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "./logo";
 import {
@@ -42,6 +42,11 @@ export function Header() {
   ];
 
   return (
+    <>
+    <div className="w-full bg-[hsl(186,65%,38%)] text-white text-center py-1.5 text-xs font-medium tracking-wide" data-testid="banner-free-shipping">
+      <Truck className="inline h-3.5 w-3.5 mr-1.5 -mt-0.5" />
+      Free Shipping on Orders Over &euro;120
+    </div>
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4">
         <div className="flex h-14 items-center justify-between gap-6">
@@ -170,5 +175,6 @@ export function Header() {
         )}
       </div>
     </header>
+    </>
   );
 }
