@@ -59,12 +59,12 @@ function FeaturedPeptides() {
             <Link href={`/products/${peptide.id}`} key={peptide.id} data-testid={`link-product-${peptide.id}`}>
               <Card className="hover-elevate h-full overflow-visible" data-testid={`card-featured-${i}`}>
                 <div className="p-5">
-                  <div className="mb-3 h-36 rounded-md bg-muted/40 flex items-center justify-center overflow-hidden">
+                  <div className="mb-3 h-48 rounded-md bg-muted/40 flex items-center justify-center overflow-hidden">
                     {getProductImage(peptide.id, "") ? (
                       <img
                         src={getProductImage(peptide.id, "")}
                         alt={peptide.name}
-                        className="h-full w-full object-contain p-2"
+                        className="h-full w-full object-cover"
                         data-testid={`img-featured-${i}`}
                       />
                     ) : (
