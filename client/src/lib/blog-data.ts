@@ -1,5 +1,11 @@
 import mitochondrialProtocolCover from "@assets/mitochondrial-protocol-blog-cover.png";
 import peptideProtocolsCover from "@assets/peptide-protocols-blog-cover.png";
+import retatrutideCover from "@assets/retatrutide-research-blog-cover.png";
+import orforglipronCover from "@assets/orforglipron-blog-cover.png";
+import homeostasisCover from "@assets/cellular-homeostasis-blog-cover.png";
+import ghkCuCover from "@assets/ghk-cu-blog-cover.png";
+import bpcTbCover from "@assets/bpc157-tb500-blog-cover.png";
+import nadLongevityCover from "@assets/nad-longevity-blog-cover.png";
 
 export interface BlogPost {
   slug: string;
@@ -799,7 +805,7 @@ All three interventions together target the **"mitochondrial triangle" of health
     excerpt: "Explore the stability, storage, and experimental best practices for retatrutide peptide in laboratory research.",
     date: "February 15, 2026",
     category: "Peptide Resources",
-    image: "https://www.peptideregenesis.com/cdn/shop/articles/retahandling_blog_176a0919-8ab5-4e5f-afbc-f733a9b0997b.png?v=1771416687&width=1100",
+    image: retatrutideCover,
     content: `
 ### 1. Introduction
 Retatrutide is a multi-receptor peptide examined in advanced metabolic research models. It is studied for its interaction with GLP-1, GIP, and glucagon receptor pathways and its role in complex endocrine signaling systems.
@@ -843,7 +849,7 @@ In pre-filled pen format, retatrutide is supplied as a stabilized solution. This
     excerpt: "Orforglipron is a small-molecule compound examined in experimental research focused on GLP-1 receptor signaling.",
     date: "February 12, 2026",
     category: "Metabolic Research",
-    image: "https://www.peptideregenesis.com/cdn/shop/articles/Orforglipron_blog_eb1b7af2-52a5-4723-873e-13abda4e0f6d.png?v=1771410598&width=1100",
+    image: orforglipronCover,
     content: `
 ### Research overview
 Orforglipron is an orally active small-molecule compound studied in experimental models examining GLP-1 receptor–mediated metabolic and energy-regulation signaling. Unlike peptide-based GLP-1 analogs, Orforglipron is designed as a non-peptide structure.
@@ -864,7 +870,7 @@ Biased agonism is a key reason Orforglipron attracts scientific interest. In lab
     excerpt: "An overview of experimental research exploring cellular balance, metabolic regulation, and antioxidant systems.",
     date: "February 10, 2026",
     category: "Homeostasis",
-    image: "https://www.peptideregenesis.com/cdn/shop/articles/Homeostasis_Health_Maintenance_blog_1fcdfe95-487b-4fee-9e6b-a609b35f7731.png?v=1769849923&width=1100",
+    image: homeostasisCover,
     content: `
 ### Introduction
 In experimental biology, long-term health maintenance is increasingly studied through the lens of cellular homeostasis — the ability of biological systems to preserve balance, stability, and function over time.
@@ -885,7 +891,7 @@ Long-term tissue health requires continuous maintenance of structural components
     excerpt: "An introduction to GHK-Cu as a research peptide studied in models examining cellular communication.",
     date: "February 8, 2026",
     category: "Cosmetic Peptides",
-    image: "https://www.peptideregenesis.com/cdn/shop/articles/whatisghk-cu_blog_cb26c99b-5c11-49b6-8fec-3cb4db556b7a.png?v=1769850147&width=1100",
+    image: ghkCuCover,
     content: `
 ### GHK-Cu Overview
 GHK-Cu (glycyl-L-histidyl-L-lysine copper complex) is a naturally occurring peptide–copper complex detected in human plasma, saliva, and urine. In experimental systems, GHK-Cu is studied for its ability to transport bioavailable copper into cells.
@@ -906,7 +912,7 @@ GHK-Cu is also investigated in angiogenesis-focused research models. During earl
     excerpt: "Explore how BPC-157 and TB-500 are studied in preclinical research, including their distinct mechanisms.",
     date: "February 5, 2026",
     category: "Healing & Repair",
-    image: "https://www.peptideregenesis.com/cdn/shop/articles/BPC-157_TB-500_together_blog_ed81d66d-57a7-434b-a8e8-4261153c7b05.png?v=1768312802&width=1100",
+    image: bpcTbCover,
     content: `
 ### Introduction
 Peptide research has seen a surge of interest in compounds like BPC-157 and TB-500 for their remarkable regenerative and healing potential. BPC-157 and TB-500 each act on different biological pathways involved in tissue repair.
@@ -927,7 +933,7 @@ Despite their distinct origins, BPC-157 and TB-500 have complementary roles in t
     excerpt: "Discover how NAD+, autophagy, and senescence shape the body's aging process and cellular renewal.",
     date: "February 1, 2026",
     category: "Longevity",
-    image: "https://www.peptideregenesis.com/cdn/shop/articles/Longevity_Healthy_blog_aaa5534a-80f6-4121-9fd9-d7d311293252.png?v=1768382941&width=1100",
+    image: nadLongevityCover,
     content: `
 ### Unlocking the Science
 Imagine your body as a bustling metropolis, where cells are the citizens, constantly building and repairing. Longevity is the ultimate goal—living longer, healthier.
