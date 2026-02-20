@@ -24,6 +24,7 @@ import {
   HelpCircle,
   Tag,
   Check,
+  Syringe,
 } from "lucide-react";
 
 function FeaturedPeptides() {
@@ -375,6 +376,7 @@ function Testimonials() {
 
 function ToolsAndResources() {
   const resources = [
+    { label: "Dosage Guide", href: "/peptide-guide", desc: "Comprehensive dosing, reconstitution, and cycle reference for 50+ peptides", icon: Syringe },
     { label: "Peptide Calculator", href: "/calculator", desc: "Reconstitution dosing and vial duration calculator", icon: Calculator },
     { label: "Research Insights", href: "/insights", desc: "Articles on peptide science and best practices", icon: BookOpen },
     { label: "FAQ & Support", href: "/faq", desc: "Ordering, shipping, storage, and returns", icon: HelpCircle },
@@ -389,7 +391,7 @@ function ToolsAndResources() {
           </h2>
         </div>
 
-        <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
           {resources.map((link) => (
             <Link key={link.href} href={link.href} data-testid={`link-resource-${link.label.toLowerCase().replace(/\s+/g, "-")}`}>
               <Card className="hover-elevate h-full overflow-visible">

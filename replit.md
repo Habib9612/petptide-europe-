@@ -48,6 +48,13 @@ The schema includes products, cart items, orders, newsletter subscribers, and us
 - Routes: /insights (listing), /insights/:slug (static articles), /insights/user/:id (user posts)
 - API: GET /api/blog-posts, POST /api/blog-posts
 
+### Peptide Dosage Guide
+- Interactive reference page at /peptide-guide with 53 peptides across 9 categories
+- Data defined in `client/src/lib/peptide-guide-data.ts`
+- Features: search filtering, category filter buttons, expandable rows with detail cells (vial size, reconstitution, dose, frequency, cycle, notes)
+- Categories: Weight Loss, Fat Loss/Muscle, Muscle Growth, Recovery & Repair, Cognitive, Longevity & Anti-Aging, Immune & Gut, Sexual Health, Skin & UV Protection
+- Linked from header navigation ("Dosage Guide") and home page Resources section
+
 ### Peptide Calculator
 - Reconstitution calculator at /calculator
 - Inputs: peptide amount (mg), bacteriostatic water volume (mL), desired dose (mcg/mg), syringe size

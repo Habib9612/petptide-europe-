@@ -23,6 +23,7 @@ import BlogPost from "@/pages/blog-post";
 import UserBlogPostPage from "@/pages/user-blog-post";
 import PeptideCalculator from "@/pages/peptide-calculator";
 import FAQ from "@/pages/faq";
+import PeptideGuide from "@/pages/peptide-guide";
 
 function Router() {
   return (
@@ -40,6 +41,7 @@ function Router() {
       <Route path="/refund" component={Refund} />
       <Route path="/calculator" component={PeptideCalculator} />
       <Route path="/faq" component={FAQ} />
+      <Route path="/peptide-guide" component={PeptideGuide} />
       <Route component={NotFound} />
     </Switch>
   );
