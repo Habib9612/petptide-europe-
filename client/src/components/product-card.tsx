@@ -42,7 +42,7 @@ export function ProductCard({ product }: ProductCardProps) {
     <Card className="group relative flex flex-col h-full hover-elevate" data-testid={`card-product-${product.id}`}>
       <Link href={`/product/${product.id}`} className="flex flex-col flex-1" data-testid={`link-product-${product.id}`}>
         <div className="p-4 pb-0 flex-1">
-          <div className="mb-4 flex h-44 items-center justify-center rounded-md bg-muted/50 overflow-hidden">
+          <div className="mb-4 flex h-52 items-center justify-center rounded-md bg-muted/50 overflow-hidden">
             {getProductImage(product.id, "") ? (
               <img
                 src={getProductImage(product.id, "")}

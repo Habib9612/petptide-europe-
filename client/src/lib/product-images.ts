@@ -1,18 +1,18 @@
-import bpc157Card from "@assets/BPC-157_card_final_1771602712317.PNG";
-import cjc1295Card from "@assets/CJC-1295_card_final_1771602712317.PNG";
-import hexarelinCard from "@assets/Hexarelin_card_final_1771602712316.PNG";
-import motscCard from "@assets/MOTS-c_card_final_1771602712315.PNG";
-import pt141Card from "@assets/PT-141_card_final_1771602712316.PNG";
-import sermorelinCard from "@assets/Sermorelin_card_final_1771602712316.PNG";
-import tesamorelinCard from "@assets/Tesamorelin_card_final_1771602712316.PNG";
-import igf1lr3Card from "@assets/IGF-1_LR3_card_final_1771602712316.PNG";
-import ghkcuCard from "@assets/GHK-Cu_card_final_1771602712316.PNG";
-import mk677Card from "@assets/MK-677_card_final_1771602712316.PNG";
-import ipamorelinCard from "@assets/Ipamorelin_card_final_1771602712317.PNG";
-import retatrutideCard from "@assets/Retatrutide_card_final_1771602712317.PNG";
-import tirzepatideCard from "@assets/Tirzepatide_card_final_1771602712317.PNG";
-import tb500Card from "@assets/TB-500_card_final_1771602712317.PNG";
-import semaglutideCard from "@assets/Semaglutide_card_final_1771602712317.PNG";
+import bpc157Card from "@assets/BPC-157_card_v4_1771603843201.PNG";
+import cjc1295Card from "@assets/CJC-1295_card_v4_1771603843200.PNG";
+import hexarelinCard from "@assets/Hexarelin_card_v4_1771603843199.PNG";
+import motscCard from "@assets/MOTS-c_card_v4_1771603843198.PNG";
+import pt141Card from "@assets/PT-141_card_v4_1771603843199.PNG";
+import sermorelinCard from "@assets/Sermorelin_card_v4_1771603843199.PNG";
+import tesamorelinCard from "@assets/Tesamorelin_card_v4_1771603843199.PNG";
+import igf1lr3Card from "@assets/IGF-1_LR3_card_v4_1771603843200.PNG";
+import ghkcuCard from "@assets/GHK-Cu_card_v4_1771603843200.PNG";
+import mk677Card from "@assets/MK-677_card_v4_1771603843200.PNG";
+import ipamorelinCard from "@assets/Ipamorelin_card_v4_1771603843200.PNG";
+import retatrutideCard from "@assets/Retatrutide_card_v4_1771603843200.PNG";
+import tirzepatideCard from "@assets/Tirzepatide_card_v4_1771603843200.PNG";
+import tb500Card from "@assets/TB-500_card_v4_1771603843201.PNG";
+import semaglutideCard from "@assets/Semaglutide_card_v4_1771603843201.PNG";
 
 const productImageOverrides: Record<string, string> = {
   "bpc157-5mg": bpc157Card,
