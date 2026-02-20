@@ -13,6 +13,11 @@ import retatrutideCard from "@assets/Retatrutide_card_v4_1771603843200.PNG";
 import tirzepatideCard from "@assets/Tirzepatide_card_v4_1771603843200.PNG";
 import tb500Card from "@assets/TB-500_card_v4_1771603843201.PNG";
 import semaglutideCard from "@assets/Semaglutide_card_v4_1771603843201.PNG";
+import epithalonCard from "@assets/Epithalon_card_1771604454710.PNG";
+import thymosinAlpha1Card from "@assets/Thymosin_Alpha1_card_1771604454711.PNG";
+import nadCard from "@assets/NAD_card_1771604454711.PNG";
+import melanotan2Card from "@assets/Melanotan_II_card_1771604454711.PNG";
+import kpvCard from "@assets/KPV_card_1771604454711.PNG";
 
 const productImageOverrides: Record<string, string> = {
   "bpc157-5mg": bpc157Card,
@@ -30,6 +35,11 @@ const productImageOverrides: Record<string, string> = {
   "tirzepatide-10mg": tirzepatideCard,
   "tb500-10mg": tb500Card,
   "semaglutide-5mg": semaglutideCard,
+  "epithalon-10mg": epithalonCard,
+  "thymosin-alpha1-5mg": thymosinAlpha1Card,
+  "nad-100mg": nadCard,
+  "melanotan2-10mg": melanotan2Card,
+  "kpv-10mg": kpvCard,
 };
 
 export function getProductImage(productId: string, fallbackUrl: string): string {
