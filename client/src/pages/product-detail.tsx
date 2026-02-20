@@ -66,12 +66,12 @@ export default function ProductDetail() {
 
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
-            <div className="flex h-72 lg:h-96 items-center justify-center rounded-md bg-gradient-to-b from-muted/60 to-muted/20 border border-border/50 overflow-hidden">
+            <div className="flex h-72 lg:h-[28rem] items-center justify-center rounded-md bg-[hsl(210,20%,96%)] dark:bg-gradient-to-b dark:from-muted/60 dark:to-muted/20 border border-border/50 overflow-hidden">
               {getProductImage(product.id, "") ? (
                 <img
                   src={getProductImage(product.id, "")}
                   alt={product.name}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain"
                   data-testid="img-product-detail"
                 />
               ) : (
