@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "./language-context";
 import { ArrowRight, ShieldCheck, Truck, Award, FlaskConical } from "lucide-react";
 import { useRef, useCallback, useState, useEffect } from "react";
-import vialVideo from "@assets/peptide_vial_3d_rotating_1771609453361.MP4";
+import vialImage from "@assets/peptide_vial_transparent_1771703775626.gif";
 
 interface Particle {
   x: number;
@@ -177,19 +177,14 @@ function Vial3D() {
           transition: "transform 0.15s ease-out",
         }}
       >
-        <video
-          src={vialVideo}
-          autoPlay
-          loop
-          muted
-          playsInline
+        <img
+          src={vialImage}
+          alt="Peptide Europe research vial"
           className="w-full h-full object-contain"
           style={{
             filter: "drop-shadow(0 0 40px hsl(178 50% 40% / 0.2))",
-            mixBlendMode: "screen",
-            background: "transparent",
           }}
-          data-testid="video-hero-vial"
+          data-testid="img-hero-vial"
         />
       </div>
     </div>
