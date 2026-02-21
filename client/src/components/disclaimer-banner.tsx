@@ -5,15 +5,15 @@ export function DisclaimerBanner() {
   const { t } = useLanguage();
 
   return (
-    <section style={{ background: "linear-gradient(135deg, hsl(215, 35%, 8%), hsl(200, 30%, 10%))" }} className="py-8">
+    <section className="py-8 bg-[#0A0F1E] border-t border-[#7D00FF]/10">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl flex gap-4">
-          <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5" style={{ color: "hsl(35, 70%, 55%)" }} />
+          <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5 text-amber-400/70" />
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-wider mb-1.5" style={{ color: "hsl(35, 65%, 55%)" }} data-testid="text-disclaimer-title">
+            <p className="text-[11px] font-semibold uppercase tracking-wider mb-1.5 text-amber-400/80" data-testid="text-disclaimer-title">
               {t("legal.disclaimer")}
             </p>
-            <p className="text-xs leading-relaxed" style={{ color: "hsl(210, 15%, 62%)" }} data-testid="text-disclaimer-body">
+            <p className="text-xs leading-relaxed text-[#8A94B6]" data-testid="text-disclaimer-body">
               {t("legal.disclaimerText")}
             </p>
           </div>

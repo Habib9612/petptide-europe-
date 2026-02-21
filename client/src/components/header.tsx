@@ -1,9 +1,8 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "./language-context";
-import { useTheme } from "./theme-provider";
 import { useCart } from "@/lib/cart";
-import { ShoppingCart, Menu, X, Sun, Moon, ChevronDown, Truck } from "lucide-react";
+import { ShoppingCart, Menu, X, ChevronDown, Truck } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "./logo";
 import {
@@ -25,7 +24,6 @@ const languageOptions: { code: Language; name: string; flag: string }[] = [
 
 export function Header() {
   const { t, language, setLanguage } = useLanguage();
-  const { theme, toggleTheme } = useTheme();
   const { getItemCount } = useCart();
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -43,11 +41,13 @@ export function Header() {
 
   return (
     <>
-    <div className="w-full bg-[hsl(186,65%,38%)] text-white text-center py-1.5 text-xs font-medium tracking-wide" data-testid="banner-free-shipping">
-      <Truck className="inline h-3.5 w-3.5 mr-1.5 -mt-0.5" />
+    <div className="w-full text-center py-1.5 text-xs font-medium tracking-wide text-[#E0E8FF]" data-testid="banner-free-shipping"
+      style={{ background: "linear-gradient(90deg, #0A0F1E, rgba(0,245,255,0.1), rgba(125,0,255,0.08), #0A0F1E)", borderBottom: "1px solid rgba(0,245,255,0.1)" }}
+    >
+      <Truck className="inline h-3.5 w-3.5 mr-1.5 -mt-0.5 text-[#00F5FF]" />
       Free Shipping on Orders Over &euro;120
     </div>
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-[#00F5FF]/10 bg-[#0A0F1E]/90 backdrop-blur-xl">
       <div className="container mx-auto px-4">
         <div className="flex h-14 items-center justify-between gap-6">
           <Link href="/" data-testid="link-logo">
@@ -94,18 +94,6 @@ export function Header() {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleTheme}
-                data-testid="button-theme-toggle"
-              >
-                {theme === "light" ? (
-                  <Moon className="h-4 w-4" />
-                ) : (
-                  <Sun className="h-4 w-4" />
-                )}
-              </Button>
             </div>
 
             <Link href="/cart">
@@ -167,9 +155,6 @@ export function Header() {
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
-              <Button variant="ghost" size="icon" onClick={toggleTheme}>
-                {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-              </Button>
             </div>
           </div>
         )}
