@@ -41,13 +41,11 @@ export function Header() {
 
   return (
     <>
-    <div className="w-full text-center py-1.5 text-xs font-medium tracking-wide text-[#E0E8FF]" data-testid="banner-free-shipping"
-      style={{ background: "linear-gradient(90deg, #0A0F1E, rgba(0,245,255,0.1), rgba(125,0,255,0.08), #0A0F1E)", borderBottom: "1px solid rgba(0,245,255,0.1)" }}
-    >
-      <Truck className="inline h-3.5 w-3.5 mr-1.5 -mt-0.5 text-[#00F5FF]" />
+    <div className="w-full text-center py-1.5 text-xs font-medium tracking-wide text-foreground bg-secondary border-b border-border" data-testid="banner-free-shipping">
+      <Truck className="inline h-3.5 w-3.5 mr-1.5 -mt-0.5 text-primary" />
       Free Shipping on Orders Over &euro;120
     </div>
-    <header className="sticky top-0 z-50 w-full border-b border-[#00F5FF]/10 bg-[#0A0F1E]/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-xl">
       <div className="container mx-auto px-4">
         <div className="flex h-14 items-center justify-between gap-6">
           <Link href="/" data-testid="link-logo">
@@ -120,7 +118,7 @@ export function Header() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t py-3 space-y-1" data-testid="nav-mobile">
+          <div className="lg:hidden border-t border-border py-3 space-y-1" data-testid="nav-mobile">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
                 <Button
@@ -133,7 +131,7 @@ export function Header() {
                 </Button>
               </Link>
             ))}
-            <div className="flex items-center gap-1 pt-2 border-t mt-2">
+            <div className="flex items-center gap-1 pt-2 border-t border-border mt-2">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="gap-1.5">

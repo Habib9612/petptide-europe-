@@ -28,8 +28,8 @@ function generateMolecule(seed: number): MoleculeData {
   const nodes: MoleculeNode[] = [];
   const bonds: MoleculeBond[] = [];
   const nodeCount = 12 + Math.floor(rng(seed) * 8);
-  const colors = ["#00F5FF", "#00C8D6", "#7D00FF", "#5B00CC", "#00E5EF"];
-  const glowColors = ["rgba(0,245,255,0.6)", "rgba(0,200,214,0.5)", "rgba(125,0,255,0.5)", "rgba(91,0,204,0.4)", "rgba(0,229,239,0.5)"];
+  const colors = ["#339E96", "#2A8A83", "#5BA8A2", "#267A74", "#4A9B95"];
+  const glowColors = ["rgba(51,158,150,0.4)", "rgba(42,138,131,0.35)", "rgba(91,168,162,0.35)", "rgba(38,122,116,0.3)", "rgba(74,155,149,0.35)"];
 
   for (let i = 0; i < nodeCount; i++) {
     const angle1 = rng(seed + i * 7) * Math.PI * 2;
@@ -103,16 +103,12 @@ function MoleculeCanvas({ molecule, hovered }: { molecule: MoleculeData; hovered
       projected.sort((a, b) => a.z - b.z);
 
       for (const bond of molecule.bonds) {
-        const a = projected.find((p) => p === projected[bond.from]) || projected[bond.from];
-        const b = projected.find((p) => p === projected[bond.to]) || projected[bond.to];
-        if (!a || !b) continue;
-
         const fromP = projected[bond.from];
         const toP = projected[bond.to];
         if (!fromP || !toP) continue;
 
         ctx.beginPath();
-        ctx.strokeStyle = hovered ? "rgba(0,245,255,0.25)" : "rgba(0,245,255,0.12)";
+        ctx.strokeStyle = hovered ? "rgba(51,158,150,0.2)" : "rgba(51,158,150,0.1)";
         ctx.lineWidth = hovered ? 1.5 : 1;
         ctx.moveTo(fromP.px, fromP.py);
         ctx.lineTo(toP.px, toP.py);
@@ -124,17 +120,17 @@ function MoleculeCanvas({ molecule, hovered }: { molecule: MoleculeData; hovered
 
         if (hovered) {
           ctx.beginPath();
-          const glow = ctx.createRadialGradient(p.px, p.py, 0, p.px, p.py, r * 4);
+          const glow = ctx.createRadialGradient(p.px, p.py, 0, p.px, p.py, r * 3);
           glow.addColorStop(0, p.glowColor);
           glow.addColorStop(1, "transparent");
           ctx.fillStyle = glow;
-          ctx.arc(p.px, p.py, r * 4, 0, Math.PI * 2);
+          ctx.arc(p.px, p.py, r * 3, 0, Math.PI * 2);
           ctx.fill();
         }
 
         ctx.beginPath();
         const grad = ctx.createRadialGradient(p.px - r * 0.3, p.py - r * 0.3, 0, p.px, p.py, r);
-        grad.addColorStop(0, "rgba(255,255,255,0.4)");
+        grad.addColorStop(0, "rgba(255,255,255,0.3)");
         grad.addColorStop(0.4, p.color);
         grad.addColorStop(1, p.color + "66");
         ctx.fillStyle = grad;
@@ -190,17 +186,11 @@ export function PeptideShowcase() {
   const molecules = showcaseData.map((d) => generateMolecule(d.seed));
 
   return (
-    <section ref={sectionRef} className="py-16 lg:py-24 bg-[#0A0F1E] relative overflow-hidden" data-testid="section-showcase">
-      <div className="absolute inset-0" aria-hidden="true">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full"
-          style={{ background: "radial-gradient(ellipse, rgba(125,0,255,0.04) 0%, transparent 60%)" }}
-        />
-      </div>
+    <section ref={sectionRef} className="py-16 lg:py-24 bg-background relative overflow-hidden" data-testid="section-showcase">
       <div className="container relative mx-auto px-4">
         <div className="text-center mb-12">
-          <p className="text-xs font-medium tracking-[0.2em] uppercase text-[#00F5FF] mb-3">Molecular Research</p>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#E0E8FF]"
-            style={{ textShadow: "0 0 30px rgba(125,0,255,0.25)" }}
+          <p className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3">Molecular Research</p>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground"
             data-testid="text-showcase-title"
           >
             Peptide Structures
@@ -211,14 +201,9 @@ export function PeptideShowcase() {
           {showcaseData.map((item, i) => (
             <div
               key={item.name}
-              className="rounded-xl border p-6 flex flex-col items-center text-center"
+              className="rounded-xl border bg-card p-6 flex flex-col items-center text-center transition-all duration-300"
               style={{
-                background: hoveredIndex === i
-                  ? "linear-gradient(135deg, rgba(16,24,48,0.95), rgba(125,0,255,0.08))"
-                  : "#101830",
-                borderColor: hoveredIndex === i ? "rgba(0,245,255,0.25)" : "rgba(0,245,255,0.08)",
-                boxShadow: hoveredIndex === i ? "0 0 40px rgba(125,0,255,0.15), 0 0 80px rgba(0,245,255,0.05)" : "none",
-                transition: "all 0.4s ease",
+                borderColor: hoveredIndex === i ? "hsl(178 50% 40% / 0.3)" : "hsl(220 18% 18%)",
                 opacity: visible ? 1 : 0,
                 transform: visible ? "translateY(0)" : "translateY(30px)",
                 transitionDelay: `${i * 150}ms`,
@@ -230,9 +215,9 @@ export function PeptideShowcase() {
               <div className="mb-4">
                 <MoleculeCanvas molecule={molecules[i]} hovered={hoveredIndex === i} />
               </div>
-              <h3 className="text-lg font-bold text-[#E0E8FF] mb-1" data-testid={`text-showcase-name-${i}`}>{item.name}</h3>
-              <p className="text-xs font-medium text-[#00F5FF] mb-2 tracking-wider uppercase">{item.subtitle}</p>
-              <p className="text-sm text-[#8A94B6] leading-relaxed">{item.desc}</p>
+              <h3 className="text-lg font-bold text-foreground mb-1" data-testid={`text-showcase-name-${i}`}>{item.name}</h3>
+              <p className="text-xs font-medium text-primary mb-2 tracking-wider uppercase">{item.subtitle}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>

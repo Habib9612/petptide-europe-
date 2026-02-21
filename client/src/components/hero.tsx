@@ -39,21 +39,21 @@ function ParticleBackground() {
     resize();
     window.addEventListener("resize", resize);
 
-    const colors = ["#00F5FF", "#7D00FF", "#00F5FF", "#00C8D6", "#5B00CC"];
+    const colors = ["#339E96", "#2A8A83", "#5BA8A2", "#267A74", "#3DB0A8"];
     const particles: Particle[] = [];
-    const count = 60;
+    const count = 40;
     const rect = canvas.getBoundingClientRect();
 
     for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * rect.width,
         y: Math.random() * rect.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        radius: Math.random() * 2 + 0.5,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: (Math.random() - 0.5) * 0.2,
+        radius: Math.random() * 1.5 + 0.5,
         color: colors[Math.floor(Math.random() * colors.length)],
-        alpha: Math.random() * 0.4 + 0.1,
-        pulseSpeed: Math.random() * 0.02 + 0.005,
+        alpha: Math.random() * 0.25 + 0.05,
+        pulseSpeed: Math.random() * 0.015 + 0.005,
         pulsePhase: Math.random() * Math.PI * 2,
       });
     }
@@ -77,11 +77,11 @@ function ParticleBackground() {
         const currentAlpha = p.alpha * pulse;
 
         ctx.beginPath();
-        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 4);
+        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 3);
         gradient.addColorStop(0, p.color + Math.round(currentAlpha * 255).toString(16).padStart(2, "0"));
         gradient.addColorStop(1, p.color + "00");
         ctx.fillStyle = gradient;
-        ctx.arc(p.x, p.y, p.radius * 4, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.radius * 3, 0, Math.PI * 2);
         ctx.fill();
 
         ctx.beginPath();
@@ -97,9 +97,9 @@ function ParticleBackground() {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
+          if (dist < 100) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 245, 255, ${0.06 * (1 - dist / 120)})`;
+            ctx.strokeStyle = `rgba(51, 158, 150, ${0.04 * (1 - dist / 100)})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -162,12 +162,12 @@ function Vial3D() {
     <div ref={containerRef} className="relative flex items-center justify-center" aria-hidden="true">
       <div className="absolute w-[320px] h-[320px] lg:w-[420px] lg:h-[420px] rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(0,245,255,0.08) 0%, rgba(125,0,255,0.04) 50%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(178 50% 40% / 0.06) 0%, transparent 70%)",
         }}
       />
       <div className="absolute w-[250px] h-[250px] lg:w-[340px] lg:h-[340px] rounded-full animate-pulse"
         style={{
-          background: "radial-gradient(circle, rgba(125,0,255,0.06) 0%, transparent 60%)",
+          background: "radial-gradient(circle, hsl(178 50% 40% / 0.04) 0%, transparent 60%)",
         }}
       />
       <div
@@ -185,7 +185,7 @@ function Vial3D() {
           playsInline
           className="w-full h-full object-contain"
           style={{
-            filter: "drop-shadow(0 0 60px rgba(0,245,255,0.3)) drop-shadow(0 0 120px rgba(125,0,255,0.15))",
+            filter: "drop-shadow(0 0 40px hsl(178 50% 40% / 0.2))",
             mixBlendMode: "screen",
             background: "transparent",
           }}
@@ -205,15 +205,15 @@ export function TrustBar() {
   ];
 
   return (
-    <div className="border-y border-[#00F5FF]/10 bg-[#0A0F1E]" data-testid="section-trust-bar">
+    <div className="border-y border-border bg-background" data-testid="section-trust-bar">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#00F5FF]/5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border/50">
           {badges.map((badge, i) => (
-            <div key={i} className="flex items-center gap-3 px-4 py-4 bg-[#0A0F1E]" data-testid={`trust-badge-${i}`}>
-              <badge.icon className="h-5 w-5 text-[#00F5FF] shrink-0" strokeWidth={1.5} />
+            <div key={i} className="flex items-center gap-3 px-4 py-4 bg-background" data-testid={`trust-badge-${i}`}>
+              <badge.icon className="h-5 w-5 text-primary shrink-0" strokeWidth={1.5} />
               <div>
-                <p className="text-sm font-semibold leading-tight text-[#E0E8FF]">{badge.label}</p>
-                <p className="text-[11px] text-[#8A94B6]">{badge.sub}</p>
+                <p className="text-sm font-semibold leading-tight text-foreground">{badge.label}</p>
+                <p className="text-[11px] text-muted-foreground">{badge.sub}</p>
               </div>
             </div>
           ))}
@@ -227,66 +227,62 @@ export function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative overflow-hidden bg-[#0A0F1E]" data-testid="section-hero">
+    <section className="relative overflow-hidden bg-background" data-testid="section-hero">
       <ParticleBackground />
 
       <div className="absolute inset-0" aria-hidden="true">
         <div className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full -translate-x-1/3 -translate-y-1/3"
-          style={{ background: "radial-gradient(circle, rgba(0,245,255,0.04) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, hsl(178 50% 40% / 0.03) 0%, transparent 70%)" }}
         />
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full translate-x-1/4 translate-y-1/4"
-          style={{ background: "radial-gradient(circle, rgba(125,0,255,0.04) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, hsl(220 25% 20% / 0.3) 0%, transparent 70%)" }}
         />
       </div>
 
       <div className="container relative mx-auto px-4 pt-16 pb-16 md:pt-24 md:pb-20 lg:pt-28 lg:pb-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-[#00F5FF]/20 bg-[#00F5FF]/5 mb-6" data-testid="badge-hero-verified">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#00F5FF] animate-pulse" />
-              <span className="text-[11px] font-medium tracking-[0.15em] uppercase text-[#00F5FF]">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-primary/20 bg-primary/5 mb-6" data-testid="badge-hero-verified">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="text-[11px] font-medium tracking-[0.15em] uppercase text-primary">
                 Research-Grade Peptides
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] font-bold tracking-tight leading-[1.1] mb-5 text-[#E0E8FF]" data-testid="text-hero-title"
-              style={{ textShadow: "0 0 40px rgba(125,0,255,0.3), 0 0 80px rgba(125,0,255,0.1)" }}
-            >
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] font-bold tracking-tight leading-[1.1] mb-5 text-foreground" data-testid="text-hero-title">
               Premium peptides for{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5FF] to-[#00C8D6]">
+              <span className="text-primary">
                 European research
               </span>
             </h1>
 
-            <p className="text-base leading-relaxed mb-8 max-w-lg text-[#8A94B6]" data-testid="text-hero-subtitle">
+            <p className="text-base leading-relaxed mb-8 max-w-lg text-muted-foreground" data-testid="text-hero-subtitle">
               {t("hero.subtitle")}
             </p>
 
             <div className="flex flex-wrap items-center gap-3 mb-8">
               <Link href="/products">
-                <Button size="lg" className="gap-2 bg-[#00F5FF] text-[#0A0F1E] font-semibold shadow-[0_0_20px_rgba(0,245,255,0.3)]" data-testid="button-hero-cta">
+                <Button size="lg" className="gap-2" data-testid="button-hero-cta">
                   Shop All Peptides
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
               <Link href="/products" data-testid="link-hero-categories">
-                <Button size="lg" variant="outline" className="gap-2 border-[#00F5FF]/20 text-[#00F5FF]" data-testid="button-hero-browse">
+                <Button size="lg" variant="outline" className="gap-2" data-testid="button-hero-browse">
                   View Categories
                 </Button>
               </Link>
             </div>
 
-            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-[#E0E8FF]/[0.06]">
+            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-border">
               {[
                 { value: "24h", label: "Shipping" },
                 { value: "98-99%+", label: "Purity" },
                 { value: "27", label: "EU Countries" },
               ].map((stat, i) => (
                 <div key={i} data-testid={`text-hero-stat-${i}`}>
-                  <p className="text-2xl lg:text-3xl font-bold tracking-tight text-[#00F5FF]"
-                    style={{ textShadow: "0 0 20px rgba(0,245,255,0.3)" }}
-                  >{stat.value}</p>
-                  <p className="text-[11px] tracking-wide mt-0.5 text-[#8A94B6] uppercase">{stat.label}</p>
+                  <p className="text-2xl lg:text-3xl font-bold tracking-tight text-primary">{stat.value}</p>
+                  <p className="text-[11px] tracking-wide mt-0.5 text-muted-foreground uppercase">{stat.label}</p>
                 </div>
               ))}
             </div>
