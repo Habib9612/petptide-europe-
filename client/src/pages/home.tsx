@@ -58,22 +58,22 @@ function ScienceSection() {
           className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
         >
           <motion.div variants={fadeInUp}>
-            <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-3">Peptide Science</p>
+            <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-3">How We Make It</p>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-5 leading-tight text-foreground" data-testid="text-science-title">
-              Every batch synthesized, purified, and verified
+              Synthesized, purified, and third-party verified
             </h2>
             <div className="space-y-3 text-muted-foreground leading-relaxed text-sm">
               <p>
-                Our peptides are built amino acid by amino acid using solid-phase peptide synthesis (SPPS), then purified via reverse-phase HPLC and confirmed by mass spectrometry.
+                Each peptide is built residue by residue using Fmoc solid-phase synthesis, then purified through reverse-phase HPLC to isolate the target compound with documented purity of 98–99%+.
               </p>
               <p>
-                The result: lyophilized powder with 98-99%+ documented purity, shipped with a full Certificate of Analysis.
+                You receive lyophilized powder with a batch-specific Certificate of Analysis — ready for reconstitution and immediate use in your research.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 mt-6">
               <Link href="/products">
                 <Button className="gap-2" data-testid="button-explore-catalog">
-                  Browse Products
+                  Browse All Peptides
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Button>
               </Link>
@@ -169,9 +169,9 @@ function ProcessSection() {
           onViewportEnter={() => setIsVisible(true)}
           className="text-center mb-12"
         >
-          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Quality Pipeline</motion.p>
+          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">From Lab to Your Lab</motion.p>
           <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight text-foreground" data-testid="text-process-title">
-            From synthesis to your lab
+            How your peptide is made
           </motion.h2>
         </motion.div>
 
@@ -262,9 +262,9 @@ function SpecsTable() {
             variants={staggerContainer}
             className="text-center mb-8"
           >
-            <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Specifications</motion.p>
+            <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Quality Standards</motion.p>
             <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight text-foreground" data-testid="text-specs-title">
-              Product quality standards
+              What you get with every order
             </motion.h2>
           </motion.div>
 
@@ -316,7 +316,7 @@ function MidPageCTA() {
           variants={staggerContainer}
         >
           <motion.h2 variants={fadeInUp} className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight mb-3 text-primary-foreground" data-testid="text-cta-title">
-            Ready to order? Ships within 24 hours
+            Start your order — ships within 24 hours
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-sm text-primary-foreground/80 mb-5">
             Free shipping on orders over &euro;120. Pay with crypto and save 10%.
@@ -324,7 +324,7 @@ function MidPageCTA() {
           <motion.div variants={fadeInUp}>
             <Link href="/products">
               <Button variant="secondary" size="lg" className="gap-2" data-testid="button-cta-order">
-                Order Now
+                Browse Peptides
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
@@ -337,10 +337,10 @@ function MidPageCTA() {
 
 function WhyChooseUs() {
   const reasons = [
-    { icon: Sparkles, value: "98-99%+", label: "Purity", desc: "HPLC verified, CoA included" },
-    { icon: Truck, value: "24h", label: "Dispatch", desc: "Same-day shipping, cold-chain" },
-    { icon: FlaskConical, value: "20+", label: "Peptides", desc: "Research-grade compounds" },
-    { icon: ShieldCheck, value: "27", label: "Countries", desc: "EU-wide delivery network" },
+    { icon: Sparkles, value: "99%+", label: "HPLC Purity", desc: "Batch-tested, CoA included" },
+    { icon: Truck, value: "24h", label: "Same-Day Dispatch", desc: "Orders before 2pm CET" },
+    { icon: FlaskConical, value: "20+", label: "Peptides In Stock", desc: "BPC-157, Sema, Tirz & more" },
+    { icon: ShieldCheck, value: "27", label: "EU Countries", desc: "Fast, tracked delivery" },
   ];
 
   return (
@@ -353,9 +353,9 @@ function WhyChooseUs() {
           variants={staggerContainer}
           className="text-center mb-12"
         >
-          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Why Peptide Europe</motion.p>
+          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Why Researchers Choose Us</motion.p>
           <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-            Built for serious research
+            Quality you can verify, pricing you can afford
           </motion.h2>
         </motion.div>
 
@@ -418,9 +418,9 @@ function Testimonials() {
           variants={staggerContainer}
           className="text-center mb-10"
         >
-          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Testimonials</motion.p>
+          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">What Researchers Say</motion.p>
           <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground" data-testid="text-testimonials-title">
-            Trusted by researchers across Europe
+            Trusted by labs across Europe
           </motion.h2>
         </motion.div>
 
@@ -480,7 +480,7 @@ function ToolsAndResources() {
           className="text-center mb-10"
         >
           <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground" data-testid="text-tools-title">
-            Resources for your research
+            Free tools for your research
           </motion.h2>
         </motion.div>
 
@@ -560,10 +560,10 @@ function NewsletterSection() {
             <Tag className="h-4 w-4 text-primary" />
           </motion.div>
           <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight mb-2 text-foreground" data-testid="text-newsletter-title">
-            Get 10% off your first order
+            Get 10% off your first peptide order
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-muted-foreground text-sm mb-6">
-            Subscribe to receive a unique discount code and research updates.
+            Join our mailing list for a one-time discount code, restocks, and new product launches.
           </motion.p>
 
           <motion.div variants={fadeInUp}>

@@ -209,10 +209,10 @@ function Vial3D() {
 
 export function TrustBar() {
   const badges = [
-    { icon: Award, label: "98-99%+ Purity", sub: "HPLC verified" },
-    { icon: ShieldCheck, label: "CoA Included", sub: "Every order" },
-    { icon: Truck, label: "Free Shipping", sub: "Orders over €120" },
-    { icon: FlaskConical, label: "20+ Peptides", sub: "In stock now" },
+    { icon: Award, label: "99%+ Purity", sub: "Every batch HPLC tested" },
+    { icon: ShieldCheck, label: "Certificate of Analysis", sub: "Included with every order" },
+    { icon: Truck, label: "Free EU Shipping", sub: "On orders over €120" },
+    { icon: FlaskConical, label: "Same-Day Dispatch", sub: "Orders before 2pm CET" },
   ];
 
   return (
@@ -265,7 +265,7 @@ export function Hero() {
             >
               <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
               <span className="text-[11px] font-medium tracking-[0.15em] uppercase text-primary">
-                Research-Grade Peptides
+                Peptide Supplier — Europe
               </span>
             </motion.div>
 
@@ -275,7 +275,7 @@ export function Hero() {
               className="text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] font-bold tracking-tight leading-[1.1] mb-5 text-foreground"
               data-testid="text-hero-title"
             >
-              Premium peptides for European research
+              Buy Research Peptides — 99%+ Purity, EU-Wide Shipping
             </motion.h1>
 
             <motion.p
@@ -284,7 +284,7 @@ export function Hero() {
               className="text-base leading-relaxed mb-8 max-w-lg text-muted-foreground"
               data-testid="text-hero-subtitle"
             >
-              {t("hero.subtitle")}
+              BPC-157, Semaglutide, Tirzepatide, TB-500 and 20+ more compounds. HPLC-verified, lyophilized, with Certificate of Analysis. Trusted by labs and researchers across 27 European countries.
             </motion.p>
 
             <motion.div
@@ -295,7 +295,7 @@ export function Hero() {
                 <Link href="/products">
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Button size="lg" className="gap-2" data-testid="button-hero-cta">
-                      Shop All Peptides
+                      Browse All Peptides
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </motion.div>
@@ -305,7 +305,7 @@ export function Hero() {
                 <Link href="/products" data-testid="link-hero-categories">
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                     <Button size="lg" variant="outline" className="gap-2" data-testid="button-hero-browse">
-                      View Categories
+                      See Pricing
                     </Button>
                   </motion.div>
                 </Link>
@@ -317,9 +317,9 @@ export function Hero() {
               className="grid grid-cols-3 gap-6 pt-6 border-t border-border"
             >
               {[
-                { value: "24h", label: "Shipping" },
-                { value: "98-99%+", label: "Purity" },
-                { value: "27", label: "EU Countries" },
+                { value: "€10", label: "Starting Price" },
+                { value: "99%+", label: "Purity (HPLC)" },
+                { value: "24h", label: "EU Dispatch" },
               ].map((stat, i) => (
                 <motion.div
                   key={i}

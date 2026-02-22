@@ -153,19 +153,19 @@ const showcaseData = [
   {
     name: "BPC-157",
     subtitle: "Pentadecapeptide",
-    desc: "15-residue peptide derived from body protection compound. Known for tissue-repair research applications.",
+    desc: "15-amino-acid body protection compound. One of the most studied peptides for tissue repair and gut health research.",
     seed: 42,
   },
   {
     name: "GHRP-6",
     subtitle: "Hexapeptide",
-    desc: "Growth hormone releasing hexapeptide. Used in GH secretion and metabolic research studies.",
+    desc: "Growth hormone releasing hexapeptide. Widely used in GH secretion, appetite regulation, and metabolic studies.",
     seed: 137,
   },
   {
     name: "Semaglutide",
     subtitle: "GLP-1 Agonist",
-    desc: "39-residue modified peptide analog. Leading compound in metabolic regulation research.",
+    desc: "GLP-1 receptor agonist. The leading research compound for metabolic regulation and weight management studies.",
     seed: 256,
   },
 ];
@@ -196,11 +196,11 @@ export function PeptideShowcase() {
     >
       <div className="container relative mx-auto px-4">
         <motion.div className="text-center mb-12" variants={fadeInUp}>
-          <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-3">Molecular Research</p>
+          <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-3">Featured Compounds</p>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground"
             data-testid="text-showcase-title"
           >
-            Peptide Structures
+            Explore our most popular peptides
           </h2>
         </motion.div>
 

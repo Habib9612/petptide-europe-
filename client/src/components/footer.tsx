@@ -12,26 +12,28 @@ export function Footer() {
           <div>
             <Logo size="sm" className="mb-2" />
             <p className="text-xs text-muted-foreground leading-relaxed max-w-xs">
-              Research-grade peptides with lab-verified purity for European laboratories and research institutions.
+              Buy research peptides online in Europe. 99%+ purity, HPLC tested, with Certificate of Analysis. Fast EU-wide shipping.
             </p>
           </div>
 
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-primary/70 mb-3">Shop</h3>
             <nav className="flex flex-col gap-1.5">
-              <Link href="/products" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-products">All Products</Link>
-              <Link href="/calculator" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-calculator">Calculator</Link>
-              <Link href="/insights" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-insights">Insights</Link>
-              <Link href="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-faq">FAQ</Link>
+              <Link href="/products" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-products">All Peptides</Link>
+              <Link href="/peptide-guide" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-guide">Dosage Guide</Link>
+              <Link href="/calculator" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-calculator">Reconstitution Calculator</Link>
+              <Link href="/insights" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-insights">Research Insights</Link>
             </nav>
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-primary/70 mb-3">Legal</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-primary/70 mb-3">Company</h3>
             <nav className="flex flex-col gap-1.5">
-              <Link href="/shipping" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-shipping">Shipping</Link>
+              <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-about">About Us</Link>
+              <Link href="/partners" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-partners">Partner Program</Link>
+              <Link href="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-faq">FAQ</Link>
+              <Link href="/shipping" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-shipping">Shipping & Returns</Link>
               <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-terms">Terms of Service</Link>
-              <Link href="/refund" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-refund">Refund Policy</Link>
             </nav>
           </div>
 
