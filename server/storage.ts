@@ -1,5 +1,8 @@
 import { randomUUID } from "crypto";
 import type { Product, CartItem, Order, InsertOrder, NewsletterSubscriber, InsertNewsletter, UserBlogPost, InsertUserBlogPost } from "@shared/schema";
+import { products, cartItems, orders, newsletterSubscribers, userBlogPosts } from "@shared/schema";
+import { db } from "./db";
+import { eq, and, desc } from "drizzle-orm";
 
 export interface IStorage {
   // Products
@@ -394,145 +397,125 @@ const productsData: Product[] = [
   },
 ];
 
-export class MemStorage implements IStorage {
-  private products: Map<string, Product>;
-  private cartItems: Map<string, CartItem>;
-  private orders: Map<string, Order>;
-  private newsletterSubscribers: Map<string, NewsletterSubscriber>;
-  private userBlogPosts: Map<string, UserBlogPost>;
-
-  constructor() {
-    this.products = new Map();
-    this.cartItems = new Map();
-    this.orders = new Map();
-    this.newsletterSubscribers = new Map();
-    this.userBlogPosts = new Map();
-    
-    // Initialize products
-    productsData.forEach((product) => {
-      this.products.set(product.id, product);
-    });
+export class DatabaseStorage implements IStorage {
+  async init() {
+    const existing = await db.select().from(products);
+    if (existing.length === 0) {
+      await db.insert(products).values(productsData);
+    }
   }
 
-  // Products
   async getProducts(): Promise<Product[]> {
-    return Array.from(this.products.values());
+    return await db.select().from(products);
   }
 
   async getProductById(id: string): Promise<Product | undefined> {
-    return this.products.get(id);
+    const rows = await db.select().from(products).where(eq(products.id, id));
+    return rows[0];
   }
 
   async getProductsByCategory(category: string): Promise<Product[]> {
-    return Array.from(this.products.values()).filter((p) => p.category === category);
+    return await db.select().from(products).where(eq(products.category, category));
   }
 
-  // Cart
   async getCartItems(sessionId: string): Promise<CartItem[]> {
-    return Array.from(this.cartItems.values()).filter((item) => item.sessionId === sessionId);
+    return await db.select().from(cartItems).where(eq(cartItems.sessionId, sessionId));
   }
 
   async addCartItem(sessionId: string, productId: string, quantity: number): Promise<CartItem> {
-    const existing = Array.from(this.cartItems.values()).find(
-      (item) => item.sessionId === sessionId && item.productId === productId
+    const existing = await db.select().from(cartItems).where(
+      and(eq(cartItems.sessionId, sessionId), eq(cartItems.productId, productId))
     );
 
-    if (existing) {
-      existing.quantity += quantity;
-      return existing;
+    if (existing.length > 0) {
+      const updated = await db.update(cartItems)
+        .set({ quantity: existing[0].quantity + quantity })
+        .where(eq(cartItems.id, existing[0].id))
+        .returning();
+      return updated[0];
     }
 
     const id = randomUUID();
-    const cartItem: CartItem = { id, productId, quantity, sessionId };
-    this.cartItems.set(id, cartItem);
-    return cartItem;
+    const rows = await db.insert(cartItems).values({ id, productId, quantity, sessionId }).returning();
+    return rows[0];
   }
 
   async updateCartItem(id: string, quantity: number): Promise<CartItem | undefined> {
-    const item = this.cartItems.get(id);
-    if (item) {
-      item.quantity = quantity;
-      return item;
-    }
-    return undefined;
+    const rows = await db.update(cartItems)
+      .set({ quantity })
+      .where(eq(cartItems.id, id))
+      .returning();
+    return rows[0];
   }
 
   async removeCartItem(id: string): Promise<void> {
-    this.cartItems.delete(id);
+    await db.delete(cartItems).where(eq(cartItems.id, id));
   }
 
   async clearCart(sessionId: string): Promise<void> {
-    const itemsToDelete = Array.from(this.cartItems.entries())
-      .filter(([_, item]) => item.sessionId === sessionId)
-      .map(([id]) => id);
-    
-    itemsToDelete.forEach((id) => this.cartItems.delete(id));
+    await db.delete(cartItems).where(eq(cartItems.sessionId, sessionId));
   }
 
-  // Orders
   async createOrder(orderData: InsertOrder): Promise<Order> {
     const id = randomUUID();
-    const order: Order = {
-      ...orderData,
-      id,
-      status: "pending",
-    };
-    this.orders.set(id, order);
-    return order;
+    const rows = await db.insert(orders).values({ ...orderData, id, status: "pending" }).returning();
+    return rows[0];
   }
 
   async getOrderById(id: string): Promise<Order | undefined> {
-    return this.orders.get(id);
+    const rows = await db.select().from(orders).where(eq(orders.id, id));
+    return rows[0];
   }
 
-  // Newsletter
   async subscribeNewsletter(email: string): Promise<NewsletterSubscriber> {
-    const existing = Array.from(this.newsletterSubscribers.values()).find(s => s.email === email);
-    if (existing) return existing;
+    const existing = await db.select().from(newsletterSubscribers).where(eq(newsletterSubscribers.email, email));
+    if (existing.length > 0) return existing[0];
 
     const id = randomUUID();
     const discountCode = "WELCOME10-" + randomUUID().slice(0, 8).toUpperCase();
-    const subscriber: NewsletterSubscriber = {
+    const rows = await db.insert(newsletterSubscribers).values({
       id,
       email,
       discountCode,
       subscribedAt: new Date().toISOString(),
       used: false,
-    };
-    this.newsletterSubscribers.set(id, subscriber);
-    return subscriber;
+    }).returning();
+    return rows[0];
   }
 
   async getNewsletterByEmail(email: string): Promise<NewsletterSubscriber | undefined> {
-    return Array.from(this.newsletterSubscribers.values()).find(s => s.email === email);
+    const rows = await db.select().from(newsletterSubscribers).where(eq(newsletterSubscribers.email, email));
+    return rows[0];
   }
 
   async validateDiscountCode(code: string): Promise<NewsletterSubscriber | undefined> {
-    return Array.from(this.newsletterSubscribers.values()).find(s => s.discountCode === code && !s.used);
+    const rows = await db.select().from(newsletterSubscribers).where(
+      and(eq(newsletterSubscribers.discountCode, code), eq(newsletterSubscribers.used, false))
+    );
+    return rows[0];
   }
 
   async markDiscountUsed(code: string): Promise<void> {
-    const sub = Array.from(this.newsletterSubscribers.values()).find(s => s.discountCode === code);
-    if (sub) sub.used = true;
+    await db.update(newsletterSubscribers)
+      .set({ used: true })
+      .where(eq(newsletterSubscribers.discountCode, code));
   }
 
-  // User Blog Posts
   async getUserBlogPosts(): Promise<UserBlogPost[]> {
-    return Array.from(this.userBlogPosts.values()).sort((a, b) => 
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
+    return await db.select().from(userBlogPosts).orderBy(desc(userBlogPosts.createdAt));
   }
 
   async getUserBlogPostById(id: string): Promise<UserBlogPost | undefined> {
-    return this.userBlogPosts.get(id);
+    const rows = await db.select().from(userBlogPosts).where(eq(userBlogPosts.id, id));
+    return rows[0];
   }
 
   async createUserBlogPost(postData: InsertUserBlogPost): Promise<UserBlogPost> {
     const id = randomUUID();
-    const post: UserBlogPost = { ...postData, id };
-    this.userBlogPosts.set(id, post);
-    return post;
+    const rows = await db.insert(userBlogPosts).values({ ...postData, id }).returning();
+    return rows[0];
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
+storage.init().catch(console.error);

@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { getProductImage } from "@/lib/product-images";
 import {
   ArrowRight,
   CheckCircle2,
@@ -23,7 +22,6 @@ import {
   BookOpen,
   HelpCircle,
   Tag,
-  Check,
   Syringe,
   Atom,
   Sparkles,
@@ -42,108 +40,6 @@ function useScrollReveal(threshold = 0.15) {
     return () => observer.disconnect();
   }, [threshold]);
   return { ref, visible };
-}
-
-function FeaturedPeptides() {
-  const { ref, visible } = useScrollReveal();
-  const featured = [
-    { id: "tirzepatide-10mg", name: "Tirzepatide", dose: "10mg", price: "24.00", compPrice: "28.00", category: "GLP-1", purity: "≥99.5%" },
-    { id: "semaglutide-5mg", name: "Semaglutide", dose: "5mg", price: "14.00", compPrice: "18.00", category: "GLP-1", purity: "≥99.5%" },
-    { id: "bpc157-5mg", name: "BPC-157", dose: "5mg", price: "10.00", compPrice: "14.00", category: "Healing", purity: "≥99.0%" },
-    { id: "cjc1295-nodac-5mg", name: "CJC-1295", dose: "5mg (No DAC)", price: "11.00", compPrice: "15.00", category: "Growth", purity: "≥99.0%" },
-    { id: "ghkcu-50mg", name: "GHK-Cu", dose: "50mg", price: "16.00", compPrice: "20.00", category: "Cosmetic", purity: "≥98.5%" },
-    { id: "retatrutide-10mg", name: "Retatrutide", dose: "10mg", price: "31.00", compPrice: "35.00", category: "GLP-1", purity: "≥99.0%" },
-  ];
-
-  return (
-    <section ref={ref} className="py-16 lg:py-24 bg-background relative" id="catalog">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 mb-10">
-          <div>
-            <p className="text-xs font-medium tracking-[0.15em] uppercase text-primary mb-2">Popular Products</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight text-foreground" data-testid="text-catalog-title">
-              Most requested compounds
-            </h2>
-          </div>
-          <Link href="/products">
-            <Button variant="outline" className="gap-2 shrink-0" data-testid="button-browse-all">
-              View all 20+ peptides
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Button>
-          </Link>
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {featured.map((peptide, i) => (
-            <Link href={`/products/${peptide.id}`} key={peptide.id} data-testid={`link-product-${peptide.id}`}>
-              <div
-                className="rounded-xl border border-border bg-card overflow-hidden group hover:border-primary/25 transition-colors"
-                style={{
-                  opacity: visible ? 1 : 0,
-                  transform: visible ? "translateY(0)" : "translateY(20px)",
-                  transition: `all 0.5s ease ${i * 80}ms`,
-                }}
-                data-testid={`card-featured-${i}`}
-              >
-                <div className="p-5">
-                  <div className="mb-3 h-56 rounded-lg bg-muted/50 flex items-center justify-center overflow-hidden border border-border/50">
-                    {getProductImage(peptide.id, "") ? (
-                      <img
-                        src={getProductImage(peptide.id, "")}
-                        alt={peptide.name}
-                        className="h-full w-full object-contain"
-                        data-testid={`img-featured-${i}`}
-                      />
-                    ) : (
-                      <FlaskConical className="h-8 w-8 text-muted-foreground/40" />
-                    )}
-                  </div>
-                  <div className="flex items-start justify-between gap-4 mb-3">
-                    <div>
-                      <h3 className="font-semibold text-sm text-foreground" data-testid={`text-featured-name-${i}`}>{peptide.name}</h3>
-                      <p className="text-xs text-muted-foreground">{peptide.dose}</p>
-                    </div>
-                    <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-primary/8 text-primary uppercase tracking-wider shrink-0" data-testid={`badge-category-${i}`}>
-                      {peptide.category}
-                    </span>
-                  </div>
-                  <div className="flex items-end justify-between gap-4 pt-3 border-t border-border/50">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-xl font-bold tracking-tight text-primary" data-testid={`text-featured-price-${i}`}>&euro;{peptide.price}</span>
-                      <span className="text-xs text-muted-foreground line-through">&euro;{peptide.compPrice}</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
-                      <Check className="h-3 w-3 text-primary" />
-                      <span data-testid={`text-featured-purity-${i}`}>{peptide.purity}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-8">
-          {[
-            { name: "GLP-1 Agonists", count: 4, desc: "Metabolic regulation" },
-            { name: "Growth Factors", count: 7, desc: "GH secretagogues" },
-            { name: "Healing & Repair", count: 4, desc: "Tissue regeneration" },
-            { name: "Cosmetic & Other", count: 5, desc: "Skin, cognition, longevity" },
-          ].map((cat, i) => (
-            <Link href="/products" key={i} data-testid={`link-category-${i}`}>
-              <div className="rounded-lg border border-border bg-card p-4 flex items-center gap-3 hover:border-primary/25 transition-colors" data-testid={`card-category-${i}`}>
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-sm text-foreground" data-testid={`text-category-name-${i}`}>{cat.name}</p>
-                  <p className="text-xs text-muted-foreground">{cat.desc} &middot; {cat.count} peptides</p>
-                </div>
-                <ArrowRight className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
 }
 
 function ScienceSection() {
@@ -309,8 +205,8 @@ function ProcessSection() {
                     <div
                       className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300"
                       style={{
-                        background: isActive ? "hsl(178 50% 40% / 0.12)" : "hsl(178 50% 40% / 0.05)",
-                        border: `1px solid ${isActive ? "hsl(178 50% 40% / 0.35)" : "hsl(220 18% 18%)"}`,
+                        background: isActive ? "hsl(160 45% 45% / 0.12)" : "hsl(160 45% 45% / 0.05)",
+                        border: `1px solid ${isActive ? "hsl(160 45% 45% / 0.35)" : "hsl(220 20% 16%)"}`,
                       }}
                     >
                       <step.icon
@@ -671,7 +567,6 @@ export default function Home() {
     <div className="bg-background">
       <Hero />
       <TrustBar />
-      <FeaturedPeptides />
       <ScienceSection />
       <PeptideShowcase />
       <WhyChooseUs />

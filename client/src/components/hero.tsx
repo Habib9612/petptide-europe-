@@ -39,7 +39,7 @@ function ParticleBackground() {
     resize();
     window.addEventListener("resize", resize);
 
-    const colors = ["#339E96", "#2A8A83", "#5BA8A2", "#267A74", "#3DB0A8"];
+    const colors = ["#3FA882", "#359B76", "#5AB894", "#2E8A6A", "#4CC09A"];
     const particles: Particle[] = [];
     const count = 40;
     const rect = canvas.getBoundingClientRect();
@@ -99,7 +99,7 @@ function ParticleBackground() {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 100) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(51, 158, 150, ${0.04 * (1 - dist / 100)})`;
+            ctx.strokeStyle = `rgba(63, 168, 130, ${0.04 * (1 - dist / 100)})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -162,12 +162,12 @@ function Vial3D() {
     <div ref={containerRef} className="relative flex items-center justify-center" aria-hidden="true">
       <div className="absolute w-[320px] h-[320px] lg:w-[420px] lg:h-[420px] rounded-full"
         style={{
-          background: "radial-gradient(circle, hsl(178 50% 40% / 0.06) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(160 45% 45% / 0.06) 0%, transparent 70%)",
         }}
       />
       <div className="absolute w-[250px] h-[250px] lg:w-[340px] lg:h-[340px] rounded-full animate-pulse"
         style={{
-          background: "radial-gradient(circle, hsl(178 50% 40% / 0.04) 0%, transparent 60%)",
+          background: "radial-gradient(circle, hsl(160 45% 45% / 0.04) 0%, transparent 60%)",
         }}
       />
       <div
@@ -182,7 +182,7 @@ function Vial3D() {
           alt="Peptide Europe research vial"
           className="w-full h-full object-contain"
           style={{
-            filter: "drop-shadow(0 0 40px hsl(178 50% 40% / 0.2))",
+            filter: "drop-shadow(0 0 40px hsl(160 45% 45% / 0.2))",
           }}
           data-testid="img-hero-vial"
         />
@@ -227,7 +227,7 @@ export function Hero() {
 
       <div className="absolute inset-0" aria-hidden="true">
         <div className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full -translate-x-1/3 -translate-y-1/3"
-          style={{ background: "radial-gradient(circle, hsl(178 50% 40% / 0.03) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, hsl(160 45% 45% / 0.03) 0%, transparent 70%)" }}
         />
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full translate-x-1/4 translate-y-1/4"
           style={{ background: "radial-gradient(circle, hsl(220 25% 20% / 0.3) 0%, transparent 70%)" }}

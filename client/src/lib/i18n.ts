@@ -79,7 +79,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "age.exit": "Exit",
     
     // Footer
-    "footer.copyright": "© 2024 Peptide Europe. All rights reserved.",
+    "footer.copyright": "© 2026 Peptide Europe. All rights reserved.",
     "footer.research": "For Research Use Only",
     
     // Common
@@ -137,7 +137,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "age.body": "Die Produkte auf dieser Website sind ausschließlich für die Laborforschung bestimmt. Sie sind NICHT für den menschlichen Verzehr geeignet. Sie müssen mindestens 18 Jahre alt sein.",
     "age.agree": "Ich bin 18+ und stimme zu",
     "age.exit": "Verlassen",
-    "footer.copyright": "© 2024 Peptide Europe. Alle Rechte vorbehalten.",
+    "footer.copyright": "© 2026 Peptide Europe. Alle Rechte vorbehalten.",
     "footer.research": "Nur für Forschungszwecke",
     "common.loading": "Laden...",
     "common.error": "Ein Fehler ist aufgetreten",
@@ -202,7 +202,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "age.body": "Les produits sur ce site sont destinés uniquement à la recherche en laboratoire. Ils ne sont PAS destinés à la consommation humaine. Vous devez avoir au moins 18 ans.",
     "age.agree": "J'ai 18+ ans et j'accepte",
     "age.exit": "Quitter",
-    "footer.copyright": "© 2024 Peptide Europe. Tous droits réservés.",
+    "footer.copyright": "© 2026 Peptide Europe. Tous droits réservés.",
     "footer.research": "Usage recherche uniquement",
     "common.loading": "Chargement...",
     "common.error": "Une erreur s'est produite",
@@ -267,7 +267,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "age.body": "Los productos en este sitio web están destinados únicamente para investigación de laboratorio. NO son para consumo humano. Debe tener al menos 18 años.",
     "age.agree": "Tengo 18+ años y acepto",
     "age.exit": "Salir",
-    "footer.copyright": "© 2024 Peptide Europe. Todos los derechos reservados.",
+    "footer.copyright": "© 2026 Peptide Europe. Todos los derechos reservados.",
     "footer.research": "Solo para investigación",
     "common.loading": "Cargando...",
     "common.error": "Ha ocurrido un error",
@@ -332,7 +332,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "age.body": "I prodotti su questo sito sono destinati esclusivamente alla ricerca di laboratorio. NON sono per consumo umano. Devi avere almeno 18 anni.",
     "age.agree": "Ho 18+ anni e accetto",
     "age.exit": "Esci",
-    "footer.copyright": "© 2024 Peptide Europe. Tutti i diritti riservati.",
+    "footer.copyright": "© 2026 Peptide Europe. Tutti i diritti riservati.",
     "footer.research": "Solo per ricerca",
     "common.loading": "Caricamento...",
     "common.error": "Si è verificato un errore",
@@ -397,7 +397,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "age.body": "De producten op deze website zijn uitsluitend bestemd voor laboratoriumonderzoek. Ze zijn NIET voor menselijke consumptie. U moet minimaal 18 jaar oud zijn.",
     "age.agree": "Ik ben 18+ en ga akkoord",
     "age.exit": "Verlaten",
-    "footer.copyright": "© 2024 Peptide Europe. Alle rechten voorbehouden.",
+    "footer.copyright": "© 2026 Peptide Europe. Alle rechten voorbehouden.",
     "footer.research": "Alleen voor onderzoek",
     "common.loading": "Laden...",
     "common.error": "Er is een fout opgetreden",

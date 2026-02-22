@@ -2,7 +2,8 @@ import { useParams, Link } from "wouter";
 import { blogPosts } from "@/lib/blog-data";
 import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
+import ReactMarkdown from "react-markdown";
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -48,23 +49,11 @@ export default function BlogPost() {
         />
       </div>
 
-      <Card className="border-none shadow-none bg-transparent">
-        <CardContent className="p-0 prose prose-lg dark:prose-invert max-w-none">
-          {post.content.split('\n').map((line, i) => {
-            if (line.startsWith('###')) {
-              return <h3 key={i} className="text-2xl font-bold mt-8 mb-4">{line.replace('###', '').trim()}</h3>;
-            }
-            if (line.startsWith('**')) {
-              return <p key={i} className="font-bold my-2">{line.replace(/\*\*/g, '').trim()}</p>;
-            }
-            if (line.startsWith('-')) {
-              return <li key={i} className="ml-4 mb-2">{line.replace('-', '').trim()}</li>;
-            }
-            if (line.trim() === '') return <br key={i} />;
-            return <p key={i} className="text-muted-foreground leading-relaxed mb-4">{line.trim()}</p>;
-          })}
-        </CardContent>
-      </Card>
+      <CardContent className="p-0">
+        <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-p:leading-relaxed prose-li:text-muted-foreground prose-strong:text-foreground prose-td:text-muted-foreground prose-th:text-primary prose-th:text-xs prose-th:uppercase prose-th:tracking-wider prose-table:text-sm prose-hr:border-border">
+          <ReactMarkdown>{post.content}</ReactMarkdown>
+        </div>
+      </CardContent>
 
       <div className="mt-16 pt-8 border-t border-border/50">
         <h4 className="text-lg font-bold mb-4 uppercase tracking-wider text-primary">Disclaimer</h4>

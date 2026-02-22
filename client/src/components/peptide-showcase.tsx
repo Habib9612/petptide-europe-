@@ -28,8 +28,8 @@ function generateMolecule(seed: number): MoleculeData {
   const nodes: MoleculeNode[] = [];
   const bonds: MoleculeBond[] = [];
   const nodeCount = 12 + Math.floor(rng(seed) * 8);
-  const colors = ["#339E96", "#2A8A83", "#5BA8A2", "#267A74", "#4A9B95"];
-  const glowColors = ["rgba(51,158,150,0.4)", "rgba(42,138,131,0.35)", "rgba(91,168,162,0.35)", "rgba(38,122,116,0.3)", "rgba(74,155,149,0.35)"];
+  const colors = ["#3FA882", "#359B76", "#5AB894", "#2E8A6A", "#4CC09A"];
+  const glowColors = ["rgba(63,168,130,0.4)", "rgba(53,155,118,0.35)", "rgba(90,184,148,0.35)", "rgba(46,138,106,0.3)", "rgba(76,192,154,0.35)"];
 
   for (let i = 0; i < nodeCount; i++) {
     const angle1 = rng(seed + i * 7) * Math.PI * 2;
@@ -203,7 +203,7 @@ export function PeptideShowcase() {
               key={item.name}
               className="rounded-xl border bg-card p-6 flex flex-col items-center text-center transition-all duration-300"
               style={{
-                borderColor: hoveredIndex === i ? "hsl(178 50% 40% / 0.3)" : "hsl(220 18% 18%)",
+                borderColor: hoveredIndex === i ? "hsl(160 45% 45% / 0.3)" : "hsl(220 20% 16%)",
                 opacity: visible ? 1 : 0,
                 transform: visible ? "translateY(0)" : "translateY(30px)",
                 transitionDelay: `${i * 150}ms`,
