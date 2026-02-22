@@ -637,7 +637,6 @@ export default function Home() {
       <ProcessSection />
       <SpecsTable />
       <MidPageCTA />
-      <Testimonials />
       <ToolsAndResources />
       <NewsletterSection />
       <DisclaimerBanner />
