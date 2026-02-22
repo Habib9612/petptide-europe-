@@ -7,18 +7,23 @@ import { motion } from "framer-motion";
 import vialImage from "@assets/peptide_vial_transparent_1771703775626.gif";
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0 }
 };
 
-const fadeInDown = {
-  hidden: { opacity: 0, y: -20 },
-  visible: { opacity: 1, y: 0 }
+const fadeInLeft = {
+  hidden: { opacity: 0, x: -40 },
+  visible: { opacity: 1, x: 0 }
+};
+
+const fadeInRight = {
+  hidden: { opacity: 0, x: 40 },
+  visible: { opacity: 1, x: 0 }
 };
 
 const staggerContainer = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } }
+  visible: { transition: { staggerChildren: 0.12 } }
 };
 
 interface Particle {
@@ -57,18 +62,18 @@ function ParticleBackground() {
 
     const colors = ["#2563EB", "#3B82F6", "#60A5FA", "#1D4ED8", "#93C5FD"];
     const particles: Particle[] = [];
-    const count = 40;
+    const count = 50;
     const rect = canvas.getBoundingClientRect();
 
     for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * rect.width,
         y: Math.random() * rect.height,
-        vx: (Math.random() - 0.5) * 0.2,
-        vy: (Math.random() - 0.5) * 0.2,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15,
         radius: Math.random() * 1.5 + 0.5,
         color: colors[Math.floor(Math.random() * colors.length)],
-        alpha: Math.random() * 0.25 + 0.05,
+        alpha: Math.random() * 0.15 + 0.03,
         pulseSpeed: Math.random() * 0.015 + 0.005,
         pulsePhase: Math.random() * Math.PI * 2,
       });
@@ -113,9 +118,9 @@ function ParticleBackground() {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 100) {
+          if (dist < 120) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(37, 99, 235, ${0.04 * (1 - dist / 100)})`;
+            ctx.strokeStyle = `rgba(37, 99, 235, ${0.03 * (1 - dist / 120)})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -147,6 +152,7 @@ function ParticleBackground() {
 function Vial3D() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [floatY, setFloatY] = useState(0);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!containerRef.current) return;
@@ -155,7 +161,7 @@ function Vial3D() {
     const centerY = rect.top + rect.height / 2;
     const dx = (e.clientX - centerX) / rect.width;
     const dy = (e.clientY - centerY) / rect.height;
-    setOffset({ x: -dx * 20, y: -dy * 15 });
+    setOffset({ x: -dx * 25, y: -dy * 20 });
   }, []);
 
   const handleMouseLeave = useCallback(() => {
@@ -174,22 +180,34 @@ function Vial3D() {
     };
   }, [handleMouseMove, handleMouseLeave]);
 
+  useEffect(() => {
+    let frame: number;
+    let t = 0;
+    const animate = () => {
+      t += 0.015;
+      setFloatY(Math.sin(t) * 8);
+      frame = requestAnimationFrame(animate);
+    };
+    animate();
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
     <div ref={containerRef} className="relative flex items-center justify-center" aria-hidden="true">
-      <div className="absolute w-[320px] h-[320px] lg:w-[420px] lg:h-[420px] rounded-full"
+      <div className="absolute w-[400px] h-[400px] lg:w-[500px] lg:h-[500px] rounded-full"
         style={{
-          background: "radial-gradient(circle, hsl(220 70% 55% / 0.06) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(220 70% 55% / 0.08) 0%, transparent 70%)",
         }}
       />
-      <div className="absolute w-[250px] h-[250px] lg:w-[340px] lg:h-[340px] rounded-full animate-pulse"
+      <div className="absolute w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] rounded-full animate-pulse"
         style={{
-          background: "radial-gradient(circle, hsl(220 70% 55% / 0.04) 0%, transparent 60%)",
+          background: "radial-gradient(circle, hsl(220 70% 55% / 0.05) 0%, transparent 60%)",
         }}
       />
       <div
-        className="relative w-[280px] h-[350px] lg:w-[360px] lg:h-[450px]"
+        className="relative w-[300px] h-[380px] lg:w-[380px] lg:h-[480px] xl:w-[420px] xl:h-[530px]"
         style={{
-          transform: `translate(${offset.x}px, ${offset.y}px)`,
+          transform: `translate(${offset.x}px, ${offset.y + floatY}px)`,
           transition: "transform 0.15s ease-out",
         }}
       >
@@ -198,7 +216,7 @@ function Vial3D() {
           alt="Peptide Europe research vial"
           className="w-full h-full object-contain"
           style={{
-            filter: "drop-shadow(0 0 40px hsl(220 70% 55% / 0.15))",
+            filter: "drop-shadow(0 20px 60px hsl(220 70% 55% / 0.2)) drop-shadow(0 0 40px hsl(220 70% 55% / 0.1))",
           }}
           data-testid="img-hero-vial"
         />
@@ -239,110 +257,113 @@ export function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative overflow-hidden bg-background" data-testid="section-hero">
+    <section className="relative overflow-hidden bg-background min-h-[100svh] flex flex-col" data-testid="section-hero">
       <ParticleBackground />
 
       <div className="absolute inset-0" aria-hidden="true">
-        <div className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full -translate-x-1/3 -translate-y-1/3"
-          style={{ background: "radial-gradient(circle, hsl(220 70% 50% / 0.03) 0%, transparent 70%)" }}
+        <div className="absolute top-0 left-0 w-[700px] h-[700px] rounded-full -translate-x-1/3 -translate-y-1/3"
+          style={{ background: "radial-gradient(circle, hsl(220 70% 50% / 0.04) 0%, transparent 70%)" }}
         />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full translate-x-1/4 translate-y-1/4"
-          style={{ background: "radial-gradient(circle, hsl(220 60% 40% / 0.15) 0%, transparent 70%)" }}
+        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full translate-x-1/4 translate-y-1/4"
+          style={{ background: "radial-gradient(circle, hsl(220 60% 40% / 0.12) 0%, transparent 70%)" }}
+        />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
+          style={{ background: "radial-gradient(circle, hsl(220 70% 50% / 0.03) 0%, transparent 50%)" }}
         />
       </div>
 
-      <div className="container relative mx-auto px-4 pt-16 pb-16 md:pt-24 md:pb-20 lg:pt-28 lg:pb-24">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
+      <div className="relative flex-1 flex items-center">
+        <div className="container mx-auto px-4 py-12 lg:py-0">
+          <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-4 items-center min-h-[calc(100svh-140px)]">
+
             <motion.div
-              variants={fadeInDown}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-primary/20 bg-primary/5 mb-6"
-              data-testid="badge-hero-verified"
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainer}
+              className="lg:pr-4"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="text-[11px] font-medium tracking-[0.15em] uppercase text-primary">
-                {t("hero.badge")}
-              </span>
+              <motion.div
+                variants={fadeInLeft}
+                transition={{ duration: 0.6 }}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-primary/20 bg-primary/5 mb-6"
+                data-testid="badge-hero-verified"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                <span className="text-[11px] font-medium tracking-[0.15em] uppercase text-primary">
+                  {t("hero.badge")}
+                </span>
+              </motion.div>
+
+              <motion.h1
+                variants={fadeInLeft}
+                transition={{ duration: 0.7, delay: 0.1 }}
+                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.05] text-foreground"
+                data-testid="text-hero-title"
+              >
+                {t("hero.mainTitle")}
+              </motion.h1>
+
+              <motion.div
+                variants={fadeInLeft}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="grid grid-cols-3 gap-6 mt-10 pt-8 border-t border-border"
+              >
+                {[
+                  { value: "€10", label: t("hero.startingPrice") },
+                  { value: "99%+", label: t("hero.purityHPLC") },
+                  { value: "24h", label: t("hero.euDispatch") },
+                ].map((stat, i) => (
+                  <div key={i} data-testid={`text-hero-stat-${i}`}>
+                    <p className="text-2xl lg:text-3xl xl:text-4xl font-bold tracking-tight text-foreground">{stat.value}</p>
+                    <p className="text-[10px] lg:text-[11px] tracking-wide mt-1 text-muted-foreground uppercase">{stat.label}</p>
+                  </div>
+                ))}
+              </motion.div>
             </motion.div>
 
-            <motion.h1
-              variants={fadeInUp}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] font-bold tracking-tight leading-[1.1] mb-5 text-foreground"
-              data-testid="text-hero-title"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+              className="flex justify-center order-first lg:order-none"
             >
-              {t("hero.mainTitle")}
-            </motion.h1>
-
-            <motion.p
-              variants={fadeInUp}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base leading-relaxed mb-8 max-w-lg text-muted-foreground"
-              data-testid="text-hero-subtitle"
-            >
-              {t("hero.mainSubtitle")}
-            </motion.p>
+              <Vial3D />
+            </motion.div>
 
             <motion.div
+              initial="hidden"
+              animate="visible"
               variants={staggerContainer}
-              className="flex flex-wrap items-center gap-3 mb-8"
+              className="lg:pl-4 flex flex-col lg:items-end lg:text-right"
             >
-              <motion.div variants={fadeInUp} transition={{ duration: 0.4, delay: 0.3 }}>
+              <motion.p
+                variants={fadeInRight}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-base lg:text-lg leading-relaxed max-w-md text-muted-foreground mb-8"
+                data-testid="text-hero-subtitle"
+              >
+                {t("hero.mainSubtitle")}
+              </motion.p>
+
+              <motion.div
+                variants={fadeInRight}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="flex flex-wrap items-center gap-3 lg:justify-end"
+              >
                 <Link href="/products">
-                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <Button size="lg" className="gap-2" data-testid="button-hero-cta">
-                      {t("hero.browseAll")}
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </motion.div>
+                  <Button size="lg" className="gap-2 text-sm" data-testid="button-hero-cta">
+                    {t("hero.browseAll")}
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
                 </Link>
-              </motion.div>
-              <motion.div variants={fadeInUp} transition={{ duration: 0.4, delay: 0.4 }}>
                 <Link href="/products" data-testid="link-hero-categories">
-                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <Button size="lg" variant="outline" className="gap-2" data-testid="button-hero-browse">
-                      {t("hero.seePricing")}
-                    </Button>
-                  </motion.div>
+                  <Button size="lg" variant="outline" className="gap-2 text-sm" data-testid="button-hero-browse">
+                    {t("hero.seePricing")}
+                  </Button>
                 </Link>
               </motion.div>
             </motion.div>
-
-            <motion.div
-              variants={staggerContainer}
-              className="grid grid-cols-3 gap-6 pt-6 border-t border-border"
-            >
-              {[
-                { value: "€10", label: t("hero.startingPrice") },
-                { value: "99%+", label: t("hero.purityHPLC") },
-                { value: "24h", label: t("hero.euDispatch") },
-              ].map((stat, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeInUp}
-                  transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
-                  data-testid={`text-hero-stat-${i}`}
-                >
-                  <p className="text-2xl lg:text-3xl font-bold tracking-tight text-foreground">{stat.value}</p>
-                  <p className="text-[11px] tracking-wide mt-0.5 text-muted-foreground uppercase">{stat.label}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="flex justify-center"
-          >
-            <Vial3D />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
