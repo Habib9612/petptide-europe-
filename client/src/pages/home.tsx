@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Hero, TrustBar } from "@/components/hero";
+import { Hero } from "@/components/hero";
 import { PeptideShowcase } from "@/components/peptide-showcase";
 import { DisclaimerBanner } from "@/components/disclaimer-banner";
 import { useLanguage } from "@/components/language-context";
@@ -631,7 +631,6 @@ export default function Home() {
   return (
     <div className="bg-background">
       <Hero />
-      <TrustBar />
       <ScienceSection />
       <PeptideShowcase />
       <WhyChooseUs />
