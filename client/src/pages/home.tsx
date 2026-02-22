@@ -49,7 +49,7 @@ function ScienceSection() {
   const residues = ["Gly", "Glu", "Pro", "Pro", "Pro", "Gly", "Lys", "Pro", "Ala", "Asp", "Asp", "Ala", "Gly", "Leu", "Val"];
 
   return (
-    <section className="relative py-24 lg:py-32 bg-[#0c0c14] overflow-hidden" id="science">
+    <section className="relative py-24 lg:py-32 bg-[#1a2e2a] overflow-hidden" id="science">
       <div className="container relative mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -59,27 +59,27 @@ function ScienceSection() {
           className="max-w-5xl mx-auto"
         >
           <motion.div variants={fadeInUp} className="text-center mb-16">
-            <p className="text-xs font-medium tracking-[0.3em] uppercase text-white/30 mb-4">{t("science.label")}</p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[0.08em] leading-tight text-white" data-testid="text-science-title">
+            <p className="text-xs font-medium tracking-[0.3em] uppercase text-[#c8d7c8]/30 mb-4">{t("science.label")}</p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[0.08em] leading-tight text-[#e8efe4]" data-testid="text-science-title">
               {t("science.title")}
             </h2>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <motion.div variants={fadeInUp}>
-              <div className="space-y-4 text-white/50 leading-relaxed text-sm">
+              <div className="space-y-4 text-[#c8d7c8]/50 leading-relaxed text-sm">
                 <p>{t("science.p1")}</p>
                 <p>{t("science.p2")}</p>
               </div>
               <div className="flex flex-wrap items-center gap-3 mt-8">
                 <Link href="/products">
-                  <Button className="gap-2 bg-white text-[#0c0c14] border-white/20" data-testid="button-explore-catalog">
+                  <Button className="gap-2 bg-[#e8efe4] text-[#1a2e2a] border-[#7a9e8e]/20" data-testid="button-explore-catalog">
                     {t("science.browsePeptides")}
                     <ArrowRight className="h-3.5 w-3.5" />
                   </Button>
                 </Link>
                 <Link href="/calculator">
-                  <Button variant="outline" className="gap-2 border-white/15 text-white/70 bg-white/5" data-testid="button-science-calc">
+                  <Button variant="outline" className="gap-2 border-[#7a9e8e]/15 text-[#c8d7c8]/70 bg-[#7a9e8e]/5" data-testid="button-science-calc">
                     {t("science.calculator")}
                   </Button>
                 </Link>
@@ -87,46 +87,46 @@ function ScienceSection() {
             </motion.div>
 
             <motion.div variants={fadeInUp} data-testid="section-amino-chain">
-              <div className="rounded-md border border-white/10 bg-white/[0.03] p-5">
+              <div className="rounded-md border border-[#7a9e8e]/10 bg-[#7a9e8e]/[0.03] p-5">
                 <div className="flex items-center justify-between gap-4 flex-wrap mb-4">
                   <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 rounded-full bg-blue-400 animate-pulse" />
-                    <p className="text-[10px] uppercase tracking-[0.2em] font-medium text-blue-400/80" data-testid="text-sequence-label">
+                    <div className="h-2 w-2 rounded-full bg-[#7a9e8e] animate-pulse" />
+                    <p className="text-[10px] uppercase tracking-[0.2em] font-medium text-[#7a9e8e]/80" data-testid="text-sequence-label">
                       {t("science.sequenceLabel")}
                     </p>
                   </div>
-                  <span className="text-[10px] font-mono text-white/30">{t("science.residues")}</span>
+                  <span className="text-[10px] font-mono text-[#c8d7c8]/30">{t("science.residues")}</span>
                 </div>
 
                 <div className="flex flex-wrap gap-1 mb-5" data-testid="text-sequence-value">
                   {residues.map((res, i) => (
                     <span key={i} className="inline-flex items-center">
-                      <span className="font-mono text-xs px-1.5 py-0.5 rounded-md bg-white/5 text-blue-300/80 border border-white/10">
+                      <span className="font-mono text-xs px-1.5 py-0.5 rounded-md bg-[#7a9e8e]/5 text-[#7a9e8e]/80 border border-[#7a9e8e]/10">
                         {res}
                       </span>
                       {i < residues.length - 1 && (
-                        <span className="text-white/10 mx-0.5 text-[10px]">&mdash;</span>
+                        <span className="text-[#c8d7c8]/10 mx-0.5 text-[10px]">&mdash;</span>
                       )}
                     </span>
                   ))}
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-white/10 text-xs">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-[#7a9e8e]/10 text-xs">
                   <div data-testid="text-formula-value">
-                    <span className="block font-medium text-white/40 mb-0.5">{t("science.formula")}</span>
-                    <span className="text-white/80 font-mono text-[11px]">C<sub>62</sub>H<sub>98</sub>N<sub>16</sub>O<sub>22</sub></span>
+                    <span className="block font-medium text-[#c8d7c8]/40 mb-0.5">{t("science.formula")}</span>
+                    <span className="text-[#c8d7c8]/80 font-mono text-[11px]">C<sub>62</sub>H<sub>98</sub>N<sub>16</sub>O<sub>22</sub></span>
                   </div>
                   <div data-testid="text-mw-value">
-                    <span className="block font-medium text-white/40 mb-0.5">{t("science.molWeight")}</span>
-                    <span className="text-white/80 font-mono text-[11px]">1419.56</span>
+                    <span className="block font-medium text-[#c8d7c8]/40 mb-0.5">{t("science.molWeight")}</span>
+                    <span className="text-[#c8d7c8]/80 font-mono text-[11px]">1419.56</span>
                   </div>
                   <div data-testid="text-purity-value">
-                    <span className="block font-medium text-white/40 mb-0.5">{t("science.purity")}</span>
-                    <span className="font-semibold text-white/80 text-[11px]">&ge;99.0%</span>
+                    <span className="block font-medium text-[#c8d7c8]/40 mb-0.5">{t("science.purity")}</span>
+                    <span className="font-semibold text-[#c8d7c8]/80 text-[11px]">&ge;99.0%</span>
                   </div>
                   <div data-testid="text-cas-value">
-                    <span className="block font-medium text-white/40 mb-0.5">{t("science.cas")}</span>
-                    <span className="text-white/80 font-mono text-[11px]">137525-51-0</span>
+                    <span className="block font-medium text-[#c8d7c8]/40 mb-0.5">{t("science.cas")}</span>
+                    <span className="text-[#c8d7c8]/80 font-mono text-[11px]">137525-51-0</span>
                   </div>
                 </div>
               </div>
@@ -312,10 +312,10 @@ function SpecsTable() {
 function MidPageCTA() {
   const { t } = useLanguage();
   return (
-    <section className="relative overflow-hidden bg-[#0c0c14]" data-testid="section-midcta">
+    <section className="relative overflow-hidden bg-[#1a2e2a]" data-testid="section-midcta">
       <div className="absolute inset-0" aria-hidden="true">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px]"
-          style={{ background: "radial-gradient(ellipse, rgba(59, 130, 246, 0.06) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(ellipse, rgba(122, 158, 142, 0.06) 0%, transparent 70%)" }}
         />
       </div>
       <div className="container relative mx-auto px-4 py-20 lg:py-28 text-center">
@@ -325,15 +325,15 @@ function MidPageCTA() {
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
         >
-          <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[0.08em] mb-4 text-white" data-testid="text-cta-title">
+          <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[0.08em] mb-4 text-[#e8efe4]" data-testid="text-cta-title">
             {t("cta.title")}
           </motion.h2>
-          <motion.p variants={fadeInUp} className="text-sm text-white/40 mb-8 max-w-lg mx-auto">
+          <motion.p variants={fadeInUp} className="text-sm text-[#c8d7c8]/40 mb-8 max-w-lg mx-auto">
             {t("cta.subtitle")}
           </motion.p>
           <motion.div variants={fadeInUp}>
             <Link href="/products">
-              <Button size="lg" className="gap-2 bg-white text-[#0c0c14] border-white/20" data-testid="button-cta-order">
+              <Button size="lg" className="gap-2 bg-[#e8efe4] text-[#1a2e2a] border-[#7a9e8e]/20" data-testid="button-cta-order">
                 {t("cta.button")}
                 <ArrowRight className="h-4 w-4" />
               </Button>
@@ -355,7 +355,7 @@ function WhyChooseUs() {
   ];
 
   return (
-    <section className="py-24 lg:py-32 bg-[#0e0e18] relative" id="why-choose-us">
+    <section className="py-24 lg:py-32 bg-[#1f3530] relative" id="why-choose-us">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -364,8 +364,8 @@ function WhyChooseUs() {
           variants={staggerContainer}
           className="text-center mb-16"
         >
-          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.3em] uppercase text-white/30 mb-3">{t("why.label")}</motion.p>
-          <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[0.08em] text-white">
+          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.3em] uppercase text-[#c8d7c8]/30 mb-3">{t("why.label")}</motion.p>
+          <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[0.08em] text-[#e8efe4]">
             {t("why.title")}
           </motion.h2>
         </motion.div>
@@ -383,12 +383,12 @@ function WhyChooseUs() {
               variants={fadeInUp}
               className="text-center"
             >
-              <div className="mx-auto w-12 h-12 rounded-full flex items-center justify-center mb-5 bg-white/5 border border-white/10">
-                <item.icon className="h-5 w-5 text-blue-400/70" strokeWidth={1.5} />
+              <div className="mx-auto w-12 h-12 rounded-full flex items-center justify-center mb-5 bg-[#7a9e8e]/5 border border-[#7a9e8e]/10">
+                <item.icon className="h-5 w-5 text-[#7a9e8e]/70" strokeWidth={1.5} />
               </div>
-              <p className="text-4xl lg:text-5xl font-bold text-white mb-2 tracking-tight">{item.value}</p>
-              <p className="text-sm font-medium text-white/70 mb-1 tracking-wide">{item.label}</p>
-              <p className="text-xs text-white/35">{item.desc}</p>
+              <p className="text-4xl lg:text-5xl font-bold text-[#e8efe4] mb-2 tracking-tight">{item.value}</p>
+              <p className="text-sm font-medium text-[#c8d7c8]/70 mb-1 tracking-wide">{item.label}</p>
+              <p className="text-xs text-[#c8d7c8]/35">{item.desc}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -561,10 +561,10 @@ function NewsletterSection() {
   };
 
   return (
-    <section className="relative py-24 lg:py-32 bg-[#0c0c14] overflow-hidden">
+    <section className="relative py-24 lg:py-32 bg-[#1a2e2a] overflow-hidden">
       <div className="absolute inset-0" aria-hidden="true">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px]"
-          style={{ background: "radial-gradient(ellipse, rgba(59, 130, 246, 0.04) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(ellipse, rgba(122, 158, 142, 0.04) 0%, transparent 70%)" }}
         />
       </div>
       <div className="container relative mx-auto px-4">
@@ -575,32 +575,32 @@ function NewsletterSection() {
           variants={staggerContainer}
           className="max-w-xl mx-auto text-center"
         >
-          <motion.div variants={fadeInUp} className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-5 bg-white/5 border border-white/10">
-            <Tag className="h-4 w-4 text-blue-400/60" />
+          <motion.div variants={fadeInUp} className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-5 bg-[#7a9e8e]/5 border border-[#7a9e8e]/10">
+            <Tag className="h-4 w-4 text-[#7a9e8e]/60" />
           </motion.div>
-          <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-[0.08em] mb-3 text-white" data-testid="text-newsletter-title">
+          <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-[0.08em] mb-3 text-[#e8efe4]" data-testid="text-newsletter-title">
             {t("newsletter.title")}
           </motion.h2>
-          <motion.p variants={fadeInUp} className="text-white/40 text-sm mb-8">
+          <motion.p variants={fadeInUp} className="text-[#c8d7c8]/40 text-sm mb-8">
             {t("newsletter.subtitle")}
           </motion.p>
 
           <motion.div variants={fadeInUp}>
             {submitted ? (
               <div className="space-y-4" data-testid="text-newsletter-success">
-                <div className="flex items-center justify-center gap-2 font-medium text-white">
+                <div className="flex items-center justify-center gap-2 font-medium text-[#e8efe4]">
                   <CheckCircle2 className="h-4 w-4 text-green-400" />
                   <span className="text-sm">{t("newsletter.success")}</span>
                 </div>
                 {discountCode && (
-                  <div className="inline-flex items-center gap-3 px-5 py-3 rounded-md border border-white/10 bg-white/5">
-                    <code className="font-mono text-sm tracking-wider text-white font-semibold" data-testid="text-discount-code">{discountCode}</code>
-                    <button onClick={handleCopy} className="text-white/40 hover:text-white transition-colors" data-testid="button-copy-code" aria-label="Copy discount code">
+                  <div className="inline-flex items-center gap-3 px-5 py-3 rounded-md border border-[#7a9e8e]/10 bg-[#7a9e8e]/5">
+                    <code className="font-mono text-sm tracking-wider text-[#e8efe4] font-semibold" data-testid="text-discount-code">{discountCode}</code>
+                    <button onClick={handleCopy} className="text-[#c8d7c8]/40 hover:text-[#e8efe4] transition-colors" data-testid="button-copy-code" aria-label="Copy discount code">
                       {copied ? <CheckCircle2 className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
                     </button>
                   </div>
                 )}
-                <p className="text-xs text-white/30">{t("newsletter.applyAt")}</p>
+                <p className="text-xs text-[#c8d7c8]/30">{t("newsletter.applyAt")}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-wrap gap-2 max-w-sm mx-auto">
@@ -610,10 +610,10 @@ function NewsletterSection() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="flex-1 bg-white/5 border-white/10 text-white placeholder:text-white/25"
+                  className="flex-1 bg-[#7a9e8e]/5 border-[#7a9e8e]/10 text-[#e8efe4] placeholder:text-[#c8d7c8]/25"
                   data-testid="input-newsletter-email"
                 />
-                <Button type="submit" disabled={isSubmitting} className="shrink-0 bg-white text-[#0c0c14] border-white/20" data-testid="button-newsletter-submit">
+                <Button type="submit" disabled={isSubmitting} className="shrink-0 bg-[#e8efe4] text-[#1a2e2a] border-[#7a9e8e]/20" data-testid="button-newsletter-submit">
                   {isSubmitting ? "..." : t("newsletter.subscribe")}
                 </Button>
               </form>
