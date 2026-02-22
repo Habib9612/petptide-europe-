@@ -12,33 +12,33 @@ export function Footer() {
           <div>
             <Logo size="sm" className="mb-2" />
             <p className="text-xs text-muted-foreground leading-relaxed max-w-xs">
-              Buy research peptides online in Europe. 99%+ purity, HPLC tested, with Certificate of Analysis. Fast EU-wide shipping.
+              {t("footer.description")}
             </p>
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-primary/70 mb-3">Shop</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-primary/70 mb-3">{t("footer.shopTitle")}</h3>
             <nav className="flex flex-col gap-1.5">
-              <Link href="/products" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-products">All Peptides</Link>
-              <Link href="/peptide-guide" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-guide">Dosage Guide</Link>
-              <Link href="/calculator" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-calculator">Reconstitution Calculator</Link>
-              <Link href="/insights" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-insights">Research Insights</Link>
+              <Link href="/products" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-products">{t("footer.allPeptides")}</Link>
+              <Link href="/peptide-guide" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-guide">{t("footer.dosageGuide")}</Link>
+              <Link href="/calculator" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-calculator">{t("footer.reconCalc")}</Link>
+              <Link href="/insights" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-insights">{t("footer.researchInsights")}</Link>
             </nav>
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-primary/70 mb-3">Company</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-primary/70 mb-3">{t("footer.companyTitle")}</h3>
             <nav className="flex flex-col gap-1.5">
-              <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-about">About Us</Link>
-              <Link href="/partners" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-partners">Partner Program</Link>
-              <Link href="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-faq">FAQ</Link>
-              <Link href="/shipping" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-shipping">Shipping & Returns</Link>
-              <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-terms">Terms of Service</Link>
+              <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-about">{t("footer.aboutUs")}</Link>
+              <Link href="/partners" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-partners">{t("footer.partnerProgram")}</Link>
+              <Link href="/faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-faq">{t("nav.faq")}</Link>
+              <Link href="/shipping" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-shipping">{t("footer.shippingReturns")}</Link>
+              <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-footer-terms">{t("footer.termsOfService")}</Link>
             </nav>
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-primary/70 mb-3">Payment</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-primary/70 mb-3">{t("footer.paymentTitle")}</h3>
             <div className="space-y-1.5 text-sm text-muted-foreground">
               <p>Bitcoin, Ethereum, USDT</p>
               <p>SEPA Bank Transfer</p>
@@ -46,7 +46,7 @@ export function Footer() {
             </div>
             <div className="mt-3 inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-md bg-primary/5 border border-primary/15">
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <span className="text-primary">10% off with crypto</span>
+              <span className="text-primary">{t("footer.cryptoDiscount")}</span>
             </div>
           </div>
         </div>

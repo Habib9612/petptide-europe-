@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ShieldCheck, FlaskConical, Truck, Microscope, Beaker, Thermometer, Award, Users, Globe } from "lucide-react";
+import { useLanguage } from "@/components/language-context";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -18,39 +19,49 @@ const values = [
     icon: Award,
     title: "Scientific Rigor",
     desc: "Every batch \u226598-99%+ pure with full Certificate of Analysis",
+    titleKey: "about.valueRigor",
+    descKey: "about.valueRigorDesc",
   },
   {
     icon: ShieldCheck,
     title: "Integrity",
     desc: "Open disclosure of sourcing, testing methodology, and quality data",
+    titleKey: "about.valueIntegrity",
+    descKey: "about.valueIntegrityDesc",
   },
   {
     icon: Truck,
     title: "Reliable Fulfillment",
     desc: "Same-day dispatch on qualifying orders keeps projects on track",
+    titleKey: "about.valueFulfillment",
+    descKey: "about.valueFulfillmentDesc",
   },
   {
     icon: Users,
     title: "Research Support",
     desc: "Knowledgeable team ready to help with product selection",
+    titleKey: "about.valueSupport",
+    descKey: "about.valueSupportDesc",
   },
 ];
 
 const pipelineSteps = [
-  { num: "01", title: "Laboratory-Grade Water", desc: "Contaminant-free foundation for synthesis" },
-  { num: "02", title: "Stabilizing Excipients", desc: "Precisely measured mannitol and sucrose protect peptide integrity" },
-  { num: "03", title: "Analytical Verification", desc: "ESI-MS confirms molecular structure" },
-  { num: "04", title: "0.22\u00B5m Filtration", desc: "Removes particulates prior to vialing" },
-  { num: "05", title: "Lyophilization & Vialing", desc: "36-hour freeze-dry cycle for long-term stability" },
+  { num: "01", titleKey: "about.pipeline1", descKey: "about.pipeline1Desc" },
+  { num: "02", titleKey: "about.pipeline2", descKey: "about.pipeline2Desc" },
+  { num: "03", titleKey: "about.pipeline3", descKey: "about.pipeline3Desc" },
+  { num: "04", titleKey: "about.pipeline4", descKey: "about.pipeline4Desc" },
+  { num: "05", titleKey: "about.pipeline5", descKey: "about.pipeline5Desc" },
 ];
 
 const stats = [
-  { value: "27+", label: "Countries", desc: "EU-wide delivery network" },
-  { value: "98-99%+", label: "Purity", desc: "HPLC verified purity standard" },
-  { value: "20+", label: "Peptides", desc: "Research-grade peptides in stock" },
+  { value: "27+", labelKey: "about.stat1Label", descKey: "about.stat1Desc" },
+  { value: "98-99%+", labelKey: "about.stat2Label", descKey: "about.stat2Desc" },
+  { value: "20+", labelKey: "about.stat3Label", descKey: "about.stat3Desc" },
 ];
 
 export default function About() {
+  const { t } = useLanguage();
+
   return (
     <>
       <section className="bg-primary text-primary-foreground py-20 lg:py-28" data-testid="section-about-hero">
@@ -63,13 +74,13 @@ export default function About() {
             className="max-w-3xl mx-auto text-center"
           >
             <motion.p variants={fadeInUp} className="tracking-[0.2em] uppercase text-xs font-medium text-primary-foreground/70 mb-4">
-              About Peptide Europe
+              {t("about.heroLabel")}
             </motion.p>
             <motion.h1 variants={fadeInUp} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6" data-testid="text-about-title">
-              Advancing European peptide research
+              {t("about.heroTitle")}
             </motion.h1>
             <motion.p variants={fadeInUp} className="text-base sm:text-lg text-primary-foreground/80 leading-relaxed max-w-2xl mx-auto">
-              Peptide Europe supplies high-purity research peptides to laboratories across the continent, enabling breakthroughs in cellular biology, metabolic science, and regenerative medicine.
+              {t("about.heroSubtitle")}
             </motion.p>
           </motion.div>
         </div>
@@ -85,16 +96,16 @@ export default function About() {
             className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start"
           >
             <motion.div variants={fadeInUp}>
-              <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-3">Our Story</p>
+              <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-3">{t("about.whoWeAreLabel")}</p>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-5 leading-tight text-foreground" data-testid="text-who-we-are-title">
-                Who We Are
+                {t("about.whoWeAreTitle")}
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed text-sm">
                 <p>
-                  Peptide Europe was founded to close the gap between cutting-edge peptide science and the researchers who depend on it. We supply synthetic peptides at &ge;98-99%+ purity, each accompanied by a comprehensive Certificate of Analysis that documents HPLC purity, mass-spectrometry confirmation, and endotoxin data.
+                  {t("about.whoWeAreP1")}
                 </p>
                 <p>
-                  Our customers include independent researchers, university laboratories, and commercial R&amp;D teams who require consistent, well-documented compounds for in-vitro and in-vivo study. From order to delivery, we prioritize transparency, scientific accuracy, and reliable fulfillment so your work never stalls.
+                  {t("about.whoWeAreP2")}
                 </p>
               </div>
             </motion.div>
@@ -110,8 +121,8 @@ export default function About() {
                     <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3 bg-primary/8 border border-primary/15">
                       <item.icon className="h-4.5 w-4.5 text-primary" strokeWidth={1.5} />
                     </div>
-                    <p className="font-bold text-sm text-foreground mb-1">{item.title}</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                    <p className="font-bold text-sm text-foreground mb-1">{t(item.titleKey)}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{t(item.descKey)}</p>
                   </div>
                 ))}
               </div>
@@ -130,9 +141,9 @@ export default function About() {
             className="max-w-3xl mx-auto"
           >
             <motion.div variants={fadeInUp} className="text-center mb-12">
-              <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Manufacturing Process</p>
+              <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">{t("about.pipelineLabel")}</p>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight text-foreground" data-testid="text-pipeline-title">
-                Our Quality Pipeline
+                {t("about.pipelineTitle")}
               </h2>
             </motion.div>
 
@@ -153,8 +164,8 @@ export default function About() {
                     )}
                   </div>
                   <div className="pb-10">
-                    <p className="font-bold text-sm text-foreground mb-1">{step.title}</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
+                    <p className="font-bold text-sm text-foreground mb-1">{t(step.titleKey)}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{t(step.descKey)}</p>
                   </div>
                 </motion.div>
               ))}
@@ -173,7 +184,7 @@ export default function About() {
             className="max-w-3xl mx-auto"
           >
             <p className="text-xl lg:text-2xl font-light italic text-foreground text-center leading-relaxed" data-testid="text-mission-quote">
-              &ldquo;At Peptide Europe, advancing research is not just our business &mdash; it&rsquo;s our purpose.&rdquo;
+              {t("about.missionQuote")}
             </p>
           </motion.div>
         </div>
@@ -189,9 +200,9 @@ export default function About() {
             className="max-w-4xl mx-auto"
           >
             <motion.div variants={fadeInUp} className="text-center mb-10">
-              <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Why Choose Us</p>
+              <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">{t("about.statsLabel")}</p>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight text-foreground" data-testid="text-why-choose-title">
-                Numbers that speak for themselves
+                {t("about.statsTitle")}
               </h2>
             </motion.div>
 
@@ -207,8 +218,8 @@ export default function About() {
                   data-testid={`card-stat-${i}`}
                 >
                   <p className="text-3xl font-bold text-foreground mb-1" data-testid={`text-stat-value-${i}`}>{stat.value}</p>
-                  <p className="text-sm font-semibold text-foreground mb-1">{stat.label}</p>
-                  <p className="text-xs text-muted-foreground">{stat.desc}</p>
+                  <p className="text-sm font-semibold text-foreground mb-1">{t(stat.labelKey)}</p>
+                  <p className="text-xs text-muted-foreground">{t(stat.descKey)}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -216,7 +227,7 @@ export default function About() {
             <motion.div variants={fadeInUp} className="text-center">
               <Link href="/products">
                 <Button className="gap-2" data-testid="button-browse-catalog">
-                  Browse Our Catalog
+                  {t("about.heroCTA")}
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Button>
               </Link>
@@ -227,9 +238,13 @@ export default function About() {
 
       <section className="bg-background py-12" data-testid="section-disclaimer">
         <div className="container mx-auto px-4">
-          <p className="text-sm text-muted-foreground text-center italic max-w-2xl mx-auto">
-            All products sold by Peptide Europe are intended for laboratory and research use only. They are not intended for human consumption, therapeutic, or diagnostic purposes.
-          </p>
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">{t("about.disclaimerLabel")}</p>
+            <h3 className="text-lg font-bold tracking-tight text-foreground mb-3">{t("about.disclaimerTitle")}</h3>
+            <p className="text-sm text-muted-foreground italic">
+              {t("about.disclaimerText")}
+            </p>
+          </div>
         </div>
       </section>
     </>

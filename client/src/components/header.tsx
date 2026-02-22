@@ -2,9 +2,10 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "./language-context";
 import { useCart } from "@/lib/cart";
-import { ShoppingCart, Menu, X, ChevronDown, Truck } from "lucide-react";
+import { ShoppingCart, Menu, X, ChevronDown, Truck, Sun, Moon } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "./logo";
+import { useTheme } from "./theme-provider";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,25 +28,26 @@ export function Header() {
   const { getItemCount } = useCart();
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const itemCount = getItemCount();
   const currentLang = languageOptions.find(l => l.code === language);
 
   const navLinks = [
     { href: "/products", label: t("nav.products") },
-    { href: "/peptide-guide", label: "Dosage Guide" },
-    { href: "/calculator", label: "Calculator" },
-    { href: "/insights", label: "Insights" },
-    { href: "/about", label: "About" },
-    { href: "/faq", label: "FAQ" },
-    { href: "/partners", label: "Partners" },
+    { href: "/peptide-guide", label: t("nav.dosageGuide") },
+    { href: "/calculator", label: t("nav.calculator") },
+    { href: "/insights", label: t("nav.insights") },
+    { href: "/about", label: t("nav.about") },
+    { href: "/faq", label: t("nav.faq") },
+    { href: "/partners", label: t("nav.partners") },
   ];
 
   return (
     <>
     <div className="w-full text-center py-1.5 text-xs font-medium tracking-wide text-foreground bg-secondary border-b border-border" data-testid="banner-free-shipping">
       <Truck className="inline h-3.5 w-3.5 mr-1.5 -mt-0.5 text-primary" />
-      Free Shipping on Orders Over &euro;120
+      {t("nav.freeShipping")}
     </div>
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 backdrop-blur-xl">
       <div className="container mx-auto px-4">
@@ -71,6 +73,9 @@ export function Header() {
 
           <div className="flex items-center gap-1">
             <div className="hidden sm:flex items-center gap-1">
+              <Button variant="ghost" size="icon" onClick={toggleTheme} className="text-muted-foreground" data-testid="button-theme-toggle-desktop">
+                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="gap-1.5 text-xs text-muted-foreground" data-testid="button-language">
@@ -134,6 +139,9 @@ export function Header() {
               </Link>
             ))}
             <div className="flex items-center gap-1 pt-2 border-t border-border mt-2">
+              <Button variant="ghost" size="icon" onClick={toggleTheme} className="text-muted-foreground" data-testid="button-theme-toggle-mobile">
+                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="gap-1.5">

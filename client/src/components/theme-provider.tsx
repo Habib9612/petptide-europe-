@@ -11,7 +11,13 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("peptide-europe-theme");
+      if (saved === "light" || saved === "dark") return saved;
+    }
+    return "dark";
+  });
 
   useEffect(() => {
     const root = document.documentElement;

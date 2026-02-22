@@ -45,6 +45,7 @@ const fadeIn = {
 };
 
 function ScienceSection() {
+  const { t } = useLanguage();
   const residues = ["Gly", "Glu", "Pro", "Pro", "Pro", "Gly", "Lys", "Pro", "Ala", "Asp", "Asp", "Ala", "Gly", "Leu", "Val"];
 
   return (
@@ -58,28 +59,28 @@ function ScienceSection() {
           className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
         >
           <motion.div variants={fadeInUp}>
-            <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-3">How We Make It</p>
+            <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-3">{t("science.label")}</p>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-5 leading-tight text-foreground" data-testid="text-science-title">
-              Synthesized, purified, and third-party verified
+              {t("science.title")}
             </h2>
             <div className="space-y-3 text-muted-foreground leading-relaxed text-sm">
               <p>
-                Each peptide is built residue by residue using Fmoc solid-phase synthesis, then purified through reverse-phase HPLC to isolate the target compound with documented purity of 98–99%+.
+                {t("science.p1")}
               </p>
               <p>
-                You receive lyophilized powder with a batch-specific Certificate of Analysis — ready for reconstitution and immediate use in your research.
+                {t("science.p2")}
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3 mt-6">
               <Link href="/products">
                 <Button className="gap-2" data-testid="button-explore-catalog">
-                  Browse All Peptides
+                  {t("science.browsePeptides")}
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Button>
               </Link>
               <Link href="/calculator">
                 <Button variant="outline" className="gap-2" data-testid="button-science-calc">
-                  Calculator
+                  {t("science.calculator")}
                 </Button>
               </Link>
             </div>
@@ -91,10 +92,10 @@ function ScienceSection() {
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
                   <p className="text-[10px] uppercase tracking-widest font-medium text-primary" data-testid="text-sequence-label">
-                    BPC-157 Sequence
+                    {t("science.sequenceLabel")}
                   </p>
                 </div>
-                <span className="text-[10px] font-mono text-muted-foreground">15 residues</span>
+                <span className="text-[10px] font-mono text-muted-foreground">{t("science.residues")}</span>
               </div>
 
               <div className="flex flex-wrap gap-1 mb-5" data-testid="text-sequence-value">
@@ -112,19 +113,19 @@ function ScienceSection() {
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-border text-xs">
                 <div data-testid="text-formula-value">
-                  <span className="block font-medium text-muted-foreground mb-0.5">Formula</span>
+                  <span className="block font-medium text-muted-foreground mb-0.5">{t("science.formula")}</span>
                   <span className="text-foreground font-mono text-[11px]">C<sub>62</sub>H<sub>98</sub>N<sub>16</sub>O<sub>22</sub></span>
                 </div>
                 <div data-testid="text-mw-value">
-                  <span className="block font-medium text-muted-foreground mb-0.5">Mol. Weight</span>
+                  <span className="block font-medium text-muted-foreground mb-0.5">{t("science.molWeight")}</span>
                   <span className="text-foreground font-mono text-[11px]">1419.56</span>
                 </div>
                 <div data-testid="text-purity-value">
-                  <span className="block font-medium text-muted-foreground mb-0.5">Purity</span>
+                  <span className="block font-medium text-muted-foreground mb-0.5">{t("science.purity")}</span>
                   <span className="font-semibold text-foreground text-[11px]">&ge;99.0%</span>
                 </div>
                 <div data-testid="text-cas-value">
-                  <span className="block font-medium text-muted-foreground mb-0.5">CAS</span>
+                  <span className="block font-medium text-muted-foreground mb-0.5">{t("science.cas")}</span>
                   <span className="text-foreground font-mono text-[11px]">137525-51-0</span>
                 </div>
               </div>
@@ -137,17 +138,18 @@ function ScienceSection() {
 }
 
 function ProcessSection() {
+  const { t } = useLanguage();
   const timelineRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
   const steps = [
-    { num: "01", icon: Beaker, title: "Synthesis", desc: "Solid-phase peptide synthesis using Fmoc chemistry with automated coupling cycles" },
-    { num: "02", icon: Atom, title: "Purification", desc: "Reverse-phase HPLC chromatographic separation to isolate target compound" },
-    { num: "03", icon: Microscope, title: "Verification", desc: "ESI-MS / MALDI-TOF mass spectrometry analysis confirms molecular identity" },
-    { num: "04", icon: Thermometer, title: "Lyophilization", desc: "Freeze-dried for long-term stability at -20°C storage conditions" },
-    { num: "05", icon: ShieldCheck, title: "QC Release", desc: "Full Certificate of Analysis documentation with batch-specific data" },
-    { num: "06", icon: Truck, title: "Cold-Chain", desc: "Temperature-controlled EU-wide dispatch with real-time tracking" },
+    { num: "01", icon: Beaker, title: t("process.step1"), desc: t("process.step1Desc") },
+    { num: "02", icon: Atom, title: t("process.step2"), desc: t("process.step2Desc") },
+    { num: "03", icon: Microscope, title: t("process.step3"), desc: t("process.step3Desc") },
+    { num: "04", icon: Thermometer, title: t("process.step4"), desc: t("process.step4Desc") },
+    { num: "05", icon: ShieldCheck, title: t("process.step5"), desc: t("process.step5Desc") },
+    { num: "06", icon: Truck, title: t("process.step6"), desc: t("process.step6Desc") },
   ];
 
   useEffect(() => {
@@ -169,9 +171,9 @@ function ProcessSection() {
           onViewportEnter={() => setIsVisible(true)}
           className="text-center mb-12"
         >
-          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">From Lab to Your Lab</motion.p>
+          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">{t("process.label")}</motion.p>
           <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight text-foreground" data-testid="text-process-title">
-            How your peptide is made
+            {t("process.title")}
           </motion.h2>
         </motion.div>
 
@@ -240,15 +242,16 @@ function ProcessSection() {
 }
 
 function SpecsTable() {
+  const { t } = useLanguage();
   const specs = [
-    { param: "Purity (HPLC)", value: "≥98% — most products ≥99%" },
-    { param: "Synthesis", value: "Solid-Phase Peptide Synthesis (SPPS / Fmoc)" },
-    { param: "Verification", value: "ESI-MS / MALDI-TOF mass spectrometry" },
-    { param: "Form", value: "Lyophilized powder (freeze-dried)" },
-    { param: "Quantities", value: "5 mg, 10 mg, 20 mg, 50 mg vials" },
-    { param: "Documentation", value: "Certificate of Analysis (CoA) with every order" },
-    { param: "Storage", value: "-20°C recommended; stable 6-12 months" },
-    { param: "Shipping", value: "Temperature-controlled, EU-wide, tracked & insured" },
+    { param: t("specs.purityParam"), value: t("specs.purityValue") },
+    { param: t("specs.synthesisParam"), value: t("specs.synthesisValue") },
+    { param: t("specs.verificationParam"), value: t("specs.verificationValue") },
+    { param: t("specs.formParam"), value: t("specs.formValue") },
+    { param: t("specs.quantitiesParam"), value: t("specs.quantitiesValue") },
+    { param: t("specs.documentationParam"), value: t("specs.documentationValue") },
+    { param: t("specs.storageParam"), value: t("specs.storageValue") },
+    { param: t("specs.shippingParam"), value: t("specs.shippingValue") },
   ];
 
   return (
@@ -262,9 +265,9 @@ function SpecsTable() {
             variants={staggerContainer}
             className="text-center mb-8"
           >
-            <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Quality Standards</motion.p>
+            <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">{t("specs.label")}</motion.p>
             <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight text-foreground" data-testid="text-specs-title">
-              What you get with every order
+              {t("specs.title")}
             </motion.h2>
           </motion.div>
 
@@ -280,8 +283,8 @@ function SpecsTable() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-left font-semibold p-4 text-foreground text-xs uppercase tracking-wider bg-muted/50" data-testid="th-parameter">Parameter</th>
-                    <th className="text-left font-semibold p-4 text-foreground text-xs uppercase tracking-wider bg-muted/50" data-testid="th-standard">Standard</th>
+                    <th className="text-left font-semibold p-4 text-foreground text-xs uppercase tracking-wider bg-muted/50" data-testid="th-parameter">{t("specs.parameter")}</th>
+                    <th className="text-left font-semibold p-4 text-foreground text-xs uppercase tracking-wider bg-muted/50" data-testid="th-standard">{t("specs.standard")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -306,6 +309,7 @@ function SpecsTable() {
 }
 
 function MidPageCTA() {
+  const { t } = useLanguage();
   return (
     <section className="relative overflow-hidden bg-primary text-primary-foreground" data-testid="section-midcta">
       <div className="container relative mx-auto px-4 py-14 lg:py-20 text-center">
@@ -316,15 +320,15 @@ function MidPageCTA() {
           variants={staggerContainer}
         >
           <motion.h2 variants={fadeInUp} className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight mb-3 text-primary-foreground" data-testid="text-cta-title">
-            Start your order — ships within 24 hours
+            {t("cta.title")}
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-sm text-primary-foreground/80 mb-5">
-            Free shipping on orders over &euro;120. Pay with crypto and save 10%.
+            {t("cta.subtitle")}
           </motion.p>
           <motion.div variants={fadeInUp}>
             <Link href="/products">
               <Button variant="secondary" size="lg" className="gap-2" data-testid="button-cta-order">
-                Browse Peptides
+                {t("cta.button")}
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
@@ -336,11 +340,12 @@ function MidPageCTA() {
 }
 
 function WhyChooseUs() {
+  const { t } = useLanguage();
   const reasons = [
-    { icon: Sparkles, value: "99%+", label: "HPLC Purity", desc: "Batch-tested, CoA included" },
-    { icon: Truck, value: "24h", label: "Same-Day Dispatch", desc: "Orders before 2pm CET" },
-    { icon: FlaskConical, value: "20+", label: "Peptides In Stock", desc: "BPC-157, Sema, Tirz & more" },
-    { icon: ShieldCheck, value: "27", label: "EU Countries", desc: "Fast, tracked delivery" },
+    { icon: Sparkles, value: t("why.purityValue"), label: t("why.purityLabel"), desc: t("why.purityDesc") },
+    { icon: Truck, value: t("why.dispatchValue"), label: t("why.dispatchLabel"), desc: t("why.dispatchDesc") },
+    { icon: FlaskConical, value: t("why.stockValue"), label: t("why.stockLabel"), desc: t("why.stockDesc") },
+    { icon: ShieldCheck, value: t("why.countriesValue"), label: t("why.countriesLabel"), desc: t("why.countriesDesc") },
   ];
 
   return (
@@ -353,9 +358,9 @@ function WhyChooseUs() {
           variants={staggerContainer}
           className="text-center mb-12"
         >
-          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Why Researchers Choose Us</motion.p>
+          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">{t("why.label")}</motion.p>
           <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-            Quality you can verify, pricing you can afford
+            {t("why.title")}
           </motion.h2>
         </motion.div>
 
@@ -387,6 +392,7 @@ function WhyChooseUs() {
 }
 
 function Testimonials() {
+  const { t } = useLanguage();
   const reviews = [
     {
       quote: "The purity documentation was thorough and the peptides performed consistently across our assay panel. We've since moved all our peptide sourcing here.",
@@ -418,9 +424,9 @@ function Testimonials() {
           variants={staggerContainer}
           className="text-center mb-10"
         >
-          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">What Researchers Say</motion.p>
+          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">{t("testimonials.label")}</motion.p>
           <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground" data-testid="text-testimonials-title">
-            Trusted by labs across Europe
+            {t("testimonials.title")}
           </motion.h2>
         </motion.div>
 
@@ -462,11 +468,12 @@ function Testimonials() {
 }
 
 function ToolsAndResources() {
+  const { t } = useLanguage();
   const resources = [
-    { label: "Dosage Guide", href: "/peptide-guide", desc: "Comprehensive dosing, reconstitution, and cycle reference for 50+ peptides", icon: Syringe },
-    { label: "Peptide Calculator", href: "/calculator", desc: "Reconstitution dosing and vial duration calculator", icon: Calculator },
-    { label: "Research Insights", href: "/insights", desc: "Articles on peptide science and best practices", icon: BookOpen },
-    { label: "FAQ & Support", href: "/faq", desc: "Ordering, shipping, storage, and returns", icon: HelpCircle },
+    { label: t("tools.dosageGuide"), href: "/peptide-guide", desc: t("tools.dosageDesc"), icon: Syringe },
+    { label: t("tools.calculator"), href: "/calculator", desc: t("tools.calculatorDesc"), icon: Calculator },
+    { label: t("tools.insights"), href: "/insights", desc: t("tools.insightsDesc"), icon: BookOpen },
+    { label: t("tools.faq"), href: "/faq", desc: t("tools.faqDesc"), icon: HelpCircle },
   ];
 
   return (
@@ -480,7 +487,7 @@ function ToolsAndResources() {
           className="text-center mb-10"
         >
           <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground" data-testid="text-tools-title">
-            Free tools for your research
+            {t("tools.title")}
           </motion.h2>
         </motion.div>
 
@@ -511,6 +518,7 @@ function ToolsAndResources() {
 }
 
 function NewsletterSection() {
+  const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -529,9 +537,9 @@ function NewsletterSection() {
       setDiscountCode(data.discountCode || "");
       setSubmitted(true);
       setEmail("");
-      toast({ title: "Welcome!", description: "Your 10% discount code is ready." });
+      toast({ title: t("newsletter.welcomeTitle"), description: t("newsletter.welcomeDesc") });
     } catch {
-      toast({ title: "Something went wrong", description: "Please try again later.", variant: "destructive" });
+      toast({ title: t("newsletter.errorTitle"), description: t("newsletter.errorDesc"), variant: "destructive" });
     } finally {
       setIsSubmitting(false);
     }
@@ -541,7 +549,7 @@ function NewsletterSection() {
     if (discountCode) {
       navigator.clipboard.writeText(discountCode);
       setCopied(true);
-      toast({ title: "Copied!", description: "Discount code copied to clipboard." });
+      toast({ title: t("newsletter.copied"), description: t("newsletter.copiedDesc") });
       setTimeout(() => setCopied(false), 2000);
     }
   };
@@ -560,10 +568,10 @@ function NewsletterSection() {
             <Tag className="h-4 w-4 text-primary" />
           </motion.div>
           <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight mb-2 text-foreground" data-testid="text-newsletter-title">
-            Get 10% off your first peptide order
+            {t("newsletter.title")}
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-muted-foreground text-sm mb-6">
-            Join our mailing list for a one-time discount code, restocks, and new product launches.
+            {t("newsletter.subtitle")}
           </motion.p>
 
           <motion.div variants={fadeInUp}>
@@ -571,7 +579,7 @@ function NewsletterSection() {
               <div className="space-y-4" data-testid="text-newsletter-success">
                 <div className="flex items-center justify-center gap-2 font-medium text-foreground">
                   <CheckCircle2 className="h-4 w-4 text-green-500" />
-                  <span className="text-sm">Your discount code is ready</span>
+                  <span className="text-sm">{t("newsletter.success")}</span>
                 </div>
                 {discountCode && (
                   <div className="inline-flex items-center gap-3 px-5 py-3 rounded-lg border border-border bg-card">
@@ -581,13 +589,13 @@ function NewsletterSection() {
                     </button>
                   </div>
                 )}
-                <p className="text-xs text-muted-foreground">Apply at checkout. One-time use.</p>
+                <p className="text-xs text-muted-foreground">{t("newsletter.applyAt")}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex gap-2 max-w-sm mx-auto">
                 <Input
                   type="email"
-                  placeholder="researcher@university.eu"
+                  placeholder={t("newsletter.placeholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -595,7 +603,7 @@ function NewsletterSection() {
                   data-testid="input-newsletter-email"
                 />
                 <Button type="submit" disabled={isSubmitting} className="shrink-0" data-testid="button-newsletter-submit">
-                  {isSubmitting ? "..." : "Subscribe"}
+                  {isSubmitting ? "..." : t("newsletter.subscribe")}
                 </Button>
               </form>
             )}

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "./language-context";
 
 interface MoleculeNode {
   x: number;
@@ -154,23 +155,27 @@ const showcaseData = [
     name: "BPC-157",
     subtitle: "Pentadecapeptide",
     desc: "15-amino-acid body protection compound. One of the most studied peptides for tissue repair and gut health research.",
+    descKey: "showcase.bpc157",
     seed: 42,
   },
   {
     name: "GHRP-6",
     subtitle: "Hexapeptide",
     desc: "Growth hormone releasing hexapeptide. Widely used in GH secretion, appetite regulation, and metabolic studies.",
+    descKey: "showcase.ghrp6",
     seed: 137,
   },
   {
     name: "Semaglutide",
     subtitle: "GLP-1 Agonist",
     desc: "GLP-1 receptor agonist. The leading research compound for metabolic regulation and weight management studies.",
+    descKey: "showcase.semaglutide",
     seed: 256,
   },
 ];
 
 export function PeptideShowcase() {
+  const { t } = useLanguage();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const molecules = showcaseData.map((d) => generateMolecule(d.seed));
@@ -196,11 +201,11 @@ export function PeptideShowcase() {
     >
       <div className="container relative mx-auto px-4">
         <motion.div className="text-center mb-12" variants={fadeInUp}>
-          <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-3">Featured Compounds</p>
+          <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-3">{t("showcase.label")}</p>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground"
             data-testid="text-showcase-title"
           >
-            Explore our most popular peptides
+            {t("showcase.title")}
           </h2>
         </motion.div>
 
@@ -222,7 +227,7 @@ export function PeptideShowcase() {
               </div>
               <h3 className="text-lg font-bold text-foreground mb-1" data-testid={`text-showcase-name-${i}`}>{item.name}</h3>
               <p className="text-xs font-medium text-muted-foreground mb-2 tracking-wider uppercase">{item.subtitle}</p>
-              <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{t(item.descKey)}</p>
             </motion.div>
           ))}
         </motion.div>
