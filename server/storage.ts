@@ -19,6 +19,7 @@ export interface IStorage {
   
   // Orders
   createOrder(order: InsertOrder): Promise<Order>;
+  createOrderWithId(id: string, order: InsertOrder): Promise<Order>;
   getOrderById(id: string): Promise<Order | undefined>;
 
   // Newsletter
@@ -459,6 +460,11 @@ export class DatabaseStorage implements IStorage {
   async createOrder(orderData: InsertOrder): Promise<Order> {
     const id = randomUUID();
     const rows = await db.insert(orders).values({ ...orderData, id, status: "pending" }).returning();
+    return rows[0];
+  }
+
+  async createOrderWithId(id: string, orderData: InsertOrder): Promise<Order> {
+    const rows = await db.insert(orders).values({ ...orderData, id }).returning();
     return rows[0];
   }
 

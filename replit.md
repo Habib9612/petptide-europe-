@@ -82,11 +82,11 @@ The home page (`client/src/pages/home.tsx`) uses a premium biotech design that s
 - **DisclaimerBanner**: Legal research-use disclaimer
 
 ### Color Palette
-- **Primary**: Teal/cyan (HSL 186 65% 38-48%)
-- **Accent**: Warm amber (HSL 35 75% 52%)
+- **Primary**: Emerald green (HSL 160 45% 45%)
+- **Accent**: Warm amber (HSL 38 70% 55%)
 - **Success**: Emerald (HSL 155 55% 40%)
-- **Category Colors**: GLP-1=teal, Growth=emerald, Healing=amber, Cosmetic=purple
-- Dark-themed sections (hero, process, disclaimer) use navy-to-teal gradients in both light/dark modes
+- **Category Colors**: GLP-1=emerald, Growth=emerald, Healing=amber, Cosmetic=purple
+- Dark-themed sections (hero, process, disclaimer) use navy-to-emerald gradients in both light/dark modes
 
 ### Product Images
 - Custom vial images for BPC-157, CJC-1295, and Hexarelin via `client/src/lib/product-images.ts` import map
@@ -116,10 +116,10 @@ Light/dark mode support using CSS custom properties defined in `client/src/index
 - **React Icons**: Additional icons (specifically Bitcoin/crypto icons)
 - **Embla Carousel**: Carousel/slider component
 
-### Payment Integration (Planned)
-- **BTCPay Server**: Cryptocurrency payments (Bitcoin, USDT, Ethereum) with 10% discount
-- **SEPA Bank Transfer**: European bank transfers
-- **High-risk Merchant Account**: Credit card processing (e.g., Seamless Chex)
+### Payment Integration
+- **Stripe**: Credit card payments via Stripe Checkout (hosted page). Integration uses Replit's Stripe connector for credentials. Files: `server/stripeClient.ts`, `server/webhookHandlers.ts`. Webhook route registered before `express.json()` in `server/index.ts`. Checkout session created via `POST /api/stripe/create-checkout` with `price_data` line items. Success page at `/checkout/success`.
+- **Cryptocurrency**: Manual crypto payments (Bitcoin, USDT, Ethereum) with 10% discount
+- **SEPA Bank Transfer**: European bank transfers (manual process)
 
 ### Development Tools
 - **Replit Plugins**: Runtime error overlay, cartographer, dev banner for Replit environment

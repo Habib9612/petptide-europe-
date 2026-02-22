@@ -24,6 +24,7 @@ import UserBlogPostPage from "@/pages/user-blog-post";
 import PeptideCalculator from "@/pages/peptide-calculator";
 import FAQ from "@/pages/faq";
 import PeptideGuide from "@/pages/peptide-guide";
+import CheckoutSuccess from "@/pages/checkout-success";
 
 function Router() {
   return (
@@ -35,6 +36,7 @@ function Router() {
       <Route path="/insights/user/:id" component={UserBlogPostPage} />
       <Route path="/insights/:slug" component={BlogPost} />
       <Route path="/cart" component={Cart} />
+      <Route path="/checkout/success" component={CheckoutSuccess} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/shipping" component={Shipping} />
       <Route path="/terms" component={Terms} />

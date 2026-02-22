@@ -121,9 +121,42 @@ export default function Checkout() {
       return;
     }
 
+    if (paymentMethod === "card" && !formData.email) {
+      toast({
+        title: "Email required",
+        description: "Please enter your email address for credit card payment.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
+      if (paymentMethod === "card") {
+        const stripePayload = {
+          items: items.map(i => ({ productId: i.product.id, name: i.product.name, quantity: i.quantity, price: i.product.price })),
+          email: formData.email,
+          shipping,
+          subtotal,
+          discount: cryptoDiscount + newsletterDiscountAmount,
+          total,
+          discountCode: discountApplied ? discountCode.trim() : '',
+          customerInfo: formData,
+        };
+
+        const res = await apiRequest("POST", "/api/stripe/create-checkout", stripePayload);
+        const data = await res.json();
+
+        if (data.url) {
+          if (discountApplied && discountCode) {
+            try { await apiRequest("POST", "/api/newsletter/use-code", { code: discountCode.trim() }); } catch {}
+          }
+          window.location.href = data.url;
+          return;
+        }
+      }
+
       const orderPayload = {
         ...formData,
         paymentMethod,

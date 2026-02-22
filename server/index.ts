@@ -2,6 +2,9 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
+import { runMigrations } from "stripe-replit-sync";
+import { getStripeSync } from "./stripeClient";
+import { WebhookHandlers } from "./webhookHandlers";
 
 const app = express();
 const httpServer = createServer(app);
@@ -11,6 +14,35 @@ declare module "http" {
     rawBody: unknown;
   }
 }
+
+async function initStripe() {
+  const databaseUrl = process.env.DATABASE_URL;
+  if (!databaseUrl) return;
+
+  await runMigrations({ databaseUrl });
+
+  const stripeSync = await getStripeSync();
+
+  const webhookBaseUrl = `https://${process.env.REPLIT_DOMAINS?.split(',')[0]}`;
+  await stripeSync.findOrCreateManagedWebhook(
+    `${webhookBaseUrl}/api/stripe/webhook`
+  );
+
+  stripeSync.syncBackfill().catch((err: any) => {
+    console.error('Stripe backfill error:', err.message);
+  });
+}
+
+app.post("/api/stripe/webhook", express.raw({ type: "application/json" }), async (req, res) => {
+  try {
+    const signature = req.headers["stripe-signature"] as string;
+    await WebhookHandlers.processWebhook(req.body, signature);
+    res.json({ received: true });
+  } catch (err: any) {
+    console.error("Stripe webhook error:", err.message);
+    res.status(400).json({ error: err.message });
+  }
+});
 
 app.use(
   express.json({
@@ -61,6 +93,10 @@ app.use((req, res, next) => {
 
 (async () => {
   await registerRoutes(httpServer, app);
+
+  initStripe().catch((err) => {
+    console.error("Stripe initialization error (non-blocking):", err.message);
+  });
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;

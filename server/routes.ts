@@ -229,5 +229,135 @@ export async function registerRoutes(
     }
   });
 
+  app.get("/api/stripe/publishable-key", async (req, res) => {
+    try {
+      const { getStripePublishableKey } = await import("./stripeClient");
+      const key = await getStripePublishableKey();
+      res.json({ publishableKey: key });
+    } catch (error) {
+      res.status(500).json({ error: "Stripe not configured" });
+    }
+  });
+
+  app.post("/api/stripe/create-checkout", async (req, res) => {
+    try {
+      const { getUncachableStripeClient } = await import("./stripeClient");
+      const stripe = await getUncachableStripeClient();
+      const { items, email, shipping, subtotal, discount, total, discountCode, customerInfo } = req.body;
+
+      if (!items || !Array.isArray(items) || items.length === 0) {
+        return res.status(400).json({ error: "Cart items required" });
+      }
+
+      const lineItems = items.map((item: any) => ({
+        price_data: {
+          currency: 'eur',
+          product_data: {
+            name: item.name,
+          },
+          unit_amount: Math.round(item.price * 100),
+        },
+        quantity: item.quantity,
+      }));
+
+      if (shipping > 0) {
+        lineItems.push({
+          price_data: {
+            currency: 'eur',
+            product_data: { name: 'Shipping' },
+            unit_amount: Math.round(shipping * 100),
+          },
+          quantity: 1,
+        });
+      }
+
+      const sessionParams: any = {
+        payment_method_types: ['card'],
+        line_items: lineItems,
+        mode: 'payment',
+        customer_email: email,
+        success_url: `${req.protocol}://${req.get('host')}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.protocol}://${req.get('host')}/checkout`,
+        metadata: {
+          subtotal: String(subtotal),
+          shipping: String(shipping),
+          discount: String(discount),
+          total: String(total),
+          discountCode: discountCode || '',
+          items: JSON.stringify(items.map((i: any) => ({ productId: i.productId, quantity: i.quantity, price: i.price }))),
+          customerFirstName: customerInfo?.firstName || '',
+          customerLastName: customerInfo?.lastName || '',
+          customerAddress: customerInfo?.address || '',
+          customerCity: customerInfo?.city || '',
+          customerCountry: customerInfo?.country || '',
+          customerPostalCode: customerInfo?.postalCode || '',
+        },
+      };
+
+      if (discount > 0) {
+        const coupon = await stripe.coupons.create({
+          amount_off: Math.round(discount * 100),
+          currency: 'eur',
+          duration: 'once',
+          name: 'Order Discount',
+        });
+        sessionParams.discounts = [{ coupon: coupon.id }];
+      }
+
+      const session = await stripe.checkout.sessions.create(sessionParams);
+      res.json({ url: session.url });
+    } catch (error: any) {
+      console.error("Stripe checkout error:", error.message);
+      res.status(500).json({ error: "Failed to create checkout session" });
+    }
+  });
+
+  app.get("/api/stripe/session/:sessionId", async (req, res) => {
+    try {
+      const { getUncachableStripeClient } = await import("./stripeClient");
+      const stripe = await getUncachableStripeClient();
+      const session = await stripe.checkout.sessions.retrieve(req.params.sessionId);
+
+      if (session.payment_status === "paid" && session.metadata) {
+        const existingOrder = await storage.getOrderById(session.id);
+        if (!existingOrder) {
+          try {
+            const orderData = {
+              email: session.customer_email || "",
+              firstName: session.metadata.customerFirstName || "",
+              lastName: session.metadata.customerLastName || "",
+              address: session.metadata.customerAddress || "",
+              city: session.metadata.customerCity || "",
+              country: session.metadata.customerCountry || "",
+              postalCode: session.metadata.customerPostalCode || "",
+              paymentMethod: "card",
+              subtotal: parseFloat(session.metadata.subtotal || "0"),
+              shipping: parseFloat(session.metadata.shipping || "0"),
+              discount: parseFloat(session.metadata.discount || "0"),
+              total: parseFloat(session.metadata.total || "0"),
+              items: session.metadata.items || "[]",
+            };
+            await storage.createOrderWithId(session.id, { ...orderData, status: "paid" } as any);
+
+            if (session.metadata.discountCode) {
+              try { await storage.markDiscountUsed(session.metadata.discountCode); } catch {}
+            }
+          } catch {}
+        }
+      }
+
+      res.json({
+        id: session.id,
+        payment_status: session.payment_status,
+        customer_email: session.customer_email,
+        amount_total: session.amount_total,
+        currency: session.currency,
+        metadata: session.metadata,
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to retrieve session" });
+    }
+  });
+
   return httpServer;
 }
