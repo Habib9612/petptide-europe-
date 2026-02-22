@@ -11,11 +11,11 @@ import { Plus, FlaskConical } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const categoryColors: Record<string, string> = {
-  glp1: "hsl(186, 60%, 42%)",
-  growth: "hsl(155, 50%, 40%)",
-  healing: "hsl(35, 65%, 50%)",
-  cosmetic: "hsl(262, 45%, 52%)",
-  nootropics: "hsl(340, 55%, 48%)",
+  glp1: "hsl(222, 30%, 30%)",
+  growth: "hsl(222, 25%, 35%)",
+  healing: "hsl(40, 30%, 45%)",
+  cosmetic: "hsl(222, 20%, 40%)",
+  nootropics: "hsl(222, 15%, 45%)",
 };
 
 interface ProductCardProps {
@@ -28,7 +28,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const { toast } = useToast();
 
   const hasDiscount = product.regularPrice && product.regularPrice > product.price;
-  const catColor = categoryColors[product.category] || "hsl(186, 60%, 42%)";
+  const catColor = categoryColors[product.category] || "hsl(222, 30%, 30%)";
 
   const handleAddToCart = () => {
     addItem(product);
@@ -42,7 +42,7 @@ export function ProductCard({ product }: ProductCardProps) {
     <Card className="group relative flex flex-col h-full hover-elevate" data-testid={`card-product-${product.id}`}>
       <Link href={`/product/${product.id}`} className="flex flex-col flex-1" data-testid={`link-product-${product.id}`}>
         <div className="p-4 pb-0 flex-1">
-          <div className="mb-4 flex h-52 items-center justify-center rounded-md bg-[hsl(210,20%,96%)] dark:bg-muted/50 overflow-hidden">
+          <div className="mb-4 flex h-52 items-center justify-center rounded-md bg-muted/50 overflow-hidden">
             {getProductImage(product.id, "") ? (
               <img
                 src={getProductImage(product.id, "")}

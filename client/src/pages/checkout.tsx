@@ -93,8 +93,8 @@ export default function Checkout() {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
         <div className="mx-auto max-w-md">
-          <div className="mb-6 flex h-20 w-20 mx-auto items-center justify-center rounded-full bg-green-500/10">
-            <CheckCircle className="h-10 w-10 text-green-500" />
+          <div className="mb-6 flex h-20 w-20 mx-auto items-center justify-center rounded-full bg-primary/5">
+            <CheckCircle className="h-10 w-10 text-primary" />
           </div>
           <h1 className="text-2xl font-bold mb-3" data-testid="text-order-success">Order Placed Successfully!</h1>
           <p className="text-muted-foreground mb-6">
@@ -357,11 +357,11 @@ export default function Checkout() {
                     onValueChange={setPaymentMethod}
                     className="space-y-3"
                   >
-                    <div className="flex items-center space-x-3 rounded-lg border border-amber-500/30 bg-amber-500/5 p-4">
+                    <div className="flex items-center space-x-3 rounded-lg border border-primary/20 bg-primary/5 p-4">
                       <RadioGroupItem value="crypto" id="crypto" data-testid="radio-crypto" />
                       <Label htmlFor="crypto" className="flex-1 cursor-pointer">
                         <div className="flex items-center gap-3">
-                          <SiBitcoin className="h-5 w-5 text-amber-500" />
+                          <SiBitcoin className="h-5 w-5 text-primary" />
                           <div>
                             <p className="font-medium">{t("checkout.crypto")}</p>
                             <p className="text-xs text-muted-foreground">
@@ -454,7 +454,7 @@ export default function Checkout() {
                       </Button>
                     </div>
                     {discountApplied && (
-                      <p className="text-xs text-green-600">Newsletter discount applied: {newsletterDiscount}% off</p>
+                      <p className="text-xs text-primary">Newsletter discount applied: {newsletterDiscount}% off</p>
                     )}
                   </div>
                   <div className="border-t pt-4 space-y-2">
@@ -463,13 +463,13 @@ export default function Checkout() {
                       <span>&euro;{subtotal.toFixed(2)}</span>
                     </div>
                     {cryptoDiscount > 0 && (
-                      <div className="flex justify-between text-sm text-green-600">
+                      <div className="flex justify-between text-sm text-primary">
                         <span>{t("cart.discount")} (Crypto)</span>
                         <span data-testid="text-discount">-&euro;{cryptoDiscount.toFixed(2)}</span>
                       </div>
                     )}
                     {newsletterDiscountAmount > 0 && (
-                      <div className="flex justify-between text-sm text-green-600">
+                      <div className="flex justify-between text-sm text-primary">
                         <span>Newsletter Discount</span>
                         <span data-testid="text-newsletter-discount">-&euro;{newsletterDiscountAmount.toFixed(2)}</span>
                       </div>
@@ -479,7 +479,7 @@ export default function Checkout() {
                       <span>{shipping === 0 ? "Free" : `\u20AC${shipping.toFixed(2)}`}</span>
                     </div>
                     {shipping === 0 && (
-                      <p className="text-xs text-green-600">Free shipping on orders over &euro;120</p>
+                      <p className="text-xs text-primary">Free shipping on orders over &euro;120</p>
                     )}
                     <div className="flex justify-between text-lg font-semibold border-t pt-2">
                       <span>Total</span>

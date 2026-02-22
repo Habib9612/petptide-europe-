@@ -55,8 +55,8 @@ export default function CheckoutSuccess() {
   return (
     <div className="container mx-auto px-4 py-16 text-center">
       <div className="mx-auto max-w-md">
-        <div className="mb-6 flex h-20 w-20 mx-auto items-center justify-center rounded-full bg-green-500/10">
-          <CheckCircle className="h-10 w-10 text-green-500" />
+        <div className="mb-6 flex h-20 w-20 mx-auto items-center justify-center rounded-full bg-primary/5">
+          <CheckCircle className="h-10 w-10 text-primary" />
         </div>
         <h1 className="text-2xl font-bold mb-3" data-testid="text-payment-success">
           Payment Successful!
@@ -85,7 +85,7 @@ export default function CheckoutSuccess() {
               )}
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Status</span>
-                <span className="text-green-600 font-medium" data-testid="text-session-status">
+                <span className="text-primary font-medium" data-testid="text-session-status">
                   {session.payment_status === "paid" ? "Paid" : session.payment_status}
                 </span>
               </div>

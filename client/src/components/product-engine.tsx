@@ -32,14 +32,14 @@ function buildTiers(product: Product): PricingTier[] {
   if (baseMg >= 10) {
     return [
       { label: `${baseMg / 2}mg`, mg: baseMg / 2, price: Math.round(basePrice * 0.6 * 100) / 100 },
-      { label: `${baseMg}mg`, mg: baseMg, price: basePrice, tag: "Most Popular", tagColor: "text-[hsl(186,65%,48%)]" },
-      { label: `${baseMg * 2}mg`, mg: baseMg * 2, price: Math.round(basePrice * 1.7 * 100) / 100, tag: "Best Value", tagColor: "text-amber-500" },
+      { label: `${baseMg}mg`, mg: baseMg, price: basePrice, tag: "Most Popular", tagColor: "text-primary" },
+      { label: `${baseMg * 2}mg`, mg: baseMg * 2, price: Math.round(basePrice * 1.7 * 100) / 100, tag: "Best Value", tagColor: "text-primary" },
     ];
   }
 
   return [
-    { label: `${baseMg}mg`, mg: baseMg, price: basePrice, tag: "Most Popular", tagColor: "text-[hsl(186,65%,48%)]" },
-    { label: `${baseMg * 2}mg`, mg: baseMg * 2, price: Math.round(basePrice * 1.7 * 100) / 100, tag: "Best Value", tagColor: "text-amber-500" },
+    { label: `${baseMg}mg`, mg: baseMg, price: basePrice, tag: "Most Popular", tagColor: "text-primary" },
+    { label: `${baseMg * 2}mg`, mg: baseMg * 2, price: Math.round(basePrice * 1.7 * 100) / 100, tag: "Best Value", tagColor: "text-primary" },
     { label: `${baseMg * 4}mg`, mg: baseMg * 4, price: Math.round(basePrice * 3.0 * 100) / 100 },
   ];
 }
@@ -146,7 +146,7 @@ export function ProductEngine({ product }: { product: Product }) {
               onClick={() => setSelectedTierIdx(i)}
               className={`relative rounded-lg border-2 p-3 text-center ${
                 selectedTierIdx === i
-                  ? "border-[hsl(186,65%,48%)] bg-[hsl(186,65%,48%,0.06)]"
+                  ? "border-primary bg-primary/5"
                   : "border-border/60"
               }`}
               data-testid={`tier-${tier.label}`}
@@ -208,14 +208,14 @@ export function ProductEngine({ product }: { product: Product }) {
             onClick={() => setBacWater(!bacWater)}
             className={`w-full flex items-center gap-3 rounded-lg border p-3 text-left ${
               bacWater
-                ? "border-[hsl(186,65%,48%)] bg-[hsl(186,65%,48%,0.06)]"
+                ? "border-primary bg-primary/5"
                 : "border-border/60"
             }`}
             data-testid="addon-bac-water"
           >
-            <div className={`flex h-8 w-8 items-center justify-center rounded-md ${bacWater ? "bg-[hsl(186,65%,48%,0.15)]" : "bg-muted/50"}`}>
+            <div className={`flex h-8 w-8 items-center justify-center rounded-md ${bacWater ? "bg-primary/10" : "bg-muted/50"}`}>
               {bacWater ? (
-                <Check className="h-4 w-4 text-[hsl(186,65%,48%)]" />
+                <Check className="h-4 w-4 text-primary" />
               ) : (
                 <Droplets className="h-4 w-4 text-muted-foreground" />
               )}
@@ -230,14 +230,14 @@ export function ProductEngine({ product }: { product: Product }) {
           <div
             className={`rounded-lg border p-3 ${
               needles > 0
-                ? "border-[hsl(186,65%,48%)] bg-[hsl(186,65%,48%,0.06)]"
+                ? "border-primary bg-primary/5"
                 : "border-border/60"
             }`}
           >
             <div className="flex items-center gap-3">
-              <div className={`flex h-8 w-8 items-center justify-center rounded-md ${needles > 0 ? "bg-[hsl(186,65%,48%,0.15)]" : "bg-muted/50"}`}>
+              <div className={`flex h-8 w-8 items-center justify-center rounded-md ${needles > 0 ? "bg-primary/10" : "bg-muted/50"}`}>
                 {needles > 0 ? (
-                  <Check className="h-4 w-4 text-[hsl(186,65%,48%)]" />
+                  <Check className="h-4 w-4 text-primary" />
                 ) : (
                   <Syringe className="h-4 w-4 text-muted-foreground" />
                 )}

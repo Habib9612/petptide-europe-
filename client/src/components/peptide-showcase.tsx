@@ -28,8 +28,8 @@ function generateMolecule(seed: number): MoleculeData {
   const nodes: MoleculeNode[] = [];
   const bonds: MoleculeBond[] = [];
   const nodeCount = 12 + Math.floor(rng(seed) * 8);
-  const colors = ["#3FA882", "#359B76", "#5AB894", "#2E8A6A", "#4CC09A"];
-  const glowColors = ["rgba(63,168,130,0.4)", "rgba(53,155,118,0.35)", "rgba(90,184,148,0.35)", "rgba(46,138,106,0.3)", "rgba(76,192,154,0.35)"];
+  const colors = ["#2D3A5C", "#374566", "#4A5A80", "#283350", "#5C6B8A"];
+  const glowColors = ["rgba(45,58,92,0.4)", "rgba(55,69,102,0.35)", "rgba(74,90,128,0.35)", "rgba(40,51,80,0.3)", "rgba(92,107,138,0.35)"];
 
   for (let i = 0; i < nodeCount; i++) {
     const angle1 = rng(seed + i * 7) * Math.PI * 2;
@@ -108,7 +108,7 @@ function MoleculeCanvas({ molecule, hovered }: { molecule: MoleculeData; hovered
         if (!fromP || !toP) continue;
 
         ctx.beginPath();
-        ctx.strokeStyle = hovered ? "rgba(51,158,150,0.2)" : "rgba(51,158,150,0.1)";
+        ctx.strokeStyle = hovered ? "rgba(45,58,92,0.2)" : "rgba(45,58,92,0.1)";
         ctx.lineWidth = hovered ? 1.5 : 1;
         ctx.moveTo(fromP.px, fromP.py);
         ctx.lineTo(toP.px, toP.py);
@@ -203,7 +203,7 @@ export function PeptideShowcase() {
               key={item.name}
               className="rounded-xl border bg-card p-6 flex flex-col items-center text-center transition-all duration-300"
               style={{
-                borderColor: hoveredIndex === i ? "hsl(160 45% 45% / 0.3)" : "hsl(220 20% 16%)",
+                borderColor: hoveredIndex === i ? "hsl(222 30% 22% / 0.3)" : "hsl(220 10% 90%)",
                 opacity: visible ? 1 : 0,
                 transform: visible ? "translateY(0)" : "translateY(30px)",
                 transitionDelay: `${i * 150}ms`,

@@ -59,12 +59,12 @@ export default function Shipping() {
                   </div>
                   <Badge variant="secondary">€19.99</Badge>
                 </div>
-                <div className="flex items-center justify-between p-4 rounded-lg bg-green-500/10 border border-green-500/20">
+                <div className="flex items-center justify-between p-4 rounded-lg bg-primary/5 border border-primary/15">
                   <div>
-                    <p className="font-medium text-green-700 dark:text-green-400">Free Shipping</p>
+                    <p className="font-medium text-primary dark:text-primary">Free Shipping</p>
                     <p className="text-sm text-muted-foreground">On all orders over €150</p>
                   </div>
-                  <Badge className="bg-green-500 text-white border-0">FREE</Badge>
+                  <Badge className="bg-primary text-primary-foreground border-0">FREE</Badge>
                 </div>
               </CardContent>
             </Card>
@@ -130,7 +130,7 @@ export default function Shipping() {
                     "Sweden", "Switzerland", "United Kingdom"
                   ].map((country) => (
                     <div key={country} className="flex items-center gap-2 text-sm">
-                      <CheckCircle className="h-3 w-3 text-green-500" />
+                      <CheckCircle className="h-3 w-3 text-primary" />
                       <span>{country}</span>
                     </div>
                   ))}

@@ -74,7 +74,7 @@ function NewsletterSection() {
           <div className="w-full md:w-auto md:min-w-[340px]">
             {discountCode ? (
               <div className="space-y-3">
-                <div className="flex items-center gap-2 text-green-600 dark:text-green-400">
+                <div className="flex items-center gap-2 text-primary">
                   <Check className="h-5 w-5" />
                   <span className="font-bold text-sm">You're subscribed!</span>
                 </div>

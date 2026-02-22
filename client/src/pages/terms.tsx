@@ -34,18 +34,18 @@ export default function Terms() {
             </CardContent>
           </Card>
 
-          <Card className="border-amber-500/30">
+          <Card className="border-border">
             <CardHeader>
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/10">
-                  <AlertTriangle className="h-5 w-5 text-amber-500" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
+                  <AlertTriangle className="h-5 w-5 text-foreground" />
                 </div>
-                <CardTitle className="text-amber-700 dark:text-amber-400">2. Research Use Only</CardTitle>
+                <CardTitle className="text-foreground">2. Research Use Only</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                All products sold by Peptide Europe are strictly for <span className="font-bold text-amber-700 dark:text-amber-400">RESEARCH AND LABORATORY USE ONLY</span>. 
+                All products sold by Peptide Europe are strictly for <span className="font-bold text-foreground">RESEARCH AND LABORATORY USE ONLY</span>. 
                 They are not intended for human consumption, diagnostic, therapeutic, or veterinary use.
               </p>
               <p className="text-muted-foreground">

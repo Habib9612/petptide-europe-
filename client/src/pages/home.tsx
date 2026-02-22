@@ -105,11 +105,11 @@ function ScienceSection() {
               <div className="flex flex-wrap gap-1 mb-5" data-testid="text-sequence-value">
                 {residues.map((res, i) => (
                   <span key={i} className="inline-flex items-center">
-                    <span className="font-mono text-xs px-1.5 py-0.5 rounded-md bg-primary/8 text-primary border border-primary/12">
+                    <span className="font-mono text-xs px-1.5 py-0.5 rounded-md bg-primary/6 text-primary border border-primary/10">
                       {res}
                     </span>
                     {i < residues.length - 1 && (
-                      <span className="text-primary/25 mx-0.5 text-[10px]">&mdash;</span>
+                      <span className="text-primary/20 mx-0.5 text-[10px]">&mdash;</span>
                     )}
                   </span>
                 ))}
@@ -205,8 +205,8 @@ function ProcessSection() {
                     <div
                       className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300"
                       style={{
-                        background: isActive ? "hsl(160 45% 45% / 0.12)" : "hsl(160 45% 45% / 0.05)",
-                        border: `1px solid ${isActive ? "hsl(160 45% 45% / 0.35)" : "hsl(220 20% 16%)"}`,
+                        background: isActive ? "hsl(222 30% 22% / 0.1)" : "hsl(222 30% 22% / 0.04)",
+                        border: `1px solid ${isActive ? "hsl(222 30% 22% / 0.3)" : "hsl(220 10% 90%)"}`,
                       }}
                     >
                       <step.icon
@@ -409,7 +409,7 @@ function Testimonials() {
               <div className="p-5 flex flex-col h-full">
                 <div className="flex gap-0.5 mb-3">
                   {Array.from({ length: 5 }).map((_, s) => (
-                    <svg key={s} className="h-3.5 w-3.5 fill-current text-amber-500" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" /></svg>
+                    <svg key={s} className="h-3.5 w-3.5 fill-current text-amber-400/80" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" /></svg>
                   ))}
                 </div>
                 <p className="text-sm leading-relaxed flex-1 mb-4 text-muted-foreground" data-testid={`text-testimonial-quote-${i}`}>

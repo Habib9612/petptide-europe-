@@ -20,8 +20,8 @@ function SyringeSVG({ fillPercent }: { fillPercent: number }) {
           <stop offset="100%" stopColor="hsl(210,15%,75%)" stopOpacity="0.6" />
         </linearGradient>
         <linearGradient id="liquidFill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="hsl(186,65%,55%)" stopOpacity="0.5" />
-          <stop offset="100%" stopColor="hsl(186,65%,40%)" stopOpacity="0.7" />
+          <stop offset="0%" stopColor="hsl(222,30%,22%)" stopOpacity="0.5" />
+          <stop offset="100%" stopColor="hsl(222,25%,18%)" stopOpacity="0.7" />
         </linearGradient>
       </defs>
 
@@ -83,7 +83,7 @@ function CustomSlider({ min, max, step, value, onChange, label, unit, id }: Slid
         onChange={(e) => onChange(parseFloat(e.target.value))}
         className="w-full h-1.5 rounded-full appearance-none cursor-pointer custom-slider"
         style={{
-          background: `linear-gradient(to right, hsl(186,65%,48%) 0%, hsl(186,65%,48%) ${percent}%, hsl(210,15%,25%) ${percent}%, hsl(210,15%,25%) 100%)`,
+          background: `linear-gradient(to right, hsl(222,30%,30%) 0%, hsl(222,30%,30%) ${percent}%, hsl(210,15%,25%) ${percent}%, hsl(210,15%,25%) 100%)`,
         }}
         data-testid={`slider-${id}`}
       />
@@ -121,7 +121,7 @@ export function DosageCalculatorInline() {
   return (
     <div className="mt-8 border-t border-border/50 pt-8">
       <div className="flex items-center gap-2 mb-5">
-        <Calculator className="h-5 w-5 text-[hsl(186,65%,48%)]" />
+        <Calculator className="h-5 w-5 text-primary" />
         <h2 className="text-lg font-semibold" data-testid="heading-dosage-calculator">Dosage Calculator</h2>
       </div>
 
@@ -173,13 +173,13 @@ export function DosageCalculatorInline() {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <p className="text-[11px] text-muted-foreground uppercase tracking-wider">Draw Volume</p>
-                  <p className="text-lg font-bold text-[hsl(186,65%,48%)]" data-testid="result-draw-volume">
+                  <p className="text-lg font-bold text-primary" data-testid="result-draw-volume">
                     {results.drawVolume.toFixed(3)} mL
                   </p>
                 </div>
                 <div>
                   <p className="text-[11px] text-muted-foreground uppercase tracking-wider">Units to Draw</p>
-                  <p className="text-lg font-bold text-[hsl(186,65%,48%)]" data-testid="result-units-to-draw">
+                  <p className="text-lg font-bold text-primary" data-testid="result-units-to-draw">
                     {results.unitsToDraw} units
                   </p>
                 </div>

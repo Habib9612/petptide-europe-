@@ -168,14 +168,14 @@ export default function Cart() {
                   <span className="text-muted-foreground">{t("cart.shipping")}</span>
                   <span className="font-medium" data-testid="text-shipping">
                     {shipping === 0 ? (
-                      <span className="text-green-600">Free</span>
+                      <span className="text-primary">Free</span>
                     ) : (
                       `€${shipping.toFixed(2)}`
                     )}
                   </span>
                 </div>
                 {shipping === 0 && (
-                  <p className="text-xs text-green-600">Free shipping on orders over &euro;120</p>
+                  <p className="text-xs text-primary">Free shipping on orders over &euro;120</p>
                 )}
                 <div className="border-t pt-4">
                   <div className="flex justify-between text-lg font-semibold">
@@ -186,11 +186,11 @@ export default function Cart() {
               </CardContent>
             </Card>
 
-            <Card className="border-amber-500/30 bg-gradient-to-br from-amber-500/5 to-orange-500/5">
+            <Card className="border-primary/20 bg-primary/5">
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-500/20">
-                    <SiBitcoin className="h-5 w-5 text-amber-500" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                    <SiBitcoin className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <p className="font-medium text-sm">Pay with Crypto & Save</p>

@@ -36,48 +36,48 @@ const categoryConfig: Record<
 > = {
   "Weight Loss": {
     icon: TrendingDown,
-    color: "text-rose-600 dark:text-rose-400",
-    bgColor: "bg-rose-50 dark:bg-rose-950/30",
+    color: "text-foreground/80",
+    bgColor: "bg-muted",
   },
   "Fat Loss / Muscle": {
     icon: Flame,
-    color: "text-orange-600 dark:text-orange-400",
-    bgColor: "bg-orange-50 dark:bg-orange-950/30",
+    color: "text-foreground/75",
+    bgColor: "bg-muted/90",
   },
   "Muscle Growth": {
     icon: Dumbbell,
-    color: "text-emerald-600 dark:text-emerald-400",
-    bgColor: "bg-emerald-50 dark:bg-emerald-950/30",
+    color: "text-foreground/80",
+    bgColor: "bg-muted",
   },
   "Recovery & Repair": {
     icon: Heart,
-    color: "text-red-600 dark:text-red-400",
-    bgColor: "bg-red-50 dark:bg-red-950/30",
+    color: "text-foreground/70",
+    bgColor: "bg-muted/80",
   },
   Cognitive: {
     icon: Brain,
-    color: "text-violet-600 dark:text-violet-400",
-    bgColor: "bg-violet-50 dark:bg-violet-950/30",
+    color: "text-foreground/85",
+    bgColor: "bg-muted/70",
   },
   "Longevity & Anti-Aging": {
     icon: Clock,
-    color: "text-sky-600 dark:text-sky-400",
-    bgColor: "bg-sky-50 dark:bg-sky-950/30",
+    color: "text-foreground/75",
+    bgColor: "bg-muted/60",
   },
   "Immune & Gut": {
     icon: Shield,
-    color: "text-teal-600 dark:text-teal-400",
-    bgColor: "bg-teal-50 dark:bg-teal-950/30",
+    color: "text-foreground/70",
+    bgColor: "bg-muted/80",
   },
   "Sexual Health": {
     icon: Sparkles,
-    color: "text-pink-600 dark:text-pink-400",
-    bgColor: "bg-pink-50 dark:bg-pink-950/30",
+    color: "text-foreground/65",
+    bgColor: "bg-muted/50",
   },
   "Skin & UV Protection": {
     icon: Sparkles,
-    color: "text-amber-600 dark:text-amber-400",
-    bgColor: "bg-amber-50 dark:bg-amber-950/30",
+    color: "text-foreground/75",
+    bgColor: "bg-muted/70",
   },
 };
 
@@ -284,7 +284,7 @@ export default function PeptideGuide() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="bg-gradient-to-b from-[hsl(186,65%,12%)] to-[hsl(186,45%,18%)] text-white">
+      <div className="bg-gradient-to-b from-[hsl(222,25%,12%)] to-[hsl(222,20%,18%)] text-white">
         <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16">
           <Link
             href="/"
@@ -296,7 +296,7 @@ export default function PeptideGuide() {
           </Link>
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
-              <Syringe className="h-6 w-6 text-[hsl(186,65%,60%)]" />
+              <Syringe className="h-6 w-6 text-[hsl(40,35%,65%)]" />
             </div>
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
@@ -311,25 +311,25 @@ export default function PeptideGuide() {
 
           <div className="mt-8 grid grid-cols-3 sm:grid-cols-4 gap-4 text-center">
             <div>
-              <div className="text-2xl sm:text-3xl font-bold text-[hsl(186,65%,60%)]">
+              <div className="text-2xl sm:text-3xl font-bold text-[hsl(40,35%,65%)]">
                 {peptideGuideData.length}
               </div>
               <div className="text-xs text-white/50 mt-1">Peptides</div>
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl font-bold text-[hsl(35,75%,55%)]">
+              <div className="text-2xl sm:text-3xl font-bold text-[hsl(40,30%,58%)]">
                 {Object.keys(categoryCounts).length}
               </div>
               <div className="text-xs text-white/50 mt-1">Categories</div>
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl font-bold text-[hsl(155,55%,50%)]">
+              <div className="text-2xl sm:text-3xl font-bold text-[hsl(220,15%,55%)]">
                 98%+
               </div>
               <div className="text-xs text-white/50 mt-1">Purity</div>
             </div>
             <div className="hidden sm:block">
-              <div className="text-2xl sm:text-3xl font-bold text-violet-400">
+              <div className="text-2xl sm:text-3xl font-bold text-[hsl(220,20%,65%)]">
                 HPLC
               </div>
               <div className="text-xs text-white/50 mt-1">Verified</div>
@@ -452,7 +452,7 @@ export default function PeptideGuide() {
           </div>
         )}
 
-        <Card className="mt-8 border-amber-200/50 dark:border-amber-800/30 bg-amber-50/50 dark:bg-amber-950/10">
+        <Card className="mt-8 border-border bg-muted/50">
           <CardContent className="p-4">
             <p className="text-xs text-muted-foreground leading-relaxed">
               <strong className="text-foreground">Research Use Only:</strong>{" "}

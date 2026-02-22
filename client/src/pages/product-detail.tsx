@@ -51,7 +51,7 @@ export default function ProductDetail() {
 
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
-            <div className="flex h-72 lg:h-[28rem] items-center justify-center rounded-md bg-[hsl(210,20%,96%)] dark:bg-gradient-to-b dark:from-muted/60 dark:to-muted/20 border border-border/50 overflow-hidden">
+            <div className="flex h-72 lg:h-[28rem] items-center justify-center rounded-md bg-muted/50 dark:bg-gradient-to-b dark:from-muted/60 dark:to-muted/20 border border-border/50 overflow-hidden">
               {getProductImage(product.id, "") ? (
                 <img
                   src={getProductImage(product.id, "")}
@@ -98,8 +98,8 @@ export default function ProductDetail() {
             </div>
 
             <div className="flex items-center gap-1.5 text-sm">
-              <span className={`h-2 w-2 rounded-full ${isLowStock ? "bg-amber-500" : "bg-emerald-500"}`} />
-              <span className={isLowStock ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground"} data-testid="text-product-stock">
+              <span className={`h-2 w-2 rounded-full ${isLowStock ? "bg-primary/60" : "bg-primary"}`} />
+              <span className="text-muted-foreground" data-testid="text-product-stock">
                 {isLowStock ? t("products.lowStock") : t("products.inStock")} ({product.stock} units)
               </span>
             </div>
@@ -179,8 +179,8 @@ export default function ProductDetail() {
               </TabsContent>
 
               <TabsContent value="disclaimer" className="mt-4">
-                <div className="rounded-md bg-amber-500/5 border border-amber-500/15 p-4">
-                  <p className="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-1.5">
+                <div className="rounded-md bg-muted border border-border p-4">
+                  <p className="text-xs font-semibold text-foreground/60 uppercase tracking-wider mb-1.5">
                     Research Use Only
                   </p>
                   <p className="text-sm text-muted-foreground leading-relaxed">

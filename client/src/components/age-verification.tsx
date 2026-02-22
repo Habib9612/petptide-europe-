@@ -46,7 +46,7 @@ export function AgeVerification() {
             </p>
           </div>
 
-          <div className="rounded-md bg-amber-500/10 border border-amber-500/20 p-3">
+          <div className="rounded-md bg-muted border border-border p-3">
             <p className="text-xs text-muted-foreground">
               All products are intended for laboratory research purposes only. Not for human consumption.
             </p>
