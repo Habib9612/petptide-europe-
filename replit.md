@@ -82,13 +82,14 @@ The home page (`client/src/pages/home.tsx`) uses a premium biotech design that s
 - **DisclaimerBanner**: Legal research-use disclaimer
 
 ### Color Palette (Luxury Minimalist)
-- **Light Mode Primary**: Deep navy (HSL 222 30% 22%) - sophisticated, authoritative
-- **Dark Mode Primary**: Muted gold (HSL 40 35% 58%) - elegant accent as primary in dark
-- **Accent**: Muted gold (HSL 40 35% 52%)
-- **Background**: Clean off-white (HSL 220 15% 98%) / Deep charcoal (HSL 225 20% 6%)
-- **Success**: Muted emerald (HSL 155 45% 38%)
-- **Category Colors**: Unified navy tones with subtle opacity variations
-- Design philosophy: minimal colors, elegant and luxurious, no competing bright colors
+- **Light Mode Primary**: Clean blue (HSL 220 70% 50%) - modern, professional
+- **Dark Mode Primary**: Lighter blue (HSL 217 80% 62%) - legible on dark backgrounds
+- **Background**: Pure white (HSL 0 0% 100%) / Deep charcoal (HSL 224 71% 4%)
+- **Success**: Clean emerald (HSL 160 60% 40%)
+- **Category Colors**: Blue accent variations
+- Design philosophy: single blue accent, clean whites, no competing colors, no gold
+- framer-motion animations on all sections (scroll-triggered whileInView)
+- Hover lift effects on cards (shadow + translate-y)
 
 ### Product Images
 - Custom vial images for BPC-157, CJC-1295, and Hexarelin via `client/src/lib/product-images.ts` import map

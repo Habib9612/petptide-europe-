@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Hero, TrustBar } from "@/components/hero";
 import { PeptideShowcase } from "@/components/peptide-showcase";
 import { DisclaimerBanner } from "@/components/disclaimer-banner";
@@ -28,36 +29,36 @@ import {
   Beaker,
 } from "lucide-react";
 
-function useScrollReveal(threshold = 0.15) {
-  const ref = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [threshold]);
-  return { ref, visible };
-}
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } }
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.5 } }
+};
 
 function ScienceSection() {
-  const { ref, visible } = useScrollReveal();
   const residues = ["Gly", "Glu", "Pro", "Pro", "Pro", "Gly", "Lys", "Pro", "Ala", "Asp", "Asp", "Ala", "Gly", "Leu", "Val"];
 
   return (
-    <section ref={ref} className="relative py-16 lg:py-24 bg-card overflow-hidden" id="science">
+    <section className="relative py-20 lg:py-28 bg-muted/30 overflow-hidden" id="science">
       <div className="container relative mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateX(0)" : "translateX(-30px)",
-              transition: "all 0.6s ease",
-            }}
-          >
-            <p className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3">Peptide Science</p>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center"
+        >
+          <motion.div variants={fadeInUp}>
+            <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-3">Peptide Science</p>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-5 leading-tight text-foreground" data-testid="text-science-title">
               Every batch synthesized, purified, and verified
             </h2>
@@ -82,16 +83,10 @@ function ScienceSection() {
                 </Button>
               </Link>
             </div>
-          </div>
+          </motion.div>
 
-          <div data-testid="section-amino-chain"
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateX(0)" : "translateX(30px)",
-              transition: "all 0.6s ease 200ms",
-            }}
-          >
-            <div className="rounded-xl border border-border bg-background p-5">
+          <motion.div variants={fadeInUp} data-testid="section-amino-chain">
+            <div className="rounded-xl border border-border bg-background p-5 hover:shadow-lg hover:border-primary/20 transition-all duration-300">
               <div className="flex items-center justify-between gap-4 mb-4">
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
@@ -126,7 +121,7 @@ function ScienceSection() {
                 </div>
                 <div data-testid="text-purity-value">
                   <span className="block font-medium text-muted-foreground mb-0.5">Purity</span>
-                  <span className="font-semibold text-primary text-[11px]">&ge;99.0%</span>
+                  <span className="font-semibold text-foreground text-[11px]">&ge;99.0%</span>
                 </div>
                 <div data-testid="text-cas-value">
                   <span className="block font-medium text-muted-foreground mb-0.5">CAS</span>
@@ -134,17 +129,17 @@ function ScienceSection() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
 }
 
 function ProcessSection() {
-  const { ref, visible } = useScrollReveal();
   const timelineRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   const steps = [
     { num: "01", icon: Beaker, title: "Synthesis", desc: "Solid-phase peptide synthesis using Fmoc chemistry with automated coupling cycles" },
@@ -156,31 +151,44 @@ function ProcessSection() {
   ];
 
   useEffect(() => {
-    if (!visible) return;
+    if (!isVisible) return;
     const interval = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % steps.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [visible, steps.length]);
+  }, [isVisible, steps.length]);
 
   return (
-    <section ref={ref} className="py-16 lg:py-24 bg-card relative overflow-hidden" id="process">
+    <section className="py-20 lg:py-28 bg-background relative overflow-hidden" id="process">
       <div className="container relative mx-auto px-4">
-        <div className="text-center mb-12">
-          <p className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-2">Quality Pipeline</p>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight text-foreground" data-testid="text-process-title">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          onViewportEnter={() => setIsVisible(true)}
+          className="text-center mb-12"
+        >
+          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Quality Pipeline</motion.p>
+          <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight text-foreground" data-testid="text-process-title">
             From synthesis to your lab
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
 
-        <div ref={timelineRef} className="relative max-w-6xl mx-auto">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          ref={timelineRef}
+          className="relative max-w-6xl mx-auto"
+        >
           <div className="absolute top-[60px] left-0 right-0 h-[2px] hidden lg:block" aria-hidden="true">
             <div className="absolute inset-0 bg-border" />
             <div
-              className="absolute top-0 left-0 h-full bg-primary"
+              className="absolute top-0 left-0 h-full bg-primary transition-all duration-600 ease-in-out"
               style={{
                 width: `${((activeStep + 1) / steps.length) * 100}%`,
-                transition: "width 0.6s ease",
               }}
             />
           </div>
@@ -190,24 +198,21 @@ function ProcessSection() {
               const isActive = i === activeStep;
               const isPast = i <= activeStep;
               return (
-                <div
+                <motion.div
                   key={i}
+                  variants={fadeInUp}
                   className="relative text-center cursor-pointer"
                   onClick={() => setActiveStep(i)}
-                  style={{
-                    opacity: visible ? (isPast ? 1 : 0.5) : 0,
-                    transform: visible ? "translateY(0)" : "translateY(20px)",
-                    transition: `all 0.5s ease ${i * 100}ms`,
-                  }}
+                  style={{ opacity: isPast ? 1 : 0.5 }}
                   data-testid={`card-process-${i}`}
                 >
                   <div className="relative z-10 mb-4 flex justify-center">
                     <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300"
-                      style={{
-                        background: isActive ? "hsl(222 30% 22% / 0.1)" : "hsl(222 30% 22% / 0.04)",
-                        border: `1px solid ${isActive ? "hsl(222 30% 22% / 0.3)" : "hsl(220 10% 90%)"}`,
-                      }}
+                      className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        isActive
+                          ? "bg-primary/10 border border-primary/30"
+                          : "bg-muted border border-border"
+                      }`}
                     >
                       <step.icon
                         className={`h-5 w-5 transition-colors duration-300 ${isActive ? "text-primary" : "text-muted-foreground"}`}
@@ -224,19 +229,17 @@ function ProcessSection() {
                     data-testid={`text-process-step-${i}`}
                   >{step.title}</h3>
                   <p className={`text-[10px] leading-relaxed text-muted-foreground transition-opacity duration-300 ${isActive ? "opacity-100" : "opacity-60"}`}>{step.desc}</p>
-                </div>
+                </motion.div>
               );
             })}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
 
 function SpecsTable() {
-  const { ref, visible } = useScrollReveal();
-
   const specs = [
     { param: "Purity (HPLC)", value: "≥98% — most products ≥99%" },
     { param: "Synthesis", value: "Solid-Phase Peptide Synthesis (SPPS / Fmoc)" },
@@ -249,44 +252,53 @@ function SpecsTable() {
   ];
 
   return (
-    <section ref={ref} className="py-16 lg:py-24 bg-background relative" id="specifications">
+    <section className="py-20 lg:py-28 bg-muted/30 relative" id="specifications">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8">
-            <p className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-2">Specifications</p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight text-foreground" data-testid="text-specs-title">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="text-center mb-8"
+          >
+            <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Specifications</motion.p>
+            <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight text-foreground" data-testid="text-specs-title">
               Product quality standards
-            </h2>
-          </div>
+            </motion.h2>
+          </motion.div>
 
-          <div className="rounded-xl border border-border bg-card overflow-hidden" data-testid="table-specs">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="rounded-xl border border-border bg-card overflow-hidden"
+            data-testid="table-specs"
+          >
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border">
-                    <th className="text-left font-semibold p-4 text-primary text-xs uppercase tracking-wider bg-muted/50" data-testid="th-parameter">Parameter</th>
-                    <th className="text-left font-semibold p-4 text-primary text-xs uppercase tracking-wider bg-muted/50" data-testid="th-standard">Standard</th>
+                    <th className="text-left font-semibold p-4 text-foreground text-xs uppercase tracking-wider bg-muted/50" data-testid="th-parameter">Parameter</th>
+                    <th className="text-left font-semibold p-4 text-foreground text-xs uppercase tracking-wider bg-muted/50" data-testid="th-standard">Standard</th>
                   </tr>
                 </thead>
                 <tbody>
                   {specs.map((row, i) => (
-                    <tr
+                    <motion.tr
                       key={i}
+                      variants={fadeInUp}
                       className="border-b border-border/50"
-                      style={{
-                        opacity: visible ? 1 : 0,
-                        transform: visible ? "translateX(0)" : "translateX(-10px)",
-                        transition: `all 0.4s ease ${i * 80}ms`,
-                      }}
                     >
                       <td className="p-4 font-medium text-foreground" data-testid={`text-spec-param-${i}`}>{row.param}</td>
                       <td className="p-4 text-muted-foreground" data-testid={`text-spec-value-${i}`}>{row.value}</td>
-                    </tr>
+                    </motion.tr>
                   ))}
                 </tbody>
               </table>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -295,30 +307,35 @@ function SpecsTable() {
 
 function MidPageCTA() {
   return (
-    <section className="relative overflow-hidden bg-secondary" data-testid="section-midcta">
-      <div className="absolute top-0 left-0 right-0 h-px bg-border" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-border" />
-      <div className="container relative mx-auto px-4 py-12 lg:py-16 text-center">
-        <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight mb-3 text-foreground" data-testid="text-cta-title">
-          Ready to order? Ships within 24 hours
-        </h2>
-        <p className="text-sm text-muted-foreground mb-5">
-          Free shipping on orders over &euro;120. Pay with crypto and save 10%.
-        </p>
-        <Link href="/products">
-          <Button size="lg" className="gap-2" data-testid="button-cta-order">
-            Order Now
-            <ArrowRight className="h-4 w-4" />
-          </Button>
-        </Link>
+    <section className="relative overflow-hidden bg-primary text-primary-foreground" data-testid="section-midcta">
+      <div className="container relative mx-auto px-4 py-14 lg:py-20 text-center">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+        >
+          <motion.h2 variants={fadeInUp} className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight mb-3 text-primary-foreground" data-testid="text-cta-title">
+            Ready to order? Ships within 24 hours
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="text-sm text-primary-foreground/80 mb-5">
+            Free shipping on orders over &euro;120. Pay with crypto and save 10%.
+          </motion.p>
+          <motion.div variants={fadeInUp}>
+            <Link href="/products">
+              <Button variant="secondary" size="lg" className="gap-2" data-testid="button-cta-order">
+                Order Now
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
 }
 
 function WhyChooseUs() {
-  const { ref, visible } = useScrollReveal();
-
   const reasons = [
     { icon: Sparkles, value: "98-99%+", label: "Purity", desc: "HPLC verified, CoA included" },
     { icon: Truck, value: "24h", label: "Dispatch", desc: "Same-day shipping, cold-chain" },
@@ -327,42 +344,49 @@ function WhyChooseUs() {
   ];
 
   return (
-    <section ref={ref} className="py-16 lg:py-24 bg-card relative" id="why-choose-us">
+    <section className="py-20 lg:py-28 bg-background relative" id="why-choose-us">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <p className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-2">Why Peptide Europe</p>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="text-center mb-12"
+        >
+          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Why Peptide Europe</motion.p>
+          <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
             Built for serious research
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
+        >
           {reasons.map((item, i) => (
-            <div
+            <motion.div
               key={i}
-              className="rounded-xl border border-border bg-background p-6 text-center"
-              style={{
-                opacity: visible ? 1 : 0,
-                transform: visible ? "translateY(0)" : "translateY(20px)",
-                transition: `all 0.5s ease ${i * 100}ms`,
-              }}
+              variants={fadeInUp}
+              className="rounded-xl border border-border bg-card p-6 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300"
             >
               <div className="mx-auto w-12 h-12 rounded-full flex items-center justify-center mb-4 bg-primary/8 border border-primary/15">
                 <item.icon className="h-5 w-5 text-primary" strokeWidth={1.5} />
               </div>
-              <p className="text-2xl font-bold text-primary mb-1">{item.value}</p>
+              <p className="text-2xl font-bold text-foreground mb-1">{item.value}</p>
               <p className="text-sm font-semibold text-foreground mb-1">{item.label}</p>
               <p className="text-xs text-muted-foreground">{item.desc}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
 
 function Testimonials() {
-  const { ref, visible } = useScrollReveal();
   const reviews = [
     {
       quote: "The purity documentation was thorough and the peptides performed consistently across our assay panel. We've since moved all our peptide sourcing here.",
@@ -385,25 +409,33 @@ function Testimonials() {
   ];
 
   return (
-    <section ref={ref} className="py-16 lg:py-24 bg-background relative" id="testimonials">
+    <section className="py-20 lg:py-28 bg-muted/30 relative" id="testimonials">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <p className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-2">Testimonials</p>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground" data-testid="text-testimonials-title">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="text-center mb-10"
+        >
+          <motion.p variants={fadeInUp} className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-2">Testimonials</motion.p>
+          <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground" data-testid="text-testimonials-title">
             Trusted by researchers across Europe
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto"
+        >
           {reviews.map((review, i) => (
-            <div
+            <motion.div
               key={i}
-              className="rounded-xl border border-border bg-card overflow-hidden"
-              style={{
-                opacity: visible ? 1 : 0,
-                transform: visible ? "translateY(0)" : "translateY(20px)",
-                transition: `all 0.5s ease ${i * 120}ms`,
-              }}
+              variants={fadeInUp}
+              className="rounded-xl border border-border bg-card overflow-visible hover:shadow-md transition-all duration-300"
               data-testid={`card-testimonial-${i}`}
             >
               <div className="p-5 flex flex-col h-full">
@@ -418,19 +450,18 @@ function Testimonials() {
                 <div className="pt-3 border-t border-border/50">
                   <p className="font-semibold text-sm text-foreground" data-testid={`text-testimonial-name-${i}`}>{review.name}</p>
                   <p className="text-xs text-muted-foreground mt-0.5" data-testid={`text-testimonial-role-${i}`}>{review.role}</p>
-                  <p className="text-xs text-primary mt-0.5" data-testid={`text-testimonial-institution-${i}`}>{review.institution}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5" data-testid={`text-testimonial-institution-${i}`}>{review.institution}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
 
 function ToolsAndResources() {
-  const { ref, visible } = useScrollReveal();
   const resources = [
     { label: "Dosage Guide", href: "/peptide-guide", desc: "Comprehensive dosing, reconstitution, and cycle reference for 50+ peptides", icon: Syringe },
     { label: "Peptide Calculator", href: "/calculator", desc: "Reconstitution dosing and vial duration calculator", icon: Calculator },
@@ -439,34 +470,41 @@ function ToolsAndResources() {
   ];
 
   return (
-    <section ref={ref} className="py-16 lg:py-24 bg-card relative" id="tools">
+    <section className="py-20 lg:py-28 bg-background relative" id="tools">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground" data-testid="text-tools-title">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="text-center mb-10"
+        >
+          <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground" data-testid="text-tools-title">
             Resources for your research
-          </h2>
-        </div>
+          </motion.h2>
+        </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto"
+        >
           {resources.map((link, i) => (
-            <Link key={link.href} href={link.href} data-testid={`link-resource-${link.label.toLowerCase().replace(/\s+/g, "-")}`}>
-              <div
-                className="rounded-xl border border-border bg-background p-5 h-full hover:border-primary/25 transition-colors"
-                style={{
-                  opacity: visible ? 1 : 0,
-                  transform: visible ? "translateY(0)" : "translateY(15px)",
-                  transition: `all 0.4s ease ${i * 80}ms`,
-                }}
-              >
-                <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3 bg-primary/8 border border-primary/12">
-                  <link.icon className="h-4 w-4 text-primary" strokeWidth={1.5} />
+            <motion.div key={link.href} variants={fadeInUp}>
+              <Link href={link.href} data-testid={`link-resource-${link.label.toLowerCase().replace(/\s+/g, "-")}`}>
+                <div className="rounded-xl border border-border bg-card p-5 h-full hover:border-primary/25 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3 bg-primary/8 border border-primary/12">
+                    <link.icon className="h-4 w-4 text-primary" strokeWidth={1.5} />
+                  </div>
+                  <p className="font-semibold text-sm mb-1 text-foreground">{link.label}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{link.desc}</p>
                 </div>
-                <p className="font-semibold text-sm mb-1 text-foreground">{link.label}</p>
-                <p className="text-xs text-muted-foreground leading-relaxed">{link.desc}</p>
-              </div>
-            </Link>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -509,52 +547,60 @@ function NewsletterSection() {
   };
 
   return (
-    <section className="relative py-16 lg:py-24 bg-background overflow-hidden">
+    <section className="relative py-20 lg:py-28 bg-muted/30 overflow-hidden">
       <div className="container relative mx-auto px-4">
-        <div className="max-w-xl mx-auto text-center">
-          <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-4 bg-primary/8 border border-primary/15">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-xl mx-auto text-center"
+        >
+          <motion.div variants={fadeInUp} className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-4 bg-primary/8 border border-primary/15">
             <Tag className="h-4 w-4 text-primary" />
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2 text-foreground" data-testid="text-newsletter-title">
+          </motion.div>
+          <motion.h2 variants={fadeInUp} className="text-2xl sm:text-3xl font-bold tracking-tight mb-2 text-foreground" data-testid="text-newsletter-title">
             Get 10% off your first order
-          </h2>
-          <p className="text-muted-foreground text-sm mb-6">
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="text-muted-foreground text-sm mb-6">
             Subscribe to receive a unique discount code and research updates.
-          </p>
+          </motion.p>
 
-          {submitted ? (
-            <div className="space-y-4" data-testid="text-newsletter-success">
-              <div className="flex items-center justify-center gap-2 font-medium text-primary">
-                <CheckCircle2 className="h-4 w-4" />
-                <span className="text-sm">Your discount code is ready</span>
-              </div>
-              {discountCode && (
-                <div className="inline-flex items-center gap-3 px-5 py-3 rounded-lg border border-border bg-card">
-                  <code className="font-mono text-sm tracking-wider text-primary font-semibold" data-testid="text-discount-code">{discountCode}</code>
-                  <button onClick={handleCopy} className="text-muted-foreground hover:text-foreground transition-colors" data-testid="button-copy-code" aria-label="Copy discount code">
-                    {copied ? <CheckCircle2 className="h-4 w-4 text-primary" /> : <Copy className="h-4 w-4" />}
-                  </button>
+          <motion.div variants={fadeInUp}>
+            {submitted ? (
+              <div className="space-y-4" data-testid="text-newsletter-success">
+                <div className="flex items-center justify-center gap-2 font-medium text-foreground">
+                  <CheckCircle2 className="h-4 w-4 text-green-500" />
+                  <span className="text-sm">Your discount code is ready</span>
                 </div>
-              )}
-              <p className="text-xs text-muted-foreground">Apply at checkout. One-time use.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex gap-2 max-w-sm mx-auto">
-              <Input
-                type="email"
-                placeholder="researcher@university.eu"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="flex-1"
-                data-testid="input-newsletter-email"
-              />
-              <Button type="submit" disabled={isSubmitting} className="shrink-0" data-testid="button-newsletter-submit">
-                {isSubmitting ? "..." : "Subscribe"}
-              </Button>
-            </form>
-          )}
-        </div>
+                {discountCode && (
+                  <div className="inline-flex items-center gap-3 px-5 py-3 rounded-lg border border-border bg-card">
+                    <code className="font-mono text-sm tracking-wider text-foreground font-semibold" data-testid="text-discount-code">{discountCode}</code>
+                    <button onClick={handleCopy} className="text-muted-foreground hover:text-foreground transition-colors" data-testid="button-copy-code" aria-label="Copy discount code">
+                      {copied ? <CheckCircle2 className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                    </button>
+                  </div>
+                )}
+                <p className="text-xs text-muted-foreground">Apply at checkout. One-time use.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex gap-2 max-w-sm mx-auto">
+                <Input
+                  type="email"
+                  placeholder="researcher@university.eu"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="flex-1"
+                  data-testid="input-newsletter-email"
+                />
+                <Button type="submit" disabled={isSubmitting} className="shrink-0" data-testid="button-newsletter-submit">
+                  {isSubmitting ? "..." : "Subscribe"}
+                </Button>
+              </form>
+            )}
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

@@ -11,11 +11,11 @@ import { Plus, FlaskConical } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const categoryColors: Record<string, string> = {
-  glp1: "hsl(222, 30%, 30%)",
-  growth: "hsl(222, 25%, 35%)",
-  healing: "hsl(40, 30%, 45%)",
-  cosmetic: "hsl(222, 20%, 40%)",
-  nootropics: "hsl(222, 15%, 45%)",
+  glp1: "hsl(220, 70%, 50%)",
+  growth: "hsl(220, 70%, 50%)",
+  healing: "hsl(220, 70%, 50%)",
+  cosmetic: "hsl(220, 70%, 50%)",
+  nootropics: "hsl(220, 70%, 50%)",
 };
 
 interface ProductCardProps {
@@ -28,7 +28,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const { toast } = useToast();
 
   const hasDiscount = product.regularPrice && product.regularPrice > product.price;
-  const catColor = categoryColors[product.category] || "hsl(222, 30%, 30%)";
+  const catColor = categoryColors[product.category] || "hsl(220, 70%, 50%)";
 
   const handleAddToCart = () => {
     addItem(product);
@@ -39,7 +39,7 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Card className="group relative flex flex-col h-full hover-elevate" data-testid={`card-product-${product.id}`}>
+    <Card className="group relative flex flex-col h-full hover-elevate hover:shadow-lg hover:-translate-y-1 transition-all duration-300" data-testid={`card-product-${product.id}`}>
       <Link href={`/product/${product.id}`} className="flex flex-col flex-1" data-testid={`link-product-${product.id}`}>
         <div className="p-4 pb-0 flex-1">
           <div className="mb-4 flex h-52 items-center justify-center rounded-md bg-muted/50 overflow-hidden">

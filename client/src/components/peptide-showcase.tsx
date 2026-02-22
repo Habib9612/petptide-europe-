@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 interface MoleculeNode {
   x: number;
@@ -28,8 +29,8 @@ function generateMolecule(seed: number): MoleculeData {
   const nodes: MoleculeNode[] = [];
   const bonds: MoleculeBond[] = [];
   const nodeCount = 12 + Math.floor(rng(seed) * 8);
-  const colors = ["#2D3A5C", "#374566", "#4A5A80", "#283350", "#5C6B8A"];
-  const glowColors = ["rgba(45,58,92,0.4)", "rgba(55,69,102,0.35)", "rgba(74,90,128,0.35)", "rgba(40,51,80,0.3)", "rgba(92,107,138,0.35)"];
+  const colors = ["#2563EB", "#3B82F6", "#60A5FA", "#1D4ED8", "#93C5FD"];
+  const glowColors = ["rgba(37,99,235,0.35)", "rgba(59,130,246,0.3)", "rgba(96,165,250,0.3)", "rgba(29,78,216,0.25)", "rgba(147,197,253,0.3)"];
 
   for (let i = 0; i < nodeCount; i++) {
     const angle1 = rng(seed + i * 7) * Math.PI * 2;
@@ -108,7 +109,7 @@ function MoleculeCanvas({ molecule, hovered }: { molecule: MoleculeData; hovered
         if (!fromP || !toP) continue;
 
         ctx.beginPath();
-        ctx.strokeStyle = hovered ? "rgba(45,58,92,0.2)" : "rgba(45,58,92,0.1)";
+        ctx.strokeStyle = hovered ? "rgba(37,99,235,0.2)" : "rgba(37,99,235,0.1)";
         ctx.lineWidth = hovered ? 1.5 : 1;
         ctx.moveTo(fromP.px, fromP.py);
         ctx.lineTo(toP.px, toP.py);
@@ -171,57 +172,61 @@ const showcaseData = [
 
 export function PeptideShowcase() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.2 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   const molecules = showcaseData.map((d) => generateMolecule(d.seed));
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
+  const staggerContainer = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.15 } }
+  };
+
   return (
-    <section ref={sectionRef} className="py-16 lg:py-24 bg-background relative overflow-hidden" data-testid="section-showcase">
+    <motion.section 
+      className="py-16 lg:py-24 bg-background relative overflow-hidden" 
+      data-testid="section-showcase"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
+    >
       <div className="container relative mx-auto px-4">
-        <div className="text-center mb-12">
-          <p className="text-xs font-medium tracking-[0.2em] uppercase text-primary mb-3">Molecular Research</p>
+        <motion.div className="text-center mb-12" variants={fadeInUp}>
+          <p className="text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground mb-3">Molecular Research</p>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground"
             data-testid="text-showcase-title"
           >
             Peptide Structures
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <motion.div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto" variants={staggerContainer}>
           {showcaseData.map((item, i) => (
-            <div
+            <motion.div
               key={item.name}
-              className="rounded-xl border bg-card p-6 flex flex-col items-center text-center transition-all duration-300"
+              className="rounded-xl border bg-card p-6 flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               style={{
-                borderColor: hoveredIndex === i ? "hsl(222 30% 22% / 0.3)" : "hsl(220 10% 90%)",
-                opacity: visible ? 1 : 0,
-                transform: visible ? "translateY(0)" : "translateY(30px)",
-                transitionDelay: `${i * 150}ms`,
+                borderColor: hoveredIndex === i ? "hsl(220 70% 50% / 0.3)" : "hsl(220 10% 90%)",
               }}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
               data-testid={`card-showcase-${i}`}
+              variants={fadeInUp}
             >
               <div className="mb-4">
                 <MoleculeCanvas molecule={molecules[i]} hovered={hoveredIndex === i} />
               </div>
               <h3 className="text-lg font-bold text-foreground mb-1" data-testid={`text-showcase-name-${i}`}>{item.name}</h3>
-              <p className="text-xs font-medium text-primary mb-2 tracking-wider uppercase">{item.subtitle}</p>
+              <p className="text-xs font-medium text-muted-foreground mb-2 tracking-wider uppercase">{item.subtitle}</p>
               <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

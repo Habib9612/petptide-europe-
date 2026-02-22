@@ -3,7 +3,23 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "./language-context";
 import { ArrowRight, ShieldCheck, Truck, Award, FlaskConical } from "lucide-react";
 import { useRef, useCallback, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import vialImage from "@assets/peptide_vial_transparent_1771703775626.gif";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const fadeInDown = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } }
+};
 
 interface Particle {
   x: number;
@@ -39,7 +55,7 @@ function ParticleBackground() {
     resize();
     window.addEventListener("resize", resize);
 
-    const colors = ["#2D3A5C", "#374566", "#3D4B70", "#283350", "#4A5A80"];
+    const colors = ["#2563EB", "#3B82F6", "#60A5FA", "#1D4ED8", "#93C5FD"];
     const particles: Particle[] = [];
     const count = 40;
     const rect = canvas.getBoundingClientRect();
@@ -99,7 +115,7 @@ function ParticleBackground() {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 100) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(45, 58, 92, ${0.04 * (1 - dist / 100)})`;
+            ctx.strokeStyle = `rgba(37, 99, 235, ${0.04 * (1 - dist / 100)})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -162,12 +178,12 @@ function Vial3D() {
     <div ref={containerRef} className="relative flex items-center justify-center" aria-hidden="true">
       <div className="absolute w-[320px] h-[320px] lg:w-[420px] lg:h-[420px] rounded-full"
         style={{
-          background: "radial-gradient(circle, hsl(40 35% 55% / 0.06) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(220 70% 55% / 0.06) 0%, transparent 70%)",
         }}
       />
       <div className="absolute w-[250px] h-[250px] lg:w-[340px] lg:h-[340px] rounded-full animate-pulse"
         style={{
-          background: "radial-gradient(circle, hsl(40 35% 55% / 0.04) 0%, transparent 60%)",
+          background: "radial-gradient(circle, hsl(220 70% 55% / 0.04) 0%, transparent 60%)",
         }}
       />
       <div
@@ -182,7 +198,7 @@ function Vial3D() {
           alt="Peptide Europe research vial"
           className="w-full h-full object-contain"
           style={{
-            filter: "drop-shadow(0 0 40px hsl(40 35% 55% / 0.15))",
+            filter: "drop-shadow(0 0 40px hsl(220 70% 55% / 0.15))",
           }}
           data-testid="img-hero-vial"
         />
@@ -227,65 +243,105 @@ export function Hero() {
 
       <div className="absolute inset-0" aria-hidden="true">
         <div className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full -translate-x-1/3 -translate-y-1/3"
-          style={{ background: "radial-gradient(circle, hsl(222 30% 22% / 0.03) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, hsl(220 70% 50% / 0.03) 0%, transparent 70%)" }}
         />
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full translate-x-1/4 translate-y-1/4"
-          style={{ background: "radial-gradient(circle, hsl(222 20% 15% / 0.25) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, hsl(220 60% 40% / 0.15) 0%, transparent 70%)" }}
         />
       </div>
 
       <div className="container relative mx-auto px-4 pt-16 pb-16 md:pt-24 md:pb-20 lg:pt-28 lg:pb-24">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-primary/20 bg-primary/5 mb-6" data-testid="badge-hero-verified">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+          >
+            <motion.div
+              variants={fadeInDown}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-primary/20 bg-primary/5 mb-6"
+              data-testid="badge-hero-verified"
+            >
               <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
               <span className="text-[11px] font-medium tracking-[0.15em] uppercase text-primary">
                 Research-Grade Peptides
               </span>
-            </div>
+            </motion.div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] font-bold tracking-tight leading-[1.1] mb-5 text-foreground" data-testid="text-hero-title">
-              Premium peptides for{" "}
-              <span className="text-primary">
-                European research
-              </span>
-            </h1>
+            <motion.h1
+              variants={fadeInUp}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] font-bold tracking-tight leading-[1.1] mb-5 text-foreground"
+              data-testid="text-hero-title"
+            >
+              Premium peptides for European research
+            </motion.h1>
 
-            <p className="text-base leading-relaxed mb-8 max-w-lg text-muted-foreground" data-testid="text-hero-subtitle">
+            <motion.p
+              variants={fadeInUp}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-base leading-relaxed mb-8 max-w-lg text-muted-foreground"
+              data-testid="text-hero-subtitle"
+            >
               {t("hero.subtitle")}
-            </p>
+            </motion.p>
 
-            <div className="flex flex-wrap items-center gap-3 mb-8">
-              <Link href="/products">
-                <Button size="lg" className="gap-2" data-testid="button-hero-cta">
-                  Shop All Peptides
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
-              <Link href="/products" data-testid="link-hero-categories">
-                <Button size="lg" variant="outline" className="gap-2" data-testid="button-hero-browse">
-                  View Categories
-                </Button>
-              </Link>
-            </div>
+            <motion.div
+              variants={staggerContainer}
+              className="flex flex-wrap items-center gap-3 mb-8"
+            >
+              <motion.div variants={fadeInUp} transition={{ duration: 0.4, delay: 0.3 }}>
+                <Link href="/products">
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button size="lg" className="gap-2" data-testid="button-hero-cta">
+                      Shop All Peptides
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </motion.div>
+                </Link>
+              </motion.div>
+              <motion.div variants={fadeInUp} transition={{ duration: 0.4, delay: 0.4 }}>
+                <Link href="/products" data-testid="link-hero-categories">
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button size="lg" variant="outline" className="gap-2" data-testid="button-hero-browse">
+                      View Categories
+                    </Button>
+                  </motion.div>
+                </Link>
+              </motion.div>
+            </motion.div>
 
-            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-border">
+            <motion.div
+              variants={staggerContainer}
+              className="grid grid-cols-3 gap-6 pt-6 border-t border-border"
+            >
               {[
                 { value: "24h", label: "Shipping" },
                 { value: "98-99%+", label: "Purity" },
                 { value: "27", label: "EU Countries" },
               ].map((stat, i) => (
-                <div key={i} data-testid={`text-hero-stat-${i}`}>
-                  <p className="text-2xl lg:text-3xl font-bold tracking-tight text-primary">{stat.value}</p>
+                <motion.div
+                  key={i}
+                  variants={fadeInUp}
+                  transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
+                  data-testid={`text-hero-stat-${i}`}
+                >
+                  <p className="text-2xl lg:text-3xl font-bold tracking-tight text-foreground">{stat.value}</p>
                   <p className="text-[11px] tracking-wide mt-0.5 text-muted-foreground uppercase">{stat.label}</p>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          <div className="flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, x: 40, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            className="flex justify-center"
+          >
             <Vial3D />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

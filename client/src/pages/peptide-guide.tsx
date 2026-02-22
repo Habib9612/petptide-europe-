@@ -284,7 +284,7 @@ export default function PeptideGuide() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="bg-gradient-to-b from-[hsl(222,25%,12%)] to-[hsl(222,20%,18%)] text-white">
+      <div className="bg-gradient-to-b from-[hsl(220,50%,12%)] to-[hsl(220,45%,16%)] text-white">
         <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16">
           <Link
             href="/"
@@ -296,7 +296,7 @@ export default function PeptideGuide() {
           </Link>
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
-              <Syringe className="h-6 w-6 text-[hsl(40,35%,65%)]" />
+              <Syringe className="h-6 w-6 text-primary" />
             </div>
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
@@ -311,13 +311,13 @@ export default function PeptideGuide() {
 
           <div className="mt-8 grid grid-cols-3 sm:grid-cols-4 gap-4 text-center">
             <div>
-              <div className="text-2xl sm:text-3xl font-bold text-[hsl(40,35%,65%)]">
+              <div className="text-2xl sm:text-3xl font-bold text-primary">
                 {peptideGuideData.length}
               </div>
               <div className="text-xs text-white/50 mt-1">Peptides</div>
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl font-bold text-[hsl(40,30%,58%)]">
+              <div className="text-2xl sm:text-3xl font-bold text-primary">
                 {Object.keys(categoryCounts).length}
               </div>
               <div className="text-xs text-white/50 mt-1">Categories</div>

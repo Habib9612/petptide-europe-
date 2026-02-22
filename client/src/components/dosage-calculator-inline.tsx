@@ -20,8 +20,8 @@ function SyringeSVG({ fillPercent }: { fillPercent: number }) {
           <stop offset="100%" stopColor="hsl(210,15%,75%)" stopOpacity="0.6" />
         </linearGradient>
         <linearGradient id="liquidFill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="hsl(222,30%,22%)" stopOpacity="0.5" />
-          <stop offset="100%" stopColor="hsl(222,25%,18%)" stopOpacity="0.7" />
+          <stop offset="0%" stopColor="hsl(220,70%,50%)" stopOpacity="0.5" />
+          <stop offset="100%" stopColor="hsl(220,70%,40%)" stopOpacity="0.7" />
         </linearGradient>
       </defs>
 
@@ -83,7 +83,7 @@ function CustomSlider({ min, max, step, value, onChange, label, unit, id }: Slid
         onChange={(e) => onChange(parseFloat(e.target.value))}
         className="w-full h-1.5 rounded-full appearance-none cursor-pointer custom-slider"
         style={{
-          background: `linear-gradient(to right, hsl(222,30%,30%) 0%, hsl(222,30%,30%) ${percent}%, hsl(210,15%,25%) ${percent}%, hsl(210,15%,25%) 100%)`,
+          background: `linear-gradient(to right, hsl(220,70%,50%) 0%, hsl(220,70%,50%) ${percent}%, hsl(210,15%,25%) ${percent}%, hsl(210,15%,25%) 100%)`,
         }}
         data-testid={`slider-${id}`}
       />
