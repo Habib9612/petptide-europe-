@@ -284,7 +284,7 @@ export default function PeptideGuide() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="bg-gradient-to-b from-[hsl(220,50%,12%)] to-[hsl(220,45%,16%)] text-white">
+      <div className="bg-gradient-to-b from-[hsl(160,30%,12%)] to-[hsl(158,28%,16%)] text-white">
         <div className="mx-auto max-w-6xl px-4 py-12 sm:py-16">
           <Link
             href="/"
@@ -323,13 +323,13 @@ export default function PeptideGuide() {
               <div className="text-xs text-white/50 mt-1">Categories</div>
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl font-bold text-[hsl(220,15%,55%)]">
+              <div className="text-2xl sm:text-3xl font-bold text-[hsl(155,15%,55%)]">
                 98%+
               </div>
               <div className="text-xs text-white/50 mt-1">Purity</div>
             </div>
             <div className="hidden sm:block">
-              <div className="text-2xl sm:text-3xl font-bold text-[hsl(220,20%,65%)]">
+              <div className="text-2xl sm:text-3xl font-bold text-[hsl(153,18%,60%)]">
                 HPLC
               </div>
               <div className="text-xs text-white/50 mt-1">Verified</div>

@@ -29,10 +29,10 @@ function CSSFallbackScene({ className }: { className?: string }) {
             const x2 = 100 + Math.cos(angle + Math.PI) * 50;
             return (
               <g key={i}>
-                <circle cx={x1} cy={y} r="3" fill="hsl(220, 70%, 45%)" opacity="0.6" />
-                <circle cx={x2} cy={y} r="3" fill="hsl(220, 70%, 45%)" opacity="0.6" />
+                <circle cx={x1} cy={y} r="3" fill="hsl(158, 28%, 32%)" opacity="0.6" />
+                <circle cx={x2} cy={y} r="3" fill="hsl(158, 28%, 32%)" opacity="0.6" />
                 {i % 3 === 0 && (
-                  <line x1={x1} y1={y} x2={x2} y2={y} stroke="hsl(220, 65%, 50%)" strokeWidth="1" opacity="0.3" />
+                  <line x1={x1} y1={y} x2={x2} y2={y} stroke="hsl(155, 25%, 40%)" strokeWidth="1" opacity="0.3" />
                 )}
               </g>
             );
@@ -43,7 +43,7 @@ function CSSFallbackScene({ className }: { className?: string }) {
             const t = i / 14;
             const x = 75 + Math.sin(t * Math.PI * 3) * 40;
             const y = t * 280 + 10;
-            const colors = ["hsl(220, 70%, 48%)", "hsl(220, 65%, 50%)", "hsl(200, 60%, 50%)", "hsl(220, 65%, 52%)"];
+            const colors = ["hsl(158, 28%, 35%)", "hsl(155, 25%, 40%)", "hsl(160, 25%, 42%)", "hsl(155, 25%, 42%)"];
             return (
               <g key={i}>
                 <circle cx={x} cy={y} r="5" fill={colors[i % 4]} opacity="0.7" />
@@ -53,7 +53,7 @@ function CSSFallbackScene({ className }: { className?: string }) {
                     y1={((i - 1) / 14) * 280 + 10}
                     x2={x}
                     y2={y}
-                    stroke="hsl(220, 70%, 45%)"
+                    stroke="hsl(158, 28%, 32%)"
                     strokeWidth="2"
                     opacity="0.4"
                   />
@@ -104,15 +104,15 @@ function initScene(container: HTMLDivElement) {
   scene.add(point3);
 
   const strandMat = new THREE.MeshStandardMaterial({
-    color: new THREE.Color("hsl(220, 70%, 45%)"),
-    emissive: new THREE.Color("hsl(220, 70%, 25%)"),
+    color: new THREE.Color("hsl(158, 28%, 32%)"),
+    emissive: new THREE.Color("hsl(158, 28%, 20%)"),
     emissiveIntensity: 0.3,
     roughness: 0.4,
     metalness: 0.6,
   });
   const rungMat = new THREE.MeshStandardMaterial({
-    color: new THREE.Color("hsl(220, 65%, 52%)"),
-    emissive: new THREE.Color("hsl(220, 70%, 22%)"),
+    color: new THREE.Color("hsl(155, 25%, 42%)"),
+    emissive: new THREE.Color("hsl(158, 28%, 18%)"),
     emissiveIntensity: 0.2,
     transparent: true,
     opacity: 0.7,
@@ -157,14 +157,14 @@ function initScene(container: HTMLDivElement) {
 
   const peptideGroup = new THREE.Group();
   const pepColors = [
-    new THREE.Color("hsl(220, 70%, 48%)"),
-    new THREE.Color("hsl(220, 65%, 50%)"),
-    new THREE.Color("hsl(200, 60%, 50%)"),
-    new THREE.Color("hsl(220, 65%, 52%)"),
+    new THREE.Color("hsl(158, 28%, 35%)"),
+    new THREE.Color("hsl(155, 25%, 40%)"),
+    new THREE.Color("hsl(160, 25%, 42%)"),
+    new THREE.Color("hsl(155, 25%, 42%)"),
   ];
   const pepSphereGeo = new THREE.SphereGeometry(0.15, 10, 10);
   const bondMat = new THREE.MeshStandardMaterial({
-    color: new THREE.Color("hsl(220, 70%, 45%)"),
+    color: new THREE.Color("hsl(158, 28%, 32%)"),
     transparent: true,
     opacity: 0.6,
   });
@@ -204,9 +204,9 @@ function initScene(container: HTMLDivElement) {
 
   const particlesGroup = new THREE.Group();
   const particleColors = [
-    new THREE.Color("hsl(220, 70%, 48%)"),
-    new THREE.Color("hsl(220, 65%, 50%)"),
-    new THREE.Color("hsl(200, 60%, 50%)"),
+    new THREE.Color("hsl(158, 28%, 35%)"),
+    new THREE.Color("hsl(155, 25%, 40%)"),
+    new THREE.Color("hsl(160, 25%, 42%)"),
   ];
   const particleSphereGeo = new THREE.SphereGeometry(1, 6, 6);
   for (let i = 0; i < 50; i++) {

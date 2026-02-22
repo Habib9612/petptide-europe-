@@ -11,11 +11,11 @@ import { Plus, FlaskConical } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const categoryColors: Record<string, string> = {
-  glp1: "hsl(220, 70%, 50%)",
-  growth: "hsl(220, 70%, 50%)",
-  healing: "hsl(220, 70%, 50%)",
-  cosmetic: "hsl(220, 70%, 50%)",
-  nootropics: "hsl(220, 70%, 50%)",
+  glp1: "hsl(158, 28%, 36%)",
+  growth: "hsl(158, 28%, 36%)",
+  healing: "hsl(158, 28%, 36%)",
+  cosmetic: "hsl(158, 28%, 36%)",
+  nootropics: "hsl(158, 28%, 36%)",
 };
 
 interface ProductCardProps {
@@ -28,7 +28,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const { toast } = useToast();
 
   const hasDiscount = product.regularPrice && product.regularPrice > product.price;
-  const catColor = categoryColors[product.category] || "hsl(220, 70%, 50%)";
+  const catColor = categoryColors[product.category] || "hsl(158, 28%, 36%)";
 
   const handleAddToCart = () => {
     addItem(product);
