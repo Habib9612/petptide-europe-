@@ -25,6 +25,10 @@ import PeptideCalculator from "@/pages/peptide-calculator";
 import FAQ from "@/pages/faq";
 import PeptideGuide from "@/pages/peptide-guide";
 import CheckoutSuccess from "@/pages/checkout-success";
+import About from "@/pages/about";
+import Partners from "@/pages/partners";
+import PartnerSignup from "@/pages/partner-signup";
+import PartnerDashboard from "@/pages/partner-dashboard";
 
 function Router() {
   return (
@@ -44,6 +48,10 @@ function Router() {
       <Route path="/calculator" component={PeptideCalculator} />
       <Route path="/faq" component={FAQ} />
       <Route path="/peptide-guide" component={PeptideGuide} />
+      <Route path="/about" component={About} />
+      <Route path="/partners" component={Partners} />
+      <Route path="/partners/signup" component={PartnerSignup} />
+      <Route path="/partners/dashboard" component={PartnerDashboard} />
       <Route component={NotFound} />
     </Switch>
   );

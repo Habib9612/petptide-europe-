@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
-import type { Product, CartItem, Order, InsertOrder, NewsletterSubscriber, InsertNewsletter, UserBlogPost, InsertUserBlogPost } from "@shared/schema";
-import { products, cartItems, orders, newsletterSubscribers, userBlogPosts } from "@shared/schema";
+import type { Product, CartItem, Order, InsertOrder, NewsletterSubscriber, InsertNewsletter, UserBlogPost, InsertUserBlogPost, Affiliate, InsertAffiliate, AffiliateReferral, InsertAffiliateReferral } from "@shared/schema";
+import { products, cartItems, orders, newsletterSubscribers, userBlogPosts, affiliates, affiliateReferrals } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, desc } from "drizzle-orm";
 
@@ -32,6 +32,13 @@ export interface IStorage {
   getUserBlogPosts(): Promise<UserBlogPost[]>;
   getUserBlogPostById(id: string): Promise<UserBlogPost | undefined>;
   createUserBlogPost(post: InsertUserBlogPost): Promise<UserBlogPost>;
+
+  createAffiliate(data: InsertAffiliate): Promise<Affiliate>;
+  getAffiliateByEmail(email: string): Promise<Affiliate | undefined>;
+  getAffiliateByCode(code: string): Promise<Affiliate | undefined>;
+  getAffiliateDashboard(email: string, code: string): Promise<{ affiliate: Affiliate; referrals: AffiliateReferral[] } | undefined>;
+  incrementAffiliateClicks(code: string): Promise<void>;
+  recordAffiliateConversion(affiliateId: string, orderId: string, orderTotal: number, commission: number): Promise<AffiliateReferral>;
 }
 
 // Product data
@@ -519,6 +526,78 @@ export class DatabaseStorage implements IStorage {
   async createUserBlogPost(postData: InsertUserBlogPost): Promise<UserBlogPost> {
     const id = randomUUID();
     const rows = await db.insert(userBlogPosts).values({ ...postData, id }).returning();
+    return rows[0];
+  }
+
+  async createAffiliate(data: InsertAffiliate): Promise<Affiliate> {
+    const existing = await db.select().from(affiliates).where(eq(affiliates.email, data.email));
+    if (existing.length > 0) throw new Error("Email already registered");
+    
+    const id = randomUUID();
+    const referralCode = "PE-" + randomUUID().slice(0, 8).toUpperCase();
+    const rows = await db.insert(affiliates).values({
+      ...data,
+      id,
+      referralCode,
+      totalClicks: 0,
+      totalConversions: 0,
+      totalEarnings: 0,
+      status: "active",
+    }).returning();
+    return rows[0];
+  }
+
+  async getAffiliateByEmail(email: string): Promise<Affiliate | undefined> {
+    const rows = await db.select().from(affiliates).where(eq(affiliates.email, email));
+    return rows[0];
+  }
+
+  async getAffiliateByCode(code: string): Promise<Affiliate | undefined> {
+    const rows = await db.select().from(affiliates).where(eq(affiliates.referralCode, code));
+    return rows[0];
+  }
+
+  async getAffiliateDashboard(email: string, code: string): Promise<{ affiliate: Affiliate; referrals: AffiliateReferral[] } | undefined> {
+    const rows = await db.select().from(affiliates).where(
+      and(eq(affiliates.email, email), eq(affiliates.referralCode, code))
+    );
+    if (rows.length === 0) return undefined;
+    const affiliate = rows[0];
+    const refs = await db.select().from(affiliateReferrals).where(eq(affiliateReferrals.affiliateId, affiliate.id)).orderBy(desc(affiliateReferrals.createdAt));
+    return { affiliate, referrals: refs };
+  }
+
+  async incrementAffiliateClicks(code: string): Promise<void> {
+    const rows = await db.select().from(affiliates).where(eq(affiliates.referralCode, code));
+    if (rows.length > 0) {
+      await db.update(affiliates)
+        .set({ totalClicks: rows[0].totalClicks + 1 })
+        .where(eq(affiliates.id, rows[0].id));
+    }
+  }
+
+  async recordAffiliateConversion(affiliateId: string, orderId: string, orderTotal: number, commission: number): Promise<AffiliateReferral> {
+    const id = randomUUID();
+    const rows = await db.insert(affiliateReferrals).values({
+      id,
+      affiliateId,
+      orderId,
+      orderTotal,
+      commission,
+      status: "completed",
+      createdAt: new Date().toISOString(),
+    }).returning();
+    
+    const affiliate = await db.select().from(affiliates).where(eq(affiliates.id, affiliateId));
+    if (affiliate.length > 0) {
+      await db.update(affiliates)
+        .set({
+          totalConversions: affiliate[0].totalConversions + 1,
+          totalEarnings: affiliate[0].totalEarnings + commission,
+        })
+        .where(eq(affiliates.id, affiliateId));
+    }
+    
     return rows[0];
   }
 }

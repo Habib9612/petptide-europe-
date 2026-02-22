@@ -2,7 +2,7 @@
 
 ## Overview
 
-Peptide Europe is a full-stack e-commerce web application for selling research-grade peptides to European laboratories and research institutions. The platform features a product catalog, shopping cart, checkout system with multiple payment options (crypto with 10% discount, bank transfer, credit card), and regulatory compliance features including age verification. The site emphasizes "research use only" throughout and includes multi-language support for EU markets.
+Peptide Europe is a full-stack e-commerce web application for selling research-grade peptides to European laboratories and research institutions. The platform features a product catalog, shopping cart, checkout system with multiple payment options (crypto with 10% discount, bank transfer, credit card), and regulatory compliance features including age verification. The site emphasizes "research use only" throughout and includes multi-language support for EU markets. Includes an About Us page and a complete affiliate/partner program with referral tracking and commission system.
 
 ## User Preferences
 
@@ -60,6 +60,19 @@ The schema includes products, cart items, orders, newsletter subscribers, and us
 - Inputs: peptide amount (mg), bacteriostatic water volume (mL), desired dose (mcg/mg), syringe size
 - Outputs: draw volume, syringe units, total doses per vial, concentration
 - Includes reconstitution guide, storage guidelines, and common solvents sidebar
+
+### About Us Page
+- Company information page at /about with 6 sections: hero, who we are (with 4 value cards), quality pipeline (5-step timeline), mission quote, stats (3 cards), research disclaimer
+- Framer-motion animations throughout
+
+### Affiliate/Partner Program
+- Landing page at /partners with program overview, how it works (3 steps), commission details
+- Signup at /partners/signup creates affiliate account with unique referral code (PE-XXXXXXXX format)
+- Dashboard at /partners/dashboard shows clicks, conversions, earnings, commission rate, referral link, recent referrals table
+- Dashboard access via email + referral code authentication
+- Database tables: affiliates (tracking, stats), affiliate_referrals (individual conversions)
+- API: POST /api/affiliates/signup, GET /api/affiliates/dashboard, POST /api/affiliates/validate-code, POST /api/affiliates/track-click
+- 10% default commission rate, real-time click and conversion tracking
 
 ### FAQ System
 - Comprehensive FAQ page at /faq with 6 sections (30+ Q&As)

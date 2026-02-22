@@ -36,7 +36,9 @@ export function Header() {
     { href: "/peptide-guide", label: "Dosage Guide" },
     { href: "/calculator", label: "Calculator" },
     { href: "/insights", label: "Insights" },
+    { href: "/about", label: "About" },
     { href: "/faq", label: "FAQ" },
+    { href: "/partners", label: "Partners" },
   ];
 
   return (

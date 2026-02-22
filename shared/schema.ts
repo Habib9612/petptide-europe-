@@ -89,6 +89,39 @@ export const insertUserBlogPostSchema = createInsertSchema(userBlogPosts).omit({
 export type InsertUserBlogPost = z.infer<typeof insertUserBlogPostSchema>;
 export type UserBlogPost = typeof userBlogPosts.$inferSelect;
 
+export const affiliates = pgTable("affiliates", {
+  id: varchar("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  website: text("website"),
+  promotionMethod: text("promotion_method").notNull(),
+  referralCode: text("referral_code").notNull(),
+  commissionRate: real("commission_rate").notNull().default(10),
+  totalClicks: integer("total_clicks").notNull().default(0),
+  totalConversions: integer("total_conversions").notNull().default(0),
+  totalEarnings: real("total_earnings").notNull().default(0),
+  status: text("status").notNull().default("active"),
+  createdAt: text("created_at").notNull(),
+});
+
+export const insertAffiliateSchema = createInsertSchema(affiliates).omit({ id: true, referralCode: true, totalClicks: true, totalConversions: true, totalEarnings: true, status: true });
+export type InsertAffiliate = z.infer<typeof insertAffiliateSchema>;
+export type Affiliate = typeof affiliates.$inferSelect;
+
+export const affiliateReferrals = pgTable("affiliate_referrals", {
+  id: varchar("id").primaryKey(),
+  affiliateId: varchar("affiliate_id").notNull(),
+  orderId: varchar("order_id"),
+  orderTotal: real("order_total"),
+  commission: real("commission"),
+  status: text("status").notNull().default("pending"),
+  createdAt: text("created_at").notNull(),
+});
+
+export const insertAffiliateReferralSchema = createInsertSchema(affiliateReferrals).omit({ id: true, status: true });
+export type InsertAffiliateReferral = z.infer<typeof insertAffiliateReferralSchema>;
+export type AffiliateReferral = typeof affiliateReferrals.$inferSelect;
+
 // Categories
 export const categories = [
   { id: "glp1", name: "GLP-1 Agonists", description: "Metabolic regulation peptides" },

@@ -359,5 +359,73 @@ export async function registerRoutes(
     }
   });
 
+  app.post("/api/affiliates/signup", async (req, res) => {
+    try {
+      const { name, email, website, promotionMethod } = req.body;
+      if (!name || !email || !promotionMethod) {
+        return res.status(400).json({ error: "Name, email, and promotion method are required" });
+      }
+      if (!email.includes("@")) {
+        return res.status(400).json({ error: "Valid email is required" });
+      }
+      const affiliate = await storage.createAffiliate({
+        name,
+        email,
+        website: website || null,
+        promotionMethod,
+        commissionRate: 10,
+        createdAt: new Date().toISOString(),
+      });
+      res.json({ referralCode: affiliate.referralCode, email: affiliate.email, name: affiliate.name });
+    } catch (error: any) {
+      if (error.message === "Email already registered") {
+        return res.status(409).json({ error: "This email is already registered as an affiliate" });
+      }
+      res.status(500).json({ error: "Failed to create affiliate account" });
+    }
+  });
+
+  app.get("/api/affiliates/dashboard", async (req, res) => {
+    try {
+      const email = req.query.email as string;
+      const code = req.query.code as string;
+      if (!email || !code) {
+        return res.status(400).json({ error: "Email and referral code are required" });
+      }
+      const dashboard = await storage.getAffiliateDashboard(email, code);
+      if (!dashboard) {
+        return res.status(404).json({ error: "Invalid email or referral code" });
+      }
+      res.json(dashboard);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch dashboard" });
+    }
+  });
+
+  app.post("/api/affiliates/validate-code", async (req, res) => {
+    try {
+      const { code } = req.body;
+      if (!code) return res.status(400).json({ error: "Referral code required" });
+      const affiliate = await storage.getAffiliateByCode(code);
+      if (!affiliate || affiliate.status !== "active") {
+        return res.status(404).json({ error: "Invalid referral code" });
+      }
+      res.json({ valid: true, discount: 5, affiliateId: affiliate.id });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to validate code" });
+    }
+  });
+
+  app.post("/api/affiliates/track-click", async (req, res) => {
+    try {
+      const { code } = req.body;
+      if (!code) return res.status(400).json({ error: "Referral code required" });
+      await storage.incrementAffiliateClicks(code);
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to track click" });
+    }
+  });
+
   return httpServer;
 }
